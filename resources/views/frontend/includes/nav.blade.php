@@ -11,20 +11,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                @if(config('boilerplate.locale.status') && count(config('boilerplate.locale.languages')) > 1)
-                    <li class="nav-item dropdown">
-                        <x-utils.link
-                            :text="__(getLocaleName(app()->getLocale()))"
-                            class="nav-link dropdown-toggle"
-                            id="navbarDropdownLanguageLink"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false" />
-
-                        @include('includes.partials.lang')
-                    </li>
-                @endif
-
+           
                 @guest
                     <li class="nav-item">
                         <x-utils.link

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
+use App\Domains\Auth\Models\Province;
+use App\Domains\Auth\Models\District;
+use App\Domains\Auth\Models\LocalBody;
+
 /**
  * Class RegisterController.
  */
@@ -60,9 +64,12 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         abort_unless(config('boilerplate.access.user.registration'), 404);
-
-        return view('frontend.auth.register');
+        $province = Province::get();
+        $signupStep = 0;
+        return view('frontend.auth.register',compact('province','signupStep'));
     }
+
+   
 
     /**
      * Get a validator for an incoming registration request.

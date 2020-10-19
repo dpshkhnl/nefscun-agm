@@ -1,80 +1,41 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ appName() }}</title>
-        <meta name="description" content="@yield('meta_description', appName())">
-        <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
-        @yield('meta')
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        @stack('before-styles')
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link href="{{ mix('css/frontend.css') }}" rel="stylesheet">
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/png" href="images/logo-favicon.jpg"/>
+    <title>NEFSCUN</title>
+  </head>
+  <body>
+  
 
-            .full-height {
-                height: 100vh;
-            }
+  
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <header class="site-header pt-2 pb-2">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="mobile-top-contact float-right">
+              <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="#" role="button"><i class="fas fa-map-marked-alt mr-2"></i>Login</a>
+            </div>
+            <div class="logo">
+              <img src="images/banner_logo.png" class="img-fluid" alt="Nefscun Logo">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="top-details d-flex flex-column align-items-end">
+              <div class="top-contact pb-2">
+                <span class="top-phone mr-2"><i class="fas fa-phone-volume mr-1"></i>Call Us +977-1-4781963, 4780201</span>
 
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-        @stack('after-styles')
-
-        @include('includes.partials.ga')
-    </head>
-    <body>
-        @include('includes.partials.read-only')
-        @include('includes.partials.logged-in-as')
-        @include('includes.partials.announcements')
-
-        <div id="app" class="flex-center position-ref full-height">
-            <div class="top-right links">
+             
                 @auth
                     @if ($logged_in_user->isUser())
                         <a href="{{ route('frontend.user.dashboard') }}">@lang('Dashboard')</a>
@@ -82,32 +43,249 @@
 
                     <a href="{{ route('frontend.user.account') }}">@lang('Account')</a>
                 @else
-                    <a href="{{ route('frontend.auth.login') }}">@lang('Login')</a>
+                 
+                    <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.login') }}" role="button"><i class="fas fa-map-marked-alt mr-2"></i>Login</a>
 
                     @if (config('boilerplate.access.user.registration'))
-                        <a href="{{ route('frontend.auth.register') }}">@lang('Register')</a>
+                        <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.register') }}" role="button"><i class="fas fa-map-marked-alt mr-2"></i>Register</a>
+
                     @endif
                 @endauth
-            </div><!--top-right-->
+              </div>
+             
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-            <div class="content">
-                @include('includes.partials.messages')
+    
+    <nav class="navbar navbar-expand-lg navbar-light site-navigation">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbarSupportedContent" aria-controls="topNavbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="title m-b-md">
-                    <example-component></example-component>
-                </div><!--title-->
+       
+      </div>
+    </nav>
+    <div class="menu-overlay"></div>
 
-                <div class="links">
-                    <a href="http://laravel-boilerplate.com" target="_blank"><i class="fa fa-book"></i> @lang('Docs')</a>
-                    <a href="https://github.com/rappasoft/laravel-boilerplate" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                </div><!--links-->
-            </div><!--content-->
-        </div><!--app-->
+    <section class="home-carousel">
+      <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/s1.jpg" class="d-block w-100" alt="...">
+            </div>
+           
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-        @stack('before-scripts')
-        <script src="{{ mix('js/manifest.js') }}"></script>
-        <script src="{{ mix('js/vendor.js') }}"></script>
-        <script src="{{ mix('js/frontend.js') }}"></script>
-        @stack('after-scripts')
-    </body>
+    <section class="icon-box">
+      <div class="container">
+        <div class="icon-box-inner">
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+                <i class="fas fa-users"></i>
+              </div>
+              <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+                <i class="fas fa-book-reader"></i>
+              </div>
+              <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+            
+              <i class="fas fa-pen-square"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+                  <i class="fas fa-bullhorn"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+              <i class="far fa-calendar-alt"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a href="#">
+              <div class="icon-wrap">
+                <i class="fas fa-school"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+
+
+          <div class="icon-list text-center">
+            <a href="#">
+              <div class="icon-wrap">
+                <i class="far fa-keyboard"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a href="#">
+              <div class="icon-wrap">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+           <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+            
+              <i class="fas fa-pen-square"></i>
+            </div>
+            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-post">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+            <article class="home-post-list">
+              <div class="card">
+                <img src="images/paritosh-poudyal-small.jpg" class="card-img-top" alt="paritosh-poudyal-small.jpg">
+                <div class="card-body">
+                  <h3 class="card-title"><a href="#">Message From Chairman</a></h3>
+                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of </p>
+                  <a target=_blank href="#" >Read More</a>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+            <article class="home-post-list">
+              <div class="card">
+                <img src="images/banner_logo.png" class="card-img-top" alt="students.jpg">
+                <div class="card-body">
+                  <h3 class="card-title"><a href="#">About Nefscun</a></h3>
+                  <p class="card-text">To support and foster your intellectual and personal growth and help you explore and experience the different aspects of professional life.</p>
+                  <a target=_blank href="#">Read More</a>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+            <article class="home-post-list">
+              <div class="card">
+                <img src="images/banner_logo.png" class="card-img-top" alt="members.jpg">
+                <div class="card-body">
+                  <h3 class="card-title"><a href="#">Nefscun</a></h3>
+                  <p class="card-text">ICAN is committed to regulate accounting profession in Nepal. It has a great values of membership of ICAN and are integral part of the institute.</p>
+                  <a target=_blank href="#" >Read More</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+              <ul class="footer-social">
+                <li>
+                  <a target=_blank href="#"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li>
+                  <a target=_blank href="#"><i class="fab fa-youtube"></i></a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+              <ul class="footer-links">
+                <li>
+                  <a target=_blank href="#">Home</a>
+                </li>
+                <li>
+                  <a target=_blank href="#">Useful Links</a>
+                </li>
+               
+                <li>
+                  <a target=_blank href="#">Contact Us</a>
+                </li>
+                <li class="copyright">
+                  &copy Copyright 2020 NEFSCUN
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/popper-2.4.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

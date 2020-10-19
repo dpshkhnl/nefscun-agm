@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\LocaleController;
-
+use App\Http\Controllers\Frontend\HomeController;
 /*
  * Global Routes
  *
@@ -17,7 +17,6 @@ Route::get('lang/{lang}', [LocaleController::class, 'change'])->name('locale.cha
 Route::group(['as' => 'frontend.'], function () {
     includeRouteFiles(__DIR__.'/frontend/');
 });
-
 /*
  * Backend Routes
  *
