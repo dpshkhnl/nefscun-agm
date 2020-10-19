@@ -36,21 +36,14 @@
                 <span class="top-phone mr-2"><i class="fas fa-phone-volume mr-1"></i>Call Us +977-1-4781963, 4780201</span>
 
              
-                @auth
-                    @if ($logged_in_user->isUser())
-                        <a href="{{ route('frontend.user.dashboard') }}">@lang('Dashboard')</a>
-                    @endif
-
-                    <a href="{{ route('frontend.user.account') }}">@lang('Account')</a>
-                @else
-                 
+              
+                   
                     <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank  role="button"></i>Welcome, {{$coop->org_name}}</a>
 
-                    @if (config('boilerplate.access.user.registration'))
+                    
                         <a class="btn btn-sm btn-outline-primary top-address-btn" href="{{ route('frontend.auth.logout') }}" role="button"><i class="fas fa-unlock mr-2"></i>Logout</a>
 
-                    @endif
-                @endauth
+                  
               </div>
              
               </div>

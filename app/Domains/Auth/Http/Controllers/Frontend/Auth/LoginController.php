@@ -83,7 +83,7 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        return redirect()->route('frontend.auth.login')->withFlashDanger(__('Your account has been deactivated.'));
+       // return redirect()->route('frontend.auth.admin-login')->withFlashDanger(__('Your account has been deactivated.'));
         try {
             return $this->guard()->attempt(
                 $this->credentials($request),
@@ -110,7 +110,7 @@ class LoginController extends Controller
         if (!$user || !$user->isActive()) {
             auth()->logout();
 
-            return redirect()->route('frontend.auth.login')->withFlashDanger(__('Your account has been deactivated.'));
+            return redirect()->route('frontend.auth.admin-login')->withFlashDanger(__('Your account has been deactivated.'));
         }
 
         event(new UserLoggedIn($user));

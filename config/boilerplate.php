@@ -28,8 +28,8 @@ return [
             /*
              * Whether or not admins need 2FA enabled to visit the backend
              */
-            'admin_requires_2fa' => env('ADMIN_REQUIRES_2FA', true),
-
+            //'admin_requires_2fa' => env('ADMIN_REQUIRES_2FA', false),
+            'admin_requires_2fa' => false,
             /*
              * Whether or not a user can change their email address after
              * their account has already been created
@@ -66,7 +66,7 @@ return [
             /*
              * Whether or not the register route and view are active
              */
-            'registration' => env('ENABLE_REGISTRATION', true),
+            'registration' => env('ENABLE_REGISTRATION', false),
 
             /*
              * When active, a user can only have one session active at a time
@@ -74,7 +74,7 @@ return [
              * (They can only be logged into one place at a time, all others will be logged out)
              * AuthenticateSession middleware must be enabled
              */
-            'single_login' => env('SINGLE_LOGIN', false),
+            'single_login' => env('SINGLE_LOGIN', true),
         ],
 
         'role' => [
