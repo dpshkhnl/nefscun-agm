@@ -4,6 +4,7 @@ use App\Domains\Auth\Http\Controllers\Frontend\Auth\ConfirmPasswordController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\DisableTwoFactorAuthenticationController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\ForgotPasswordController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\LoginController;
+use App\Domains\Auth\Http\Controllers\Frontend\Auth\UserLoginController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\PasswordExpiredController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\RegisterController;
 use App\Domains\Auth\Http\Controllers\Frontend\Auth\ResetPasswordController;
@@ -79,9 +80,12 @@ Route::group(['as' => 'auth.'], function () {
 
     Route::group(['middleware' => 'guest'], function () {
         // Authentication
-        Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-        Route::post('login', [LoginController::class, 'login']);
+        Route::get('login', [UserLoginController::class, 'showLoginForm'])->name('login');
+        Route::post('login', [UserLoginController::class, 'validate_user']);
+        Route::get('logout', [UserLoginController::class, 'logout'])->name('logout');
 
+        Route::get('admin-login', [LoginController::class, 'showLoginForm'])->name('login');
+        Route::post('admin-login', [LoginController::class, 'login']);
         // Registration
         Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
         Route::post('register', [RegisterController::class, 'register']);

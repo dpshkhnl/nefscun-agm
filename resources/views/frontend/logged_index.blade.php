@@ -24,7 +24,7 @@
         <div class="row align-items-center">
           <div class="col-12 col-sm-12 col-md-6 col-lg-6">
               <div class="mobile-top-contact float-right">
-              <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="#" role="button"><i class="fas fa-lock mr-2"></i>Login</a>
+              <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="#" role="button"><i class="fas fa-map-marked-alt mr-2"></i>Login</a>
             </div>
             <div class="logo">
               <img src="images/banner_logo.png" class="img-fluid" alt="Nefscun Logo">
@@ -44,10 +44,10 @@
                     <a href="{{ route('frontend.user.account') }}">@lang('Account')</a>
                 @else
                  
-                    <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.login') }}" role="button"><i class="fas fa-lock mr-2"></i>Login</a>
+                    <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank  role="button"></i>Welcome, {{$coop->org_name}}</a>
 
                     @if (config('boilerplate.access.user.registration'))
-                        <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.register') }}" role="button"><i class="fas fa-address-card mr-2"></i>Register</a>
+                        <a class="btn btn-sm btn-outline-primary top-address-btn" href="{{ route('frontend.auth.logout') }}" role="button"><i class="fas fa-unlock mr-2"></i>Logout</a>
 
                     @endif
                 @endauth
@@ -98,14 +98,14 @@
     </section>
 
     <section class="icon-box">
-      <div class="container">
+      <div class="container align-center">
         <div class="icon-box-inner">
           <div class="icon-list text-center">
             <a target=_blank href="#">
               <div class="icon-wrap">
                 <i class="fas fa-users"></i>
               </div>
-              <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+              <strong class="icon-title">Aadakshya pratibedan</strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -132,48 +132,8 @@
             <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
             </a>
           </div>
-          <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-            
-              <i class="fas fa-pen-square"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-          <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-                  <i class="fas fa-bullhorn"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-          <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-          <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-              <i class="far fa-calendar-alt"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-          <div class="icon-list text-center">
-            <a href="#">
-              <div class="icon-wrap">
-                <i class="fas fa-school"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-
+         
+         
 
           <div class="icon-list text-center">
             <a href="#">
@@ -183,70 +143,12 @@
             <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
             </a>
           </div>
-          <div class="icon-list text-center">
-            <a href="#">
-              <div class="icon-wrap">
-                <i class="fas fa-chalkboard-teacher"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-           <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-            
-              <i class="fas fa-pen-square"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
+         
         </div>
       </div>
     </section>
 
-    <section class="home-post">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <article class="home-post-list">
-              <div class="card">
-                <img src="images/paritosh-poudyal-small.jpg" class="card-img-top" alt="paritosh-poudyal-small.jpg">
-                <div class="card-body">
-                  <h3 class="card-title"><a href="#">Message From Chairman</a></h3>
-                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of </p>
-                  <a target=_blank href="#" >Read More</a>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <article class="home-post-list">
-              <div class="card">
-                <img src="images/banner_logo.png" class="card-img-top" alt="students.jpg">
-                <div class="card-body">
-                  <h3 class="card-title"><a href="#">About Nefscun</a></h3>
-                  <p class="card-text">To support and foster your intellectual and personal growth and help you explore and experience the different aspects of professional life.</p>
-                  <a target=_blank href="#">Read More</a>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <article class="home-post-list">
-              <div class="card">
-                <img src="images/banner_logo.png" class="card-img-top" alt="members.jpg">
-                <div class="card-body">
-                  <h3 class="card-title"><a href="#">Nefscun</a></h3>
-                  <p class="card-text">ICAN is committed to regulate accounting profession in Nepal. It has a great values of membership of ICAN and are integral part of the institute.</p>
-                  <a target=_blank href="#" >Read More</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
+   
     <footer class="site-footer">
       <div class="container">
         <div class="row">

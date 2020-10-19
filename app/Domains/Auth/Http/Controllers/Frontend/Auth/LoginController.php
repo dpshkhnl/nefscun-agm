@@ -44,7 +44,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('frontend.auth.login');
+        return view('frontend.auth.admin-login');
     }
 
     /**
@@ -57,6 +57,7 @@ class LoginController extends Controller
      */
     protected function validateLogin(Request $request)
     {
+      
         $request->validate([
             $this->username() => ['required', 'max:255', 'string'],
             'password' => array_merge(['max:100'], PasswordRules::login()),
@@ -77,6 +78,7 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
+        return redirect()->route('frontend.auth.login')->withFlashDanger(__('Your account has been deactivated.'));
         try {
             return $this->guard()->attempt(
                 $this->credentials($request),
@@ -99,7 +101,8 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if (! $user->isActive()) {
+        dd($request->all());
+        if (!$user || !$user->isActive()) {
             auth()->logout();
 
             return redirect()->route('frontend.auth.login')->withFlashDanger(__('Your account has been deactivated.'));

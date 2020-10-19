@@ -12,6 +12,13 @@ use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 use App\Domains\Auth\Models\Province;
 use App\Domains\Auth\Models\District;
 use App\Domains\Auth\Models\LocalBody;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\OrganizationRegistration;
+use App\Models\OrganizationUpload;
+use App\Models\OrganizationRepresentative;
+
+use Illuminate\Http\Request;
 
 /**
  * Class RegisterController.
@@ -66,43 +73,100 @@ class RegisterController extends Controller
         abort_unless(config('boilerplate.access.user.registration'), 404);
         $province = Province::get();
         $signupStep = 0;
-        return view('frontend.auth.register',compact('province','signupStep'));
+        $orgRegister =  new OrganizationRegistration;
+        return $this->showForm($signupStep,$orgRegister);
     }
 
+    public function showForm($signupStep,$result){
+        $province = Province::get();
+        return view('frontend.auth.register',compact('province','signupStep','result'));
+    }
+
+   public function saveBasic(Request $request)
+   {
+        $orgRegister = new OrganizationRegistration;
+        $orgRegister->nefscun_mem_no = $request->get('nefscun_mem_no');
+        $orgRegister->org_name = $request->get('org_name');
+        $orgRegister->org_name_np = $request->get('fullnamenp');
+        $orgRegister->province = $request->get('province_id');
+        $orgRegister->district = $request->get('dist_id');
+        $orgRegister->local = $request->get('local_id');
+        $orgRegister->ward = $request->get('ward');
+        $orgRegister->mobile_no = $request->get('mobile');
+        $orgRegister->email = $request->get('email');
+        $orgRegister->password =  Hash::make($request->get('password'));
+        $orgRegister->is_verified = 0;
+        $orgRegister->status = 0;
+        $orgRegister->ip= $request->ip();
+        $orgRegister->save();
+        return $this->showForm(1,$orgRegister);
+   }
+
+   public function saveRepresentative(Request $request)
+   {
+
+        $orgRep = new OrganizationRepresentative;
+        $orgRep->nefscun_mem_no = $request->get('nefscun_mem_no');
+        $orgRep->org_rep_id = $request->get('register_id');
+        $orgRep->rep_name = $request->get('repname');
+        $orgRep->dob = $request->get('dob');
+        $orgRep->province = $request->get('province_id');
+        $orgRep->district = $request->get('dist_id');
+        $orgRep->local = $request->get('local_id');
+        $orgRep->ward = $request->get('ward');
+        $orgRep->mobile_no = $request->get('mobile');
+        $orgRep->email = $request->get('email');
+        $orgRep->qualification = $request->get('qualification');
+        $orgRep->post = $request->get('post');
+        $orgRep->share_reg_dt = $request->get('share_reg_dt');
+        $orgRep->decision_dt = $request->get('decision_dt');
+        $orgRep->ip= $request->ip();
+        $orgRep->save();
+        return $this->showForm(2,$orgRep);
+   }
+
+   public function saveUploadDoc(Request $request){
+
+    $orgUpload = new OrganizationUpload;
    
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')],
-            'password' => array_merge(['max:100'], PasswordRules::register($data['email'] ?? null)),
-            'terms' => ['required', 'in:1'],
-            'g-recaptcha-response' => ['required_if:captcha_status,true', 'captcha'],
-        ], [
-            'terms.required' => __('You must accept the Terms & Conditions.'),
-            'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
-        ]);
+    $orgUpload->nefscun_mem_no = $request->get('nefscun_mem_no');
+    $orgUpload->org_reg_id = $request->get('register_id');
+    $orgUpload->ip= $request->ip();
+        if ($request->hasFile('rep_select')) {  //check the file present or not
+        $images = $request->file('rep_select'); //get the file
+        $size = $images->getSize();
+        $names =  'rep_select-'.time().".".$images->getClientOriginalName();
+        $destinationPaths = public_path('/images/rep_select/'); //public path folder dir
+        $images->move($destinationPaths,$names);  //mve to destination you mentioned 
+        $orgUpload->rep_select = $names; //
+    }
+    if ($request->hasFile('rep_sign')) {  //check the file present or not
+        $images = $request->file('rep_sign'); //get the file
+        $size = $images->getSize();
+        $names =  'rep_sign-'.time().".".$images->getClientOriginalName();
+        $destinationPaths = public_path('/images/rep_sign/'); //public path folder dir
+        $images->move($destinationPaths,$names);  //mve to destination you mentioned 
+        $orgUpload->rep_sign = $names; //
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     *
-     * @return \App\Domains\Auth\Models\User|mixed
-     * @throws \App\Domains\Auth\Exceptions\RegisterException
-     */
-    protected function create(array $data)
-    {
-        abort_unless(config('boilerplate.access.user.registration'), 404);
-
-        return $this->userService->registerUser($data);
+    if ($request->hasFile('chairman_sign')) {  //check the file present or not
+        $images = $request->file('chairman_sign'); //get the file
+        $size = $images->getSize();
+        $names =  'chairman_sign-'.time().".".$images->getClientOriginalName();
+        $destinationPaths = public_path('/images/chairman_sign/'); //public path folder dir
+        $images->move($destinationPaths,$names);  //mve to destination you mentioned 
+        $orgUpload->chairman_sign = $names; //
     }
+    if ($request->hasFile('audit_report')) {  //check the file present or not
+        $images = $request->file('audit_report'); //get the file
+        $size = $images->getSize();
+        $names =  'audit_report-'.time().".".$images->getClientOriginalName();
+        $destinationPaths = public_path('/images/audit_report/'); //public path folder dir
+        $images->move($destinationPaths,$names);  //mve to destination you mentioned 
+        $orgUpload->audit_report = $names; //
+    }
+    $orgUpload->save();
+    return $this->showForm(3,$orgUpload);
+}
+   
 }

@@ -11,7 +11,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/register.css">
-    <link rel="stylesheet" href="/css/base.css" />
+    <script src="{{ url('js/nepali.datepicker.v3.min.js') }}" type="text/javascript"></script>
+    <link href="{{ url('css/nepali.datepicker.v3.min.css') }}" rel="stylesheet" type="text/css"/>
+
     <script type="text/javascript" src="/js/unicodeNepali.js"></script>
   </head>
   <body>
@@ -45,34 +47,36 @@
                   <ul class="nav nav-tabs" id="nav-tab" role="tablist">
                   <li> <a class="nav-item nav-link @if($signupStep==0) active  @endif  ml-2" id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">संस्था परिचय</a></li>
                   <li> <a class="nav-item nav-link @if($signupStep==1) active  @endif  ml-2" id="nav-rep-tab" data-toggle="tab" href="#nav-rep" role="tab" aria-controls="nav-rep" aria-selected="true">केन्द्रिय प्रतिनिधि </a></li>
-                  <li> <a class="nav-item nav-link @if($signupStep==1) active  @endif ml-2" id="nav-upload-tab"  data-toggle="tab" href="#nav-upload" role="tab" aria-controls="nav-upload" aria-selected="false">अपलोड </a></li>
+                  <li> <a class="nav-item nav-link @if($signupStep==2) active  @endif ml-2" id="nav-upload-tab"  data-toggle="tab" href="#nav-upload" role="tab" aria-controls="nav-upload" aria-selected="false">अपलोड </a></li>
+                  <li> <a class="nav-item nav-link @if($signupStep==3) active  @endif ml-2" id="nav-success-tab"  data-toggle="tab" href="#nav-success" role="tab" aria-controls="nav-success" aria-selected="false">Complete</a></li>
+
                   </ul>
                 </nav> 
                 <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade @if($signupStep==0) active show @endif" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
-                 <form class="application-form" name="firstform" id="firstform" method="POST" action="{{ url('/save-form') }}" enctype="multipart/form-data">
+                 <form class="application-form" name="firstform" id="firstform" method="POST" action="{{ route('frontend.saveBasic') }}" enctype="multipart/form-data">
             @csrf  
                
                     <div class="apply-registration-input mb-3"> 
                     <div class="form-group">
                         <label for="memno" class="col-md-12">नेफ्स्कून सदस्यता नं:</label>
                         <div class="col-md-12">
-                          <input type="number" class="form-control required" id="memno"  name="memno" >
+                          <input type="number" value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
                         </div>
                       </div>
                       <div class="row">
                     
                       <div class="form-group col-md-6">
-                        <label for="fullname" class="col-md-12">संस्थाको नाम (अंग्रेजीमा):</label>
+                        <label for="org_name" class="col-md-12">संस्थाको नाम (अंग्रेजीमा):</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="fullname"  name="fullname" style="text-transform: uppercase;">
+                          <input type="text" value="{{$result->org_name}}" class="form-control required" id="org_name"  name="org_name" style="text-transform: uppercase;">
                         </div>
                       </div>
 
                       <div class="form-group col-md-6">
                         <label for="fullname" class="col-md-12">संस्थाको नाम (युनिकोडमा)</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control convert-romanize required" id="fullnamenp"  name="fullnamenp" >
+                          <input type="text" value="{{$result->org_name_np}}" class="form-control convert-romanize required" id="fullnamenp"  name="fullnamenp" >
                         </div>
                       </div>
 
@@ -103,7 +107,7 @@
                             </select></div>
 
                             <div class="controls col-md-3">
-                            <input   type="text" class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
+                            <input   type="number" class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
 
                                        </div>
 
@@ -119,7 +123,7 @@
                         <label for="mobile" class="col-md-12">मोबाईल नं:</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control " id="mobile" name="mobile">
+                          <input   type="number" class="form-control " id="mobile" name="mobile">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
@@ -151,18 +155,20 @@
                   
 </div>
                     <div class="button-group" role="group" aria-label="button">
-                      <button type="button" id="btnSubmit" name="btnSubmit" class="btn btn-primary">Save</button>
+                      <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary">Save</button>
                       <!-- <button type="button" class="btn btn-secondary">Cancel</button> -->
                     </div>
                     </form> 
                   </div>
 
                   <div class="tab-pane fade @if($signupStep==1) active show @endif" id="nav-rep" role="tabpanel" aria-labelledby="nav-rep-tab">
-                 <form class="application-form" name="firstform" id="firstform" method="POST" action="{{ url('/save-form') }}" enctype="multipart/form-data">
+                 <form class="application-form" name="firstform" id="firstform" method="POST" action="{{ route('frontend.saveRepresentative') }}" enctype="multipart/form-data">
             @csrf  
                
                     <div class="apply-registration-input mb-3"> 
-                 
+                    <input type="hidden" value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
+                    <input type="hidden" value="{{$result->id}}" class="form-control required" id="register_id"  name="register_id" >
+
                       <div class="row">
                     
                       <div class="form-group col-md-6">
@@ -175,7 +181,7 @@
                       <div class="form-group col-md-6">
                         <label for="fullname" class="col-md-12">जन्म मिति :</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="fullname"  name="fullname" style="text-transform: uppercase;">
+                          <input type="text" class="form-control required" id="dob"  name="dob">
                         </div>
                       </div>
 
@@ -208,7 +214,7 @@
                             </select></div>
 
                             <div class="controls col-md-3">
-                            <input   type="text" class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
+                            <input   type="number" class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
 
                                        </div>
 
@@ -224,7 +230,7 @@
                         <label for="mobile" class="col-md-12">मोबाईल नं:</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control " id="mobile" name="mobile">
+                          <input   type="number" class="form-control " id="mobile" name="mobile">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
@@ -240,23 +246,37 @@
                         <label for="password" class="col-md-6">योग्यता :</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control"  id="password" name="password">
+                          <input   type="text" class="form-control"  id="qualification" name="qualification">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="cnfpassword" class="col-md-12">पद :</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control "  id="cnfpassword" name="cnfpassword">
+                          <input   type="text" class="form-control "  id="post" name="post">
                         </div>
                       </div>
                       </div>
-
-                   
+                      <div class="row">
+                      <div class="form-group col-md-6">
+                        <label for="password" class="col-md-6">सेयर सदश्य लिएको मिति  :</label>
+                        <div class="col-md-12">
+                     
+                          <input   type="text" class="form-control"  id="share_reg_dt" name="share_reg_dt">
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="cnfpassword" class="col-md-12">संचालक समिति को निर्णय मिति  :</label>
+                        <div class="col-md-12">
+                     
+                          <input   type="text" class="form-control "  id="decision_dt" name="decision_dt">
+                        </div>
+                      </div>
+                      </div>
                   
 </div>
                     <div class="button-group" role="group" aria-label="button">
-                      <button type="button" id="btnSubmit" name="btnSubmit" class="btn btn-primary">Save</button>
+                      <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary">Save</button>
                       <!-- <button type="button" class="btn btn-secondary">Cancel</button> -->
                     </div>
                     </form> 
@@ -267,9 +287,12 @@
                     <div class="ican-uploads">
                       <div class="row">
                         <div class="col-12">
-                          <form class="application-form" name="uploadform" id="uploadform" method="POST" action="{{ url('/save-uploaddoc') }}" enctype="multipart/form-data">
+                          <form class="application-form" name="uploadform" id="uploadform" method="POST" action="{{ route('frontend.saveUploadDoc') }}" enctype="multipart/form-data">
                               @csrf 
+                              <input type="hidden" value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
+                    <input type="hidden" value="{{$result->id}}" class="form-control required" id="register_id"  name="register_id" >
 
+                   
                               
                           <div class="ican-uploads-inner mb-4">
                             <div class="row">
@@ -278,8 +301,8 @@
                                   <h6 class="mb-3">प्रतिनिधि छनौट निर्णय</h6>
                                   <div class="avatar-upload">
                                     <div class="avatar-edit">
-                                        <input type='file'  id="pp_photo" name="pp_photo" accept=".png, .jpg, .jpeg" />
-                                        <label for="pp_photo"></label>
+                                        <input type='file'  id="rep_select" name="rep_select" accept=".png, .jpg, .jpeg" />
+                                        <label for="rep_select"></label>
                                     </div>
                                     <div class="avatar-preview">
                                         <div id="imagePreview" style="background-image: url(http://placehold.it/180);">
@@ -298,8 +321,8 @@
                                         <div class="signature-upload-wrap mb-1">
                                             <div class="signature-upload">
                                               <div class="signature-edit">
-                                                  <input type='file' id="signatureUpload" name="signatureUpload" accept=".png, .jpg, .jpeg" />
-                                                  <label for="signatureUpload"></label>
+                                                  <input type='file' id="rep_sign" name="rep_sign" accept=".png, .jpg, .jpeg" />
+                                                  <label for="rep_sign"></label>
                                               </div>
                                               <div class="signature-preview">
                                                   <div id="signaturePreview" style="background-image: url(http://placehold.it/250x100);">
@@ -321,8 +344,8 @@
                                         <div class="signature-upload-wrap mb-1">
                                             <div class="signature-upload">
                                               <div class="signature-edit">
-                                                  <input type='file' id="signatureUpload" name="signatureUpload" accept=".png, .jpg, .jpeg" />
-                                                  <label for="signatureUpload"></label>
+                                                  <input type='file' id="chairman_sign" name="chairman_sign" accept=".png, .jpg, .jpeg" />
+                                                  <label for="chairman_sign"></label>
                                               </div>
                                               <div class="signature-preview">
                                                   <div id="signaturePreview" style="background-image: url(http://placehold.it/250x100);">
@@ -341,8 +364,8 @@
                                    <div class="citizen-passport-upload-wrap mb-1">
                                        <div class="citizen-passport-upload">
                                          <div class="citizen-passport-edit">
-                                             <input type='file' id="uploadcitizen" name="uploadcitizen" accept=".png, .jpg, .jpeg" />
-                                             <label for="uploadcitizen"></label>
+                                             <input type='file' id="audit_report" name="audit_report" accept=".png, .jpg, .jpeg" />
+                                             <label for="audit_report"></label>
                                          </div>
                                          <div class="citizen-passport-preview">
                                              <div id="citizenPassportPreview" style="background-image: url(http://placehold.it/250x100);">
@@ -357,9 +380,19 @@
                           </div>
                           <div class="button-group" role="group" aria-label="button">
                             <button type="submit" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-secondary">Cancel</button>
+                
                           </div>
                           </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade @if($signupStep==3) active show @endif" id="nav-success"  role="tabpanel" aria-labelledby="nav-success">
+                    <div class="ican-uploads">
+                      <div class="row">
+                        <div class="col-12">
+                          Thank you!! Your Request Has been submitted.
                         </div>
                       </div>
                     </div>
@@ -385,7 +418,13 @@
 	return setUnicode(event,this);
 });
   
-          
+var mainInput = document.getElementById("dob");
+var decision_dt = document.getElementById("decision_dt");
+var share_reg_dt = document.getElementById("share_reg_dt");
+      mainInput.nepaliDatePicker();
+      decision_dt.nepaliDatePicker();
+      share_reg_dt.nepaliDatePicker();
+
  $("select[name='province_id']").change(function(){
     var province_id = $(this).children("option:selected").val();
         var url = "{!! route('frontend.getDistrict') !!}";

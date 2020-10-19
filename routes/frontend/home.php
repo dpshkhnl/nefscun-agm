@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Domains\Auth\Http\Controllers\Frontend\Auth\RegisterController;
 use App\Http\Controllers\Frontend\TermsController;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -23,3 +24,6 @@ Route::get('terms', [TermsController::class, 'index'])
 
     Route::post('/getDistrict',  [HomeController::class, 'getDistrict'])->name('getDistrict');
     Route::post('/getLocal', [HomeController::class, 'getLocal'])->name('getLocal');
+    Route::post('/saveBasic', [RegisterController::class, 'saveBasic'])->name('saveBasic');
+    Route::post('/saveRepresentative', [RegisterController::class, 'saveRepresentative'])->name('saveRepresentative');
+    Route::post('/saveUploadDoc', [RegisterController::class, 'saveUploadDoc'])->name('saveUploadDoc');

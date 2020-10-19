@@ -24,8 +24,8 @@
     <!-- @include('includes.partials.announcements') -->
 
     <div id="app">
-         @include('frontend.includes.nav') 
-        <!-- @include('includes.partials.messages') -->
+         @include('frontend.includes.nav')  
+        @include('includes.partials.messages')
 
         <main>
             @yield('content')

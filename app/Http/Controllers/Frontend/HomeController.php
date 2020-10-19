@@ -8,6 +8,7 @@ use App\Domains\Auth\Models\Province;
 use App\Domains\Auth\Models\District;
 use App\Domains\Auth\Models\LocalBody;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 
 /**
@@ -20,7 +21,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+       $coop =  Session::get('user');
+        if(!$coop)
         return view('frontend.index');
+        else{
+            return view('frontend.logged_index',compact('coop'));
+        }
+       
     }
 
     public function getDistrict(Request $request) {
