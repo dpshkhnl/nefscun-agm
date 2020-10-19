@@ -44,6 +44,11 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        return view('frontend.auth.login');
+    }
+
+    public function showAdminLoginForm()
+    {
         return view('frontend.auth.admin-login');
     }
 
@@ -101,7 +106,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        dd($request->all());
+      
         if (!$user || !$user->isActive()) {
             auth()->logout();
 
