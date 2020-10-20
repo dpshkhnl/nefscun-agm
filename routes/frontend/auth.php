@@ -20,6 +20,10 @@ use Tabuna\Breadcrumbs\Trail;
  */
 
 Route::group(['as' => 'auth.'], function () {
+
+    Route::get('login', [UserLoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [UserLoginController::class, 'validate_user']);
+    Route::get('logout', [UserLoginController::class, 'logout'])->name('logout');
     Route::group(['middleware' => 'auth'], function () {
         // Authentication
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
@@ -80,9 +84,7 @@ Route::group(['as' => 'auth.'], function () {
 
     Route::group(['middleware' => 'guest'], function () {
         // Authentication
-        Route::get('login', [UserLoginController::class, 'showLoginForm'])->name('login');
-        Route::post('login', [UserLoginController::class, 'validate_user']);
-        Route::get('logout', [UserLoginController::class, 'logout'])->name('logout');
+      
 
         Route::get('admin-login', [LoginController::class, 'showAdminLoginForm'])->name('admin-login');
         Route::post('admin-login', [LoginController::class, 'login']);
