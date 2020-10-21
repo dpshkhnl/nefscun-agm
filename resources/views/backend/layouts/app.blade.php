@@ -41,7 +41,8 @@
     <script src="{{ mix('js/manifest.js') }}"></script>
     <script src="{{ mix('js/vendor.js') }}"></script>
     <script src="{{ mix('js/backend.js') }}"></script>
-    <livewire:scripts />
+    <script src="{{ asset('js/main.js') }}"></script>
+    @yield('scripts')
     @stack('after-scripts')
 </body>
 </html>
