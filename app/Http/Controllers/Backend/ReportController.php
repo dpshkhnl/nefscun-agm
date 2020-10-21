@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Models\OrganizationRegistration;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Domains\Auth\Models\Province;
+use App\Models\OrganizationUpload;
+use App\Models\OrganizationRepresentative;
+
 
 /**
  * Class DashboardController.
@@ -31,6 +35,18 @@ class ReportController extends Controller
         $register->status = 1;
         $register->save();
        return "Form Approved Successfully";
+    }
+
+    function show_form($id){ 
+     
+        $result = OrganizationRegistration::
+        join('organization_representatives','organization_representatives.org_rep_id','organization_registrations.id')
+        ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')
+        ->where('organization_registrations.id',$id)->first();
+   
+        $province = Province::get();
+        $signupStep=0;
+        return view('backend.reports.show',compact('province','signupStep','result'));
     }
 
     public function reject_form(Request $r)

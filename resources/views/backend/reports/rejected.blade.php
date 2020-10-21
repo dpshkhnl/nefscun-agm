@@ -49,9 +49,10 @@
                        <td>{{$dt->nefscun_mem_no}}</td> -->
                        <td>{{$dt->created_at}}</td>
                        <td>
-               
-               <a href="#" style="width:60px"  class='btn btn-primary'>View </a>
-             
+                       <a target="_blank" href="{{ url('admin/show-form') }}/{{$dt->id}}">
+                            
+                            <span class="btn btn-primary  mt-2">Show</span>
+                        </a>
               
               
    </td>

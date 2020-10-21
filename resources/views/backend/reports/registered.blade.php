@@ -63,7 +63,7 @@
                        <td>{{$dt->created_at}}</td>
                        <td>
                
-                       <a target="_blank" href="route("admin.registers.show", {{$dt->id}})">
+                       <a target="_blank" href="{{ url('admin/show-form') }}/{{$dt->id}}">
                             
                             <span class="btn btn-primary  mt-2">Show</span>
                         </a>

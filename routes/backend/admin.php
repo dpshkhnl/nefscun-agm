@@ -27,6 +27,12 @@ Route::get('register', [ReportController::class, 'index'])
         $trail->push(__('approved'), route('admin.approve-form'));
     });
 
+    Route::get('show-form/{id}', [ReportController::class, 'show_form'])
+    ->name('show-form')
+    ->breadcrumbs(function (Trail $trail) {
+        $trail->push(__('show-form'), route('admin.show-form'));
+    });
+
     Route::post('check_form', [ReportController::class, 'check_form'])
     ->name('check_form')
     ->breadcrumbs(function (Trail $trail) {
