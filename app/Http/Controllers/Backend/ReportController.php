@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Domains\Auth\Models\Province;
 use App\Models\OrganizationUpload;
 use App\Models\OrganizationRepresentative;
+use Auth;
+
 
 
 /**
@@ -33,6 +35,7 @@ class ReportController extends Controller
         }
         $register->is_verified = 1;
         $register->status = 1;
+        $register->updated_by = Auth::user()->name;
         $register->save();
        return "Form Approved Successfully";
     }
@@ -60,6 +63,7 @@ class ReportController extends Controller
         for($i=0;$i<count($raw);$i++){
         $data = OrganizationRegistration::find($raw[$i]);
         $data->status = 2;
+        $data->updated_by = Auth::user()->name;
         $data->message = $r->get('rmsg');
         $data->save();
         $regNo =$data->reg_no;

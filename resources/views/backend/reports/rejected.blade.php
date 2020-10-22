@@ -29,6 +29,7 @@
                             <th>Chairman Sign</th>
                             <th>Audit Report</th> -->
                             <th>Registered Date</th>
+                            <th>Rejected By</th>
                             <th>Action</th>
                             
                         </tr>
@@ -48,6 +49,7 @@
                        <td>{{$dt->nefscun_mem_no}}</td>
                        <td>{{$dt->nefscun_mem_no}}</td> -->
                        <td>{{$dt->created_at}}</td>
+                       <td>{{$dt->updated_by}}</td>
                        <td>
                        <a target="_blank" href="{{ url('admin/show-form') }}/{{$dt->id}}">
                             
