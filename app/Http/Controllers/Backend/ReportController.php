@@ -40,8 +40,8 @@ class ReportController extends Controller
     function show_form($id){ 
      
         $result = OrganizationRegistration::
-        join('organization_representatives','organization_representatives.org_rep_id','organization_registrations.id')
-        ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')
+        leftjoin('organization_representatives','organization_representatives.org_rep_id','organization_registrations.id')
+        ->leftjoin('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')
         ->where('organization_registrations.id',$id)->first();
    
         $province = Province::get();

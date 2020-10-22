@@ -35,9 +35,14 @@
     <label for="exampleFormControlTextarea1">प्रतिक्रिया</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
+  <div class="col-md-12 row">
+  <div class="col-md-9">
   <button type="submit" class="btn btn-primary">Submit</button>
-  <button  class="btn btn-success">महासचिवको प्रतिवेदन</button>
-
+  </div>
+  <div class="col-md-3">
+  <button class="btn btn-success align-right">महासचिवको प्रतिवेदन</button>
+</div>
+</div>
         </div>
       </div>
     </div>
