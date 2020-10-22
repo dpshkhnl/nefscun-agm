@@ -94,11 +94,11 @@
       <div class="container align-center">
         <div class="icon-box-inner">
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+            <a target=_blank href="showReports">
               <div class="icon-wrap">
                 <i class="fas fa-users"></i>
               </div>
-              <strong class="icon-title">Aadakshya pratibedan</strong>
+              <strong class="icon-title">अध्यक्षको प्रतिवेदन</strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -106,7 +106,7 @@
               <div class="icon-wrap">
                 <i class="fas fa-book-reader"></i>
               </div>
-              <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+              <strong class="icon-title">महासचिवको प्रतिवेदन </strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -114,7 +114,7 @@
               <div class="icon-wrap">
               <i class="fas fa-file-alt"></i>
             </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            <strong class="icon-title">कोषाध्यक्षको प्रतिवेदन</strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -122,22 +122,13 @@
               <div class="icon-wrap">
               <i class="fas fa-user-graduate"></i>
             </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            <strong class="icon-title"> प्रतिवेदन </strong>
             </a>
           </div>
          
          
 
-          <div class="icon-list text-center">
-            <a href="#">
-              <div class="icon-wrap">
-                <i class="far fa-keyboard"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-         
-        </div>
+        
       </div>
     </section>
 

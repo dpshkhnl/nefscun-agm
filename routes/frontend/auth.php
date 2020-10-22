@@ -90,6 +90,7 @@ Route::group(['as' => 'auth.'], function () {
         Route::post('admin-login', [LoginController::class, 'login']);
         // Registration
         Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+        Route::get('showReports', [RegisterController::class, 'showReports'])->name('showReports');
         Route::post('register', [RegisterController::class, 'register']);
 
         // Password Reset

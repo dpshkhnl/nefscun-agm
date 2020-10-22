@@ -82,6 +82,12 @@ class RegisterController extends Controller
         return view('frontend.auth.register',compact('province','signupStep','result'));
     }
 
+
+    public function showReports(){
+       
+        return view('frontend.auth.report-details');
+    }
+
    public function saveBasic(Request $request)
    {
         $orgRegister = new OrganizationRegistration;
