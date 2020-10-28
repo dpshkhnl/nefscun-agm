@@ -58,11 +58,20 @@
             @csrf  
                
                     <div class="apply-registration-input mb-3"> 
-                    <div class="form-group">
-                        <label for="memno" class="col-md-12">नेफ्स्कून सदस्यता नं:</label>
+                    <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="memno" class="col-md-6">नेफ्स्कून सदस्यता नं:</label>
                         <div class="col-md-12">
                           <input type="number" value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
                         </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="email" class="col-md-12"> PAN नम्बर:</label>
+                        <div class="col-md-12">
+                     
+                          <input   type="text" class="form-control " id="panno" name="panno">
+                        </div>
+                      </div>
                       </div>
                       <div class="row">
                     
@@ -126,6 +135,9 @@
                           <input   type="number" class="form-control " id="mobile" name="mobile">
                         </div>
                       </div>
+                     
+                     
+
                       <div class="form-group col-md-6">
                         <label for="email" class="col-md-12">ईमेल:</label>
                         <div class="col-md-12">
@@ -134,6 +146,44 @@
                         </div>
                       </div>
                       </div>
+                      <div class="row">       
+                      <div class="form-group col-md-6">
+                        <label for="email" class="col-md-12">संस्थाको फोन नम्बर:</label>
+                        <div class="col-md-12">
+                     
+                          <input   type="text" class="form-control " id="org_phone" name="org_phone">
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="email" class="col-md-12">व्यवस्थापकको नाम:</label>
+                        <div class="col-md-12">
+                     
+                          <input   type="text" class="form-control " id="managername" name="managername">
+                        </div>
+                      </div>
+
+                     
+                      </div>
+
+                      <div class="row">       
+                      <div class="form-group col-md-6">
+                        <label for="email" class="col-md-12">अध्यक्षको नाम:</label>
+                        <div class="col-md-12">
+                     
+                          <input   type="text" class="form-control " id="chairman_name" name="chairman_name">
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="email" class="col-md-12"> अध्यक्षको मोबाइल:</label>
+                        <div class="col-md-12">
+                     
+                          <input   type="text" class="form-control " id="chairman_no" name="chairman_no">
+                        </div>
+                      </div>
+                      </div>
+                     
+
                       <div class="row">
                       <div class="form-group col-md-6">
                         <label for="password" class="col-md-6">पासवर्ड:</label>
@@ -182,6 +232,26 @@
                         <label for="fullname" class="col-md-12">जन्म मिति :</label>
                         <div class="col-md-12">
                           <input type="text" class="form-control required" id="dob"  name="dob">
+                        </div>
+                      </div>
+
+                    
+
+                      </div>
+
+                      <div class="row">
+                    
+                      <div class="form-group col-md-6">
+                        <label for="repname" class="col-md-12">पेशा</label>
+                        <div class="col-md-12">
+                          <input type="text" class="form-control required" id="occupation"  name="occupation" >
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="fullname" class="col-md-12">साकोसको सदस्यता नम्बर :</label>
+                        <div class="col-md-12">
+                          <input type="text" class="form-control required" id="memno"  name="memno">
                         </div>
                       </div>
 
@@ -298,7 +368,7 @@
                             <div class="row">
                               <div class="col-12 col-md-3">
                                 <div class="avatar-upload-wrap">
-                                  <h6 class="mb-3">प्रतिनिधि छनौट निर्णय</h6>
+                                  <h6 class="mb-3">फोटो</h6>
                                   <div class="avatar-upload">
                                     <div class="avatar-edit">
                                         <input type='file'  id="rep_select" name="rep_select" accept=".png, .jpg, .jpeg" />
@@ -313,7 +383,93 @@
                                 </div>
                               </div>
 
+                             
                               <div class="col-12 col-md-3">
+                                <div class="citizen-passport">
+                                 <label class="mr-3">संस्थाको छाप</label>
+                                 <div class="citizen-passport-wrap">
+                                   <div class="citizen-passport-upload-wrap mb-1">
+                                       <div class="citizen-passport-upload">
+                                         <div class="citizen-passport-edit">
+                                             <input type='file' id="audit_report" name="audit_report" accept=".png, .jpg, .jpeg" />
+                                             <label for="audit_report"></label>
+                                         </div>
+                                         <div class="citizen-passport-preview">
+                                             <div id="citizenPassportPreview" style="background-image: url(http://placehold.it/250x100);">
+                                             </div>
+                                         </div>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                              </div>
+                            </div>
+
+                            <div class="ican-uploads-inner mb-4">
+                            <div class="row">
+                              <div class="col-12 col-md-3">
+                                <div class="avatar-upload-wrap">
+                                  <h6 class="mb-3">फोटो</h6>
+                                  <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input type='file'  id="photo" name="photo" accept=".png, .jpg, .jpeg" />
+                                        <label for="rep_select"></label>
+                                    </div>
+                                    <div class="avatar-preview">
+                                        <div id="imagePreview" style="background-image: url(http://placehold.it/180);">
+                                        </div>
+                                    </div>
+                                  </div>
+                                 
+                                </div>
+                              </div>
+
+                             
+                              <div class="col-12 col-md-3">
+                                <div class="citizen-passport">
+                                 <label class="mr-3">संस्थाको छाप</label>
+                                 <div class="citizen-passport-wrap">
+                                   <div class="citizen-passport-upload-wrap mb-1">
+                                       <div class="citizen-passport-upload">
+                                         <div class="citizen-passport-edit">
+                                             <input type='file' id="org_stamp" name="org_stamp" accept=".png, .jpg, .jpeg" />
+                                             <label for="audit_report"></label>
+                                         </div>
+                                         <div class="citizen-passport-preview">
+                                             <div id="citizenPassportPreview" style="background-image: url(http://placehold.it/250x100);">
+                                             </div>
+                                         </div>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="signature-of-applicant mb-3">
+                                  <h6 class="mb-3">नविकरण र नियमित बचतको भौचर अपलोड</h6>
+                                    <div class="signature-of-applicant-inner">
+                                      <div class="signature-of-applicant-wrap">
+                                        <div class="signature-upload-wrap mb-1">
+                                            <div class="signature-upload">
+                                              <div class="signature-edit">
+                                                  <input type='file' id="voucher" name="voucher" accept=".png, .jpg, .jpeg" />
+                                                  <label for="rep_sign"></label>
+                                              </div>
+                                              <div class="signature-preview">
+                                                  <div id="signaturePreview" style="background-image: url(http://placehold.it/250x100);">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+
+                          </div>
+
+                          <div class="col-12 col-md-3">
                                 <div class="signature-of-applicant mb-3">
                                   <h6 class="mb-3">प्रतिनिधिको दस्तखत</h6>
                                     <div class="signature-of-applicant-inner">
@@ -357,27 +513,6 @@
                                     </div>
                                 </div>
                               </div>
-                              <div class="col-12 col-md-3">
-                                <div class="citizen-passport">
-                                 <label class="mr-3">अडिट रिपोर्ट</label>
-                                 <div class="citizen-passport-wrap">
-                                   <div class="citizen-passport-upload-wrap mb-1">
-                                       <div class="citizen-passport-upload">
-                                         <div class="citizen-passport-edit">
-                                             <input type='file' id="audit_report" name="audit_report" accept=".png, .jpg, .jpeg" />
-                                             <label for="audit_report"></label>
-                                         </div>
-                                         <div class="citizen-passport-preview">
-                                             <div id="citizenPassportPreview" style="background-image: url(http://placehold.it/250x100);">
-                                             </div>
-                                         </div>
-                                     </div>
-                                   </div>
-                                 </div>
-                               </div>
-                              </div>
-                            </div>
-                          </div>
                           <div class="button-group" role="group" aria-label="button">
                             <button type="submit" class="btn btn-primary">Save</button>
                 

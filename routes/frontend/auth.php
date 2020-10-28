@@ -82,6 +82,9 @@ Route::group(['as' => 'auth.'], function () {
         });
     });
 
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+
+
     Route::group(['middleware' => 'guest'], function () {
         // Authentication
       
@@ -89,7 +92,6 @@ Route::group(['as' => 'auth.'], function () {
         Route::get('admin-login', [LoginController::class, 'showAdminLoginForm'])->name('admin-login');
         Route::post('admin-login', [LoginController::class, 'login']);
         // Registration
-        Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
         Route::get('showReports', [RegisterController::class, 'showReports'])->name('showReports');
         Route::post('register', [RegisterController::class, 'register']);
 

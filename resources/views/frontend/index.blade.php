@@ -218,7 +218,7 @@
                 <img src="images/banner_logo.png" class="card-img-top" alt="students.jpg">
                 <div class="card-body">
                   <h3 class="card-title"><a href="#">About Nefscun</a></h3>
-                  <p class="card-text">To support and foster your intellectual and personal growth and help you explore and experience the different aspects of professional life.</p>
+                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of</p>
                   <a target=_blank href="#">Read More</a>
                 </div>
               </div>
@@ -230,7 +230,7 @@
                 <img src="images/banner_logo.png" class="card-img-top" alt="members.jpg">
                 <div class="card-body">
                   <h3 class="card-title"><a href="#">Nefscun</a></h3>
-                  <p class="card-text">ICAN is committed to regulate accounting profession in Nepal. It has a great values of membership of ICAN and are integral part of the institute.</p>
+                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of</p>
                   <a target=_blank href="#" >Read More</a>
                 </div>
               </div>

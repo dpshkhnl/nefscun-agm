@@ -99,6 +99,11 @@ class RegisterController extends Controller
         $orgRegister->local = $request->get('local_id');
         $orgRegister->ward = $request->get('ward');
         $orgRegister->mobile_no = $request->get('mobile');
+        $orgRegister->panno = $request->get('panno');
+        $orgRegister->org_phone = $request->get('org_phone');
+        $orgRegister->managername = $request->get('managername');
+        $orgRegister->chairman_name = $request->get('chairman_name');
+        $orgRegister->chairman_no = $request->get('chairman_no');
         $orgRegister->email = $request->get('email');
         $orgRegister->password =  Hash::make($request->get('password'));
         $orgRegister->is_verified = 0;
@@ -115,6 +120,8 @@ class RegisterController extends Controller
         $orgRep->nefscun_mem_no = $request->get('nefscun_mem_no');
         $orgRep->org_rep_id = $request->get('register_id');
         $orgRep->rep_name = $request->get('repname');
+        $orgRep->occupation = $request->get('occupation');
+        $orgRep->memno = $request->get('memno');
         $orgRep->dob = $request->get('dob');
         $orgRep->province = $request->get('province_id');
         $orgRep->district = $request->get('dist_id');
@@ -170,6 +177,30 @@ class RegisterController extends Controller
         $destinationPaths = public_path('/images/audit_report/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->audit_report = $names; //
+    }
+    if ($request->hasFile('voucher')) {  //check the file present or not
+        $images = $request->file('voucher'); //get the file
+        $size = $images->getSize();
+        $names =  'voucher-'.time().".".$images->getClientOriginalName();
+        $destinationPaths = public_path('/images/voucher/'); //public path folder dir
+        $images->move($destinationPaths,$names);  //mve to destination you mentioned 
+        $orgUpload->voucher = $names; //
+    }
+    if ($request->hasFile('org_stamp')) {  //check the file present or not
+        $images = $request->file('org_stamp'); //get the file
+        $size = $images->getSize();
+        $names =  'org_stamp-'.time().".".$images->getClientOriginalName();
+        $destinationPaths = public_path('/images/org_stamp/'); //public path folder dir
+        $images->move($destinationPaths,$names);  //mve to destination you mentioned 
+        $orgUpload->org_stamp = $names; //
+    }
+    if ($request->hasFile('photo')) {  //check the file present or not
+        $images = $request->file('photo'); //get the file
+        $size = $images->getSize();
+        $names =  'photo-'.time().".".$images->getClientOriginalName();
+        $destinationPaths = public_path('/images/photo/'); //public path folder dir
+        $images->move($destinationPaths,$names);  //mve to destination you mentioned 
+        $orgUpload->photo = $names; //
     }
     $orgUpload->save();
     return $this->showForm(3,$orgUpload);
