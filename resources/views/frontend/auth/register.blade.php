@@ -128,11 +128,12 @@
                                   
                             <div class="row">           
                                     
-                      <div class=" col-md-6">
-                        <label for="mobile" class="col-md-12">मोबाईल नं:</label>
+                      
+                      <div class="form-group col-md-6">
+                        <label for="email" class="col-md-12">संस्थाको फोन नम्बर:</label>
                         <div class="col-md-12">
                      
-                          <input   type="number" class="form-control " id="mobile" name="mobile">
+                          <input   type="text" class="form-control " id="org_phone" name="org_phone">
                         </div>
                       </div>
                      
@@ -147,18 +148,19 @@
                       </div>
                       </div>
                       <div class="row">       
-                      <div class="form-group col-md-6">
-                        <label for="email" class="col-md-12">संस्थाको फोन नम्बर:</label>
-                        <div class="col-md-12">
                      
-                          <input   type="text" class="form-control " id="org_phone" name="org_phone">
-                        </div>
-                      </div>
                       <div class="form-group col-md-6">
                         <label for="email" class="col-md-12">व्यवस्थापकको नाम:</label>
                         <div class="col-md-12">
                      
                           <input   type="text" class="form-control " id="managername" name="managername">
+                        </div>
+                      </div>
+                      <div class=" col-md-6">
+                        <label for="mobile" class="col-md-12">व्यवस्थापकको मोबाईल नं:</label>
+                        <div class="col-md-12">
+                     
+                          <input   type="number" class="form-control " id="mobile" name="mobile">
                         </div>
                       </div>
 
@@ -175,7 +177,7 @@
                       </div>
 
                       <div class="form-group col-md-6">
-                        <label for="email" class="col-md-12"> अध्यक्षको मोबाइल:</label>
+                        <label for="email" class="col-md-12"> अध्यक्षको मोबाईल नं:</label>
                         <div class="col-md-12">
                      
                           <input   type="text" class="form-control " id="chairman_no" name="chairman_no">
@@ -189,14 +191,15 @@
                         <label for="password" class="col-md-6">पासवर्ड:</label>
                         <div class="col-md-12">
                      
-                          <input   type="password" class="form-control"  id="password" name="password">
+                          <input  onkeyup="checkPass();"   type="password" class="form-control"  id="password" name="password">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="cnfpassword" class="col-md-12">पुनः पासवर्ड:</label>
                         <div class="col-md-12">
                      
-                          <input   type="password" class="form-control "  id="cnfpassword" name="cnfpassword">
+                          <input  onkeyup="checkPass();"  type="password" class="form-control "  id="cnfpassword" name="cnfpassword">
+                          <span id='message'></span>
                         </div>
                       </div>
                       </div>
@@ -205,9 +208,31 @@
                   
 </div>
                     <div class="button-group" role="group" aria-label="button">
-                      <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary">Save</button>
+                    
+                      <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary align-right">Next</button>
                       <!-- <button type="button" class="btn btn-secondary">Cancel</button> -->
                     </div>
+                    <div class="modal" tabindex="-1" role="dialog" id="modal-box2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enter Your OTP :</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        OTP has been sent to your mobile number.
+        <input type="number" id="otp" name="otp_code" class="form-control">
+      </div>
+      <div class="modal-footer">
+          <button type="button" id="validate" name="validate" class="btn btn-primary" >Verify</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
                     </form> 
                   </div>
 
@@ -548,7 +573,62 @@
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
     <script type='text/javascript'>
+    function checkPass(){
+   
+       
+         if ($('#password').val() == $('#cnfpassword').val()) {
+
+          $('#message').html('Matched').css('color', 'green');
+          $( "#btnSubmit" ).prop( "disabled", false );
+
+          
+        }else{
+           
+          $('#message').html('Not Matched').css('color', 'red');
+          $( "#btnSubmit" ).prop( "disabled", true );
+
+        }
+}
     $(document).ready(function(){
+
+      $('#btnSubmit').click(function(e){
+           
+           e.preventDefault();
+           var contact = $("input[name='mobile']").val();
+           var email = $("input[name='email']").val();
+          var _token = $("input[name='_token']").val();
+           $.ajax({
+          url: "{!! url('generate_otp') !!}",
+          type: 'POST',
+          data: {phone: contact,email: email, _token: _token},
+        });
+          $('#modal-box2').modal();
+         
+          $("#modal-box2 button[name='validate']").on('click', function(){
+          var otp_code = $("input[name='otp_code']").val();
+        
+          var contact = $("input[name='mobile']").val();
+          var _token = $("input[name='_token']").val();
+          $.ajax({
+          url: "{!! url('check_otp') !!}",
+          type: 'POST',
+          data: {phone: contact, otp: otp_code, _token: _token},
+          success: function(result){
+            if(result.status == 1){
+              // var text = '<p>OTP Verified. <br> <strong>Please Wait. Your Form is being Submitted.</strong></p>';
+              // $('#modal-box2 .modal-body').append(text);
+              $('#firstform').unbind('submit').submit();
+           } else
+           {
+                var text = '<p>Invalid OTP. <br> <strong>Please input the correct OTP sent in your phone.</strong></p>';
+              $('#modal-box2 .modal-body').append(text);
+           }
+          }
+        }); 
+         
+        });
+
+      });
       $('body').on('keypress', '.convert-romanize', function (event) {
 	return setUnicode(event,this);
 });

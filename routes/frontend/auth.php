@@ -83,6 +83,12 @@ Route::group(['as' => 'auth.'], function () {
     });
 
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::get('showReports/{id}', [RegisterController::class, 'showReports'])->name('reports');
+    Route::get('printForm/{id}', [RegisterController::class, 'printForm'])->name('printForm');
+    Route::post('generate_otp', [RegisterController::class,'generate_otp'])->name('generate_otp');
+    Route::post('check_otp', [RegisterController::class,'check_otp'])->name('check_otp');
+
+    Route::post('register', [RegisterController::class, 'register']);
 
 
     Route::group(['middleware' => 'guest'], function () {
@@ -92,8 +98,6 @@ Route::group(['as' => 'auth.'], function () {
         Route::get('admin-login', [LoginController::class, 'showAdminLoginForm'])->name('admin-login');
         Route::post('admin-login', [LoginController::class, 'login']);
         // Registration
-        Route::get('showReports', [RegisterController::class, 'showReports'])->name('showReports');
-        Route::post('register', [RegisterController::class, 'register']);
 
         // Password Reset
         Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');

@@ -15,8 +15,11 @@ use App\Domains\Auth\Models\LocalBody;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\OrganizationRegistration;
+use App\Models\PratibedanComment;
 use App\Models\OrganizationUpload;
 use App\Models\OrganizationRepresentative;
+use App\Models\Helper;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -83,10 +86,76 @@ class RegisterController extends Controller
     }
 
 
-    public function showReports(){
+    public function showReports($id){
        
-        return view('frontend.auth.report-details');
+        $reports =  array("https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview",
+       "https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview",
+    "https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" );
+       $details = new OrganizationRegistration;
+       $details->reportid = $id;
+       $details->reportName="";
+       $details->url = $reports[$id-1];
+       $coop =  Session::get('user');
+       if(!$coop)
+       return view('frontend.index');
+       else{
+        $comment = PratibedanComment::where('org_reg_id',$coop->id)->first();
+      
+        return view('frontend.auth.report-details',compact('details','coop','comment'));
+          
+       }
+      
     }
+
+    public function printForm($id){
+    
+       $details = new OrganizationRegistration;
+        return view('frontend.print',compact('details'));
+    }
+    
+    public function saveComment(Request $request){
+
+       // dd($request->all());
+
+        $comment = PratibedanComment::where('org_reg_id',$request->get('register_id'))->first();
+        if(!$comment)
+        $comment = new PratibedanComment;
+        $comment->nefscun_mem_no = $request->get('nefscun_mem_no');
+        $comment->org_reg_id = $request->get('register_id');
+        $comment->chairman_comment = $request->get('chairmanComment');
+        $comment->sec_comment = $request->get('secComment');
+        $comment->tres_comment = $request->get('tresComment');
+        $comment->audit_comment = $request->get('auditComment');
+        $comment->ip = $request->ip();
+        $comment->save();
+       return $this->showReports(1);
+    }
+
+    public function generate_otp(Request $r)
+    {
+        $pass = rand(1000,9999);
+       //$pass = 1234;
+         $otp = new \App\Models\Otp;
+         $otp->phone = $r->phone;
+         $otp->email = $r->email;
+         $otp->otp_phone = $pass;
+         $otp->otp_email = $pass;
+         $otp->save();
+         Helper::sendSms($r->phone,"Your OTP is ".$otp->otp_phone);
+         Helper::sendEmail($r->email, "OTP for Registration", "Your OTP is ".$otp->otp_email);
+       
+    }
+
+    public function check_otp(Request $r)
+    {
+        $otp = \App\Models\Otp::select('*')->where('phone', $r->phone)->orderBy('id', 'desc')->first();
+        if($otp->otp_phone == $r->otp){
+            return response(['status' => 1]);
+        } else{
+            return response(['status' => 0]);
+        }
+    }
+
 
    public function saveBasic(Request $request)
    {

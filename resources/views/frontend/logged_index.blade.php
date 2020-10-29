@@ -40,7 +40,8 @@
                    
                     <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank  role="button"></i>Welcome, {{$coop->org_name}}</a>
 
-                    
+                    <a class="btn btn-sm btn-outline-primary top-address-btn" href="printForm/1" role="button"><i class="fas fa-unlock mr-2"></i>Profile</a>
+
                         <a class="btn btn-sm btn-outline-primary top-address-btn" href="{{ route('frontend.auth.logout') }}" role="button"><i class="fas fa-unlock mr-2"></i>Logout</a>
 
                   
@@ -94,7 +95,7 @@
       <div class="container align-center">
         <div class="icon-box-inner">
           <div class="icon-list text-center">
-            <a target=_blank href="showReports">
+            <a target=_blank href="showReports/1">
               <div class="icon-wrap">
                 <i class="fas fa-users"></i>
               </div>
@@ -102,7 +103,7 @@
             </a>
           </div>
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+            <a target=_blank href="showReports/2">
               <div class="icon-wrap">
                 <i class="fas fa-book-reader"></i>
               </div>
@@ -110,21 +111,14 @@
             </a>
           </div>
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+            <a target=_blank href="showReports/3">
               <div class="icon-wrap">
               <i class="fas fa-file-alt"></i>
             </div>
             <strong class="icon-title">कोषाध्यक्षको प्रतिवेदन</strong>
             </a>
           </div>
-          <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-              <i class="fas fa-user-graduate"></i>
-            </div>
-            <strong class="icon-title"> प्रतिवेदन </strong>
-            </a>
-          </div>
+         
          
          
 

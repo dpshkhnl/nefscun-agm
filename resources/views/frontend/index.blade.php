@@ -41,7 +41,7 @@
                     <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.login') }}" role="button"><i class="fas fa-lock mr-2"></i>Login</a>
 
                    
-                        <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.register') }}" role="button"><i class="fas fa-address-card mr-2"></i>Register</a>
+                        <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.register') }}" role="button"><i class="fas fa-address-card mr-2"></i>संस्था दर्ता गर्नुहोस  </a>
 
                  
               </div>
@@ -92,13 +92,16 @@
 
     <section class="icon-box">
       <div class="container">
+      <br/>
+      
+      <h5>नेफ्स्कूनको २९औ साधारण सभामा उपस्थिति जनाउने प्रकृया</h5>
         <div class="icon-box-inner">
           <div class="icon-list text-center">
             <a target=_blank href="#">
               <div class="icon-wrap">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-bank"></i>
               </div>
-              <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+              <strong class="icon-title">संस्था दर्ता गर्नुहोस </strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -106,7 +109,7 @@
               <div class="icon-wrap">
                 <i class="fas fa-book-reader"></i>
               </div>
-              <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+              <strong class="icon-title">लगईन गर्नुहोस    </strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -114,7 +117,7 @@
               <div class="icon-wrap">
               <i class="fas fa-file-alt"></i>
             </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            <strong class="icon-title">प्रतिवेदन पढ्नुहोस </strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -122,7 +125,7 @@
               <div class="icon-wrap">
               <i class="fas fa-user-graduate"></i>
             </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            <strong class="icon-title">सुझाव दिनुहोस</strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -131,68 +134,10 @@
             
               <i class="fas fa-pen-square"></i>
             </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
+            <strong class="icon-title">अभौतिक साधारण सभाको कार्यक्रममा सहभागी हुनुहोस   </strong>
             </a>
           </div>
-          <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-                  <i class="fas fa-bullhorn"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-          <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-          <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-              <i class="far fa-calendar-alt"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-          <div class="icon-list text-center">
-            <a href="#">
-              <div class="icon-wrap">
-                <i class="fas fa-school"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-
-
-          <div class="icon-list text-center">
-            <a href="#">
-              <div class="icon-wrap">
-                <i class="far fa-keyboard"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-          <div class="icon-list text-center">
-            <a href="#">
-              <div class="icon-wrap">
-                <i class="fas fa-chalkboard-teacher"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
-           <div class="icon-list text-center">
-            <a target=_blank href="#">
-              <div class="icon-wrap">
-            
-              <i class="fas fa-pen-square"></i>
-            </div>
-            <strong class="icon-title">सदस्य दर्ता गर्नुहोस </strong>
-            </a>
-          </div>
+          
         </div>
       </div>
     </section>
@@ -237,6 +182,76 @@
             </article>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="icon-box">
+      <div class="container">
+     
+      
+      <h5>संस्था दर्ता गर्ने प्रकृया</h5>
+        <div class="icon-box-inner">
+          <div class="icon-list text-center" title="नेफ्स्कून सदस्यता नम्बर
+संस्थाको नाम
+ठेगाना
+पान नम्बर
+संस्थाको फोन नम्बर
+ईमेल
+व्यवस्थापकको नाम र मोबाईल नम्बर
+अध्यक्षको नाम र मोबाईल नम्बर
+">
+            <a target=_blank href="#" >
+              <div class="icon-wrap">
+                <i class="fas fa-users"></i>
+              </div>
+              <strong class="icon-title">संस्थागत विवरण अद्यावधिक गर्नुहोस्  </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center" title="नाम
+जन्म मिति
+ठेगाना
+मोबाईल नम्बर
+ईमेल
+पेशा
+माथिल्लो शैक्षिक योग्यता
+शेयर सदस्यता लिएको मिति
+साकोस सदस्यता नम्बर
+संघ/संस्थामा बहाल रहेको पद
+सञ्चालक समितिको निर्णय मिति
+">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+                <i class="fas fa-book-reader"></i>
+              </div>
+              <strong class="icon-title">केन्द्रीय प्रतिनिधिको विवरण अद्यावधिक गर्नुहोस्  </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center" title="प्रतिनिधिको फोटो
+प्रतिनिधिको दस्तखत
+संस्थाको छाप
+अध्यक्षको दस्तखत
+प्रतिनिधि छनौट निर्णय
+नविकरण र नियमित बचतको भौचर
+अडिट रिपोर्ट
+">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <strong class="icon-title">आवश्यक कागजातहरु स्क्यान गरेर अपलोड गर्नुहोस्   </strong>
+            </a>
+          </div>
+          <div class="icon-list text-center">
+            <a target=_blank href="#">
+              <div class="icon-wrap">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <strong class="icon-title">पेश गर्नुहोस्   </strong>
+            </a>
+          </div>
+         
+          
+       
       </div>
     </section>
 
