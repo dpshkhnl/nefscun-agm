@@ -11,6 +11,16 @@
 
     @stack('before-styles')
     <link href="{{ mix('css/backend.css') }}" rel="stylesheet">
+    <style>
+   .table td{
+        text-align: center;
+    }
+    .table td img{
+        width: 130px;
+        height: 130px;
+        max-width: none;
+    }
+</style>
     <livewire:styles />
     @stack('after-styles')
 </head>

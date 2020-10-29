@@ -31,48 +31,48 @@
                         <tr>
 
                             <th width="30px"><input type="checkbox" class="check" id="check_all"></th>
-                            <th>Mem No.</th>
-                            <th>Name</th>
-                            <th>Name Np</th>
-                            <th>Address</th>
-                            <th>Email</th>
-                            <th>Mobile No.</th>
-                            <!-- <th>Rep. Select</th>
-                            <th>Rep Sign</th>
-                            <th>Chairman Sign</th>
-                            <th>Audit Report</th> -->
+                            <th> नेफ्स्कून <br/>सदस्यता नम्बर</th>
+                            <th>संस्थाको नाम</th>
+                            <th>ठेगाना</th>
+                            <th>प्रतिनिधिको नाम</th>
+                            <th> संस्थाको छाप</th>
+                            <th> प्रतिनिधि छनौट निर्णय</th>
+                           
+                            <th> नविकरणको भौचर</th>
                             <th>Registered Date</th>
-                            <th>Action</th>
+                            <th></th>
                             
                         </tr>
                     </thead>
                     <tbody class="text-nowrap">
+
                        @foreach($data as $dt)
                       <tr>
+
                        <td width="30px"><input type="checkbox" class="approve_class" name="sel_app[]" value="{{$dt->id}}" id="approve_class"></td>
                        <td>{{$dt->nefscun_mem_no}}</td>
                        <td>{{$dt->org_name}}</td>
-                       <td>{{$dt->org_name_np}}</td>
-                       <td>{{$dt->province}},{{$dt->district}},{{$dt->local}},{{$dt->ward}}</td>
-                       <td>{{$dt->email}}</td>
-                       <td>{{$dt->mobile_no}}</td>
-                       <!-- <td>{{$dt->nefscun_mem_no}}</td>
-                       <td>{{$dt->nefscun_mem_no}}</td>
-                       <td>{{$dt->nefscun_mem_no}}</td>
-                       <td>{{$dt->nefscun_mem_no}}</td> -->
+                       <td>{{$dt->name_np}},{{$dt->ward}} <br/>{{$dt->dist_name_np}}</td>
+                       
+                       <td>{{$dt->rep_name}}</td>
+                       <td><img src="{{ asset('images/org_stamp/'.$dt->org_stamp) }}"></td>
+                       <td><img src="{{ asset('images/rep_select/'.$dt->rep_select) }}"></td>
+                       <td><img src="{{ asset('images/voucher/'.$dt->voucher) }}"></td>
+                      
+                    
                        <td>{{$dt->created_at}}</td>
                        <td>
                
-                       <a target="_blank" href="{{ url('admin/show-form') }}/{{$dt->id}}">
+                       <a target="_blank" href="{{ url('admin/show-form') }}/{{$dt->orgid}}">
                             
                             <span class="btn btn-primary  mt-2">Show</span>
                         </a>
                <br/>
                <br/>
-               <button onclick=approveform({{$dt->id}}) class="btn btn-success mt-2 appbtn" style="width:60px" >Verify </button>
+               <button onclick=approveform({{$dt->orgid}}) class="btn btn-success mt-2 appbtn" style="width:60px" >Verify </button>
                <br/>
                <br/>
-               <button onclick=rejectform({{$dt->id}}) class="btn btn-danger mt-2 1-reject" style="width:60px" >Reject </button>
+               <button onclick=rejectform({{$dt->orgid}}) class="btn btn-danger mt-2 1-reject" style="width:60px" >Reject </button>
               
                
             

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Domains\Auth\Models\Province;
 use App\Models\OrganizationUpload;
 use App\Models\OrganizationRepresentative;
+use App\Models\Helper;
 use Auth;
 
 
@@ -22,12 +23,20 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $data =  OrganizationRegistration::where('status',0)->get();
+        $data =  OrganizationRegistration::select('organization_registrations.*','organization_registrations.id as orgid',
+        'organization_representatives.*','provinces.*','districts.*','local_bodies.*','organization_uploads.*')->
+        join('organization_representatives','organization_representatives.org_rep_id','organization_registrations.id')
+        ->join('provinces','provinces.state_id','organization_registrations.province')
+        ->join('districts','districts.dist_id','organization_registrations.district')
+        ->join('local_bodies','local_bodies.id','organization_registrations.local')
+        ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')
+        ->where('status',0)->get();
+        //dd($data);
         return view('backend.reports.registered',compact('data'));
     }
 
     function approve($id){ 
-
+        //return ($id);
         $register = OrganizationRegistration::find($id);
         if(!$register)
         {
@@ -37,6 +46,8 @@ class ReportController extends Controller
         $register->status = 1;
         $register->updated_by = Auth::user()->name;
         $register->save();
+        Helper::sendEmail($register->email, "Approved", "you are successfully registered. You can now login by clicking on the link below.<br/> http://agm.shutradhar.com.np/login");
+
        return "Form Approved Successfully";
     }
 
@@ -66,6 +77,8 @@ class ReportController extends Controller
         $data->updated_by = Auth::user()->name;
         $data->message = $r->get('rmsg');
         $data->save();
+        Helper::sendEmail($register->email, "Rejected", "your Form Has been Rejected due to ".$r->get('rmsg')."Please Update and Submit again");
+
         $regNo =$data->reg_no;
        
         //UtilController::sendEmail($data->email,"Dear ".$data->full_name_capital."\n\nYour Registration Form with submission no ". $data->submission_no." has been Rejected. Kindly check your email and update your form.\n\n ICAN");
