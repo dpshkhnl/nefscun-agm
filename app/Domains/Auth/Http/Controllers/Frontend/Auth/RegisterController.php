@@ -108,9 +108,35 @@ class RegisterController extends Controller
     }
 
     public function printForm($id){
+
+
+        $orgRegister = OrganizationRegistration::select('organization_registrations.*','organization_registrations.id as orgid',
+       'provinces.*','provinces.name_np as pradesh','districts.*','local_bodies.*')
+        ->join('provinces','provinces.state_id','organization_registrations.province')
+        ->join('districts','districts.dist_id','organization_registrations.district')
+        ->join('local_bodies','local_bodies.id','organization_registrations.local')
+        ->where('organization_registrations.id',$id)->first();
+
+        $orgRepresentive = OrganizationRepresentative::select('organization_representatives.*','organization_representatives.id as orgid',
+       'provinces.*','provinces.name_np as pradesh','districts.*','local_bodies.*')
+        ->join('provinces','provinces.state_id','organization_representatives.province')
+        ->join('districts','districts.dist_id','organization_representatives.district')
+        ->join('local_bodies','local_bodies.id','organization_representatives.local')
+        ->where('organization_representatives.org_rep_id',$id)->first();
+
+        $orgUploads = OrganizationUpload::where('org_reg_id',$id)->first();
     
-       $details = new OrganizationRegistration;
-        return view('frontend.print',compact('details'));
+    //    $details  =  OrganizationRegistration::select('organization_registrations.*','organization_registrations.id as orgid',
+    //    'organization_representatives.*','provinces.*','provinces.name_np as pradesh','districts.*','local_bodies.*','organization_uploads.*')->
+    //    join('organization_representatives','organization_representatives.org_rep_id','organization_registrations.id')
+    //    ->join('provinces','provinces.state_id','organization_registrations.province')
+    //    ->join('districts','districts.dist_id','organization_registrations.district')
+    //    ->join('local_bodies','local_bodies.id','organization_registrations.local')
+    //    ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')
+    //    ->where('organization_registrations.id',$id)->first();
+       //dd($details);
+     //  dd($orgUploads);
+        return view('frontend.print',compact('orgRegister','orgRepresentive','orgUploads'));
     }
     
     public function saveComment(Request $request){
@@ -217,7 +243,7 @@ class RegisterController extends Controller
         if ($request->hasFile('rep_select')) {  //check the file present or not
         $images = $request->file('rep_select'); //get the file
         $size = $images->getSize();
-        $names =  'rep_select-'.time().".".$images->getClientOriginalName();
+        $names =  'rep_select-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
         $destinationPaths = public_path('/images/rep_select/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->rep_select = $names; //
@@ -225,7 +251,7 @@ class RegisterController extends Controller
     if ($request->hasFile('rep_sign')) {  //check the file present or not
         $images = $request->file('rep_sign'); //get the file
         $size = $images->getSize();
-        $names =  'rep_sign-'.time().".".$images->getClientOriginalName();
+        $names =  'rep_sign-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
         $destinationPaths = public_path('/images/rep_sign/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->rep_sign = $names; //
@@ -234,7 +260,7 @@ class RegisterController extends Controller
     if ($request->hasFile('chairman_sign')) {  //check the file present or not
         $images = $request->file('chairman_sign'); //get the file
         $size = $images->getSize();
-        $names =  'chairman_sign-'.time().".".$images->getClientOriginalName();
+        $names =  'chairman_sign-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
         $destinationPaths = public_path('/images/chairman_sign/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->chairman_sign = $names; //
@@ -242,7 +268,7 @@ class RegisterController extends Controller
     if ($request->hasFile('audit_report')) {  //check the file present or not
         $images = $request->file('audit_report'); //get the file
         $size = $images->getSize();
-        $names =  'audit_report-'.time().".".$images->getClientOriginalName();
+        $names =  'audit_report-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
         $destinationPaths = public_path('/images/audit_report/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->audit_report = $names; //
@@ -250,15 +276,24 @@ class RegisterController extends Controller
     if ($request->hasFile('voucher')) {  //check the file present or not
         $images = $request->file('voucher'); //get the file
         $size = $images->getSize();
-        $names =  'voucher-'.time().".".$images->getClientOriginalName();
+        $names =  'voucher-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
         $destinationPaths = public_path('/images/voucher/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->voucher = $names; //
+    } 
+    if ($request->hasFile('save_voucher')) {  //check the file present or not
+        $images = $request->file('save_voucher'); //get the file
+        $size = $images->getSize();
+        $names =  'save_voucher-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $destinationPaths = public_path('/images/save_voucher/'); //public path folder dir
+        $images->move($destinationPaths,$names);  //mve to destination you mentioned 
+        $orgUpload->save_voucher = $names; //
     }
+    
     if ($request->hasFile('org_stamp')) {  //check the file present or not
         $images = $request->file('org_stamp'); //get the file
         $size = $images->getSize();
-        $names =  'org_stamp-'.time().".".$images->getClientOriginalName();
+        $names =  'org_stamp-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
         $destinationPaths = public_path('/images/org_stamp/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->org_stamp = $names; //
@@ -266,7 +301,7 @@ class RegisterController extends Controller
     if ($request->hasFile('photo')) {  //check the file present or not
         $images = $request->file('photo'); //get the file
         $size = $images->getSize();
-        $names =  'photo-'.time().".".$images->getClientOriginalName();
+        $names =  'photo-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
         $destinationPaths = public_path('/images/photo/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->photo = $names; //

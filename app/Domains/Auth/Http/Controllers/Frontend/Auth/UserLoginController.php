@@ -29,9 +29,16 @@ class UserLoginController extends Controller
     public function validate_user(Request $request)
     {
         $orgRegister = OrganizationRegistration::where('nefscun_mem_no',$request->get('email'))
+        //->where('status',1)
         //->where('password',Hash::make($request->get('password')))
         ->first();
+
+        
         if($orgRegister){
+            if($orgRegister->status!=1)
+            {
+                return redirect()->route('frontend.auth.login')->withFlashDanger('Your application is under review. Please wait for NEFSCUN official mail for login.');
+            }
             Session::put('user', $orgRegister);
             return redirect()->route('frontend.index');
         }else

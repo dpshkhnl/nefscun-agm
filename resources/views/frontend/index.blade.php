@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Alegreya&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -41,7 +42,7 @@
                     <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.login') }}" role="button"><i class="fas fa-lock mr-2"></i>Login</a>
 
                    
-                        <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="{{ route('frontend.auth.register') }}" role="button"><i class="fas fa-address-card mr-2"></i>संस्था दर्ता गर्नुहोस  </a>
+                        <a class="btn btn-sm btn-outline-danger top-address-register" target=_blank href="{{ route('frontend.auth.register') }}" role="button"><i class="fas fa-address-card mr-2"></i>संस्था दर्ता गर्नुहोस  </a>
 
                  
               </div>
@@ -94,12 +95,12 @@
       <div class="container">
       <br/>
       
-      <h5>नेफ्स्कूनको २९औ साधारण सभामा उपस्थिति जनाउने प्रकृया</h5>
+      <h4 class="text-center" style="color:blue;font-weight:bold">नेफ्स्कूनको २९औ साधारण सभामा उपस्थिति जनाउने प्रकृया</h4>
         <div class="icon-box-inner">
           <div class="icon-list text-center">
             <a target=_blank href="#">
               <div class="icon-wrap">
-                <i class="fas fa-bank"></i>
+                <i class="fa fa-bank"></i>
               </div>
               <strong class="icon-title">संस्था दर्ता गर्नुहोस </strong>
             </a>
@@ -107,7 +108,7 @@
           <div class="icon-list text-center">
             <a target=_blank href="#">
               <div class="icon-wrap">
-                <i class="fas fa-book-reader"></i>
+                <i class="fas fa-lock"></i>
               </div>
               <strong class="icon-title">लगईन गर्नुहोस    </strong>
             </a>
@@ -115,7 +116,7 @@
           <div class="icon-list text-center">
             <a target=_blank href="#">
               <div class="icon-wrap">
-              <i class="fas fa-file-alt"></i>
+              <i class="fas fa-book-reader"></i>
             </div>
             <strong class="icon-title">प्रतिवेदन पढ्नुहोस </strong>
             </a>
@@ -123,7 +124,7 @@
           <div class="icon-list text-center">
             <a target=_blank href="#">
               <div class="icon-wrap">
-              <i class="fas fa-user-graduate"></i>
+              <i class="fas fa-pen-square"></i>
             </div>
             <strong class="icon-title">सुझाव दिनुहोस</strong>
             </a>
@@ -132,7 +133,7 @@
             <a target=_blank href="#">
               <div class="icon-wrap">
             
-              <i class="fas fa-pen-square"></i>
+              <i class="fas fa-desktop"></i>
             </div>
             <strong class="icon-title">अभौतिक साधारण सभाको कार्यक्रममा सहभागी हुनुहोस   </strong>
             </a>
@@ -188,8 +189,9 @@
     <section class="icon-box">
       <div class="container">
      
+      <h4 class="text-center" style="color:blue;font-weight:bold">संस्था दर्ता गर्ने प्रकृया</h4>
+
       
-      <h5>संस्था दर्ता गर्ने प्रकृया</h5>
         <div class="icon-box-inner">
           <div class="icon-list text-center" title="नेफ्स्कून सदस्यता नम्बर
 संस्थाको नाम
@@ -202,7 +204,7 @@
 ">
             <a target=_blank href="#" >
               <div class="icon-wrap">
-                <i class="fas fa-users"></i>
+                <i class="fa fa-bank"></i>
               </div>
               <strong class="icon-title">संस्थागत विवरण अद्यावधिक गर्नुहोस्  </strong>
             </a>
@@ -221,7 +223,7 @@
 ">
             <a target=_blank href="#">
               <div class="icon-wrap">
-                <i class="fas fa-book-reader"></i>
+                <i class="fa fa-male"></i>
               </div>
               <strong class="icon-title">केन्द्रीय प्रतिनिधिको विवरण अद्यावधिक गर्नुहोस्  </strong>
             </a>
@@ -236,7 +238,7 @@
 ">
             <a target=_blank href="#">
               <div class="icon-wrap">
-              <i class="fas fa-file-alt"></i>
+              <i class="fa fa-cloud-upload-alt"></i>
             </div>
             <strong class="icon-title">आवश्यक कागजातहरु स्क्यान गरेर अपलोड गर्नुहोस्   </strong>
             </a>
@@ -244,7 +246,8 @@
           <div class="icon-list text-center">
             <a target=_blank href="#">
               <div class="icon-wrap">
-              <i class="fas fa-user-graduate"></i>
+              
+              <i class="fas fa-paper-plane"></i>
             </div>
             <strong class="icon-title">पेश गर्नुहोस्   </strong>
             </a>
@@ -270,18 +273,10 @@
             </div>
             <div class="col-12 col-sm-12 col-md-8 col-lg-8">
               <ul class="footer-links">
-                <li>
-                  <a target=_blank href="#">Home</a>
-                </li>
-                <li>
-                  <a target=_blank href="#">Useful Links</a>
-                </li>
                
-                <li>
-                  <a target=_blank href="#">Contact Us</a>
-                </li>
+                
                 <li class="copyright">
-                  &copy Copyright 2020 NEFSCUN
+                  &copy Copyright 2020 NEFSCUN  
                 </li>
               </ul>
             </div>

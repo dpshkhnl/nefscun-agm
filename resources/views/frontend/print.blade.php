@@ -6,85 +6,204 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>NEFSCUN</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-        <section class="header">
-            <div class="text-center p-2">
-                नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि.
-            </div>
+    <div class="container m-b-10">
+      <div class="row m-b-2">
+        <div class="col-lg-10 col-md-10">
+          <div class="text-center p-1">
+            नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि.
+          </div>
 
-            <div class="text-center p-2">
-              <b>२९ औं साधारण सभाको आधिकारिक प्रतिनिधि विवरण</b>
-            </div>
+          <div class="text-center p-1">
+            <b>२९ औं साधारण सभाको आधिकारिक प्रतिनिधि विवरण</b>
+          </div>
 
-            <div class="text-center p-2">
-                फारम
-            </div>
+          <div class="text-center p-1">
+              फारम
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-2">
+         
+            <!-- <p>फोटो</p> -->
+            <!-- <label for="#sanstha-logo">नोट: कृपया फोटोमा छुने गरी संस्थाको छाप प्रयाग गर्नुहोला</label> -->
+           
+                          <img  id="pp_photo" width="100px" height="100px" src="{{asset('images/photo/'.$orgUploads->photo)}}"> <br>
+                       
             
-            <div>
-              <div>
-                <label for="#sanstha-logo">नोट: कृपया फोटोमा छुने गरी संस्थाको छाप प्रयाग गर्नुहोला</label>
-              </div>
-              <div>
-                <input id="sanstha-logo" type="file" class="btn btn-primary" placeholder="फोटो छनौट गर्नुहोस्" />
-              </div>       
-            </div>
+        </div>
+      </div>
+      <section class="header">
+        <div>
+          <b>१. संघ/संस्थाको नाम:</b> <b>{{$orgRegister->org_name_np}}</b>
+        </div>
 
-            <div>
-              <b>१. संघ/संस्थाको नाम:</b> <input type="text" placeholder="संघ/संस्थाको नाम">
-            </div>
-
-            <div>
-              <b>२. ठेगाना : </b> <input type="text" placeholder="ठेगाना">
-            </div>
-
-            <div>
-              <b>३. २९ औं साधारण सभामा सहभागीताको लागि आधिकारिक निर्णय:</b>
-              <div>
-                यस संघ/संस्थाको मिति २०<input type="text" placeholder="साल">साल <input type="text" placeholder="महिना"> महिना <input type="text" placeholder="गते"> गते बसेको सञ्चालक समिति/साधारण को निर्णय नं<input type="text" placeholder="निर्णय नं"> अनुसार नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि. को २०७७ साल मंसिर ५ गते सम्पन्न हुने २९ औं साधारण सभामा प्रतिनिधित्व गर्न यस संघ/संस्थाकोतर्फबाट तपसिलमा उल्लेखित ब्यक्तिलाई मनोनयन गरि पठाईएको ब्यहोरा अनुरोध छ ।
-              </div>
-            </div>
-            
-            <div>
-              <b>४. प्रतिनिधिको विवरण:</b>
-              <div>
-                <div>
-                  नाम र थर: <input type="text" placeholder=""> सदस्यता नं. <input type="text" placeholder="">
+        <div>
+          <b>२. ठेगाना : </b>
+          <div class="p-2">
+            <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    प्रदेशः <b>{{$orgRegister->pradesh}}</b>
+                  </div>
+                  <div class="col-sm">
+                    जिल्ला: <b>{{$orgRegister->dist_name_np}} </b>
+                  </div>
                 </div>
-                 <div>
-                  ठेगाना: <input type="text" placeholder=""> जिल्ला <input type="text" placeholder=""> गा.पा. /न.पा./उप.म.न.पा. /म.न.पा. <input type="text" placeholder="">
-                 </div>
-                 <div>
-                  वडा नं. <input type="text" placeholder=""> गाउँ/टोल <input type="text" placeholder=""> पेशा: <input type="text" placeholder=""> शैक्षिक योग्यता: <input type="text" placeholder="">
-                 </div>
-                 <div>
-                  सम्पर्क फोन नं. <input type="text" placeholder=""> झबष् िस् <input type="text" placeholder=""> संघ/संस्थामा निहित पद: <input type="text" placeholder=""> 
-                 </div>
-                 <div>
-                  आफ्नो संघ/संस्थामा सदस्यता लिएको मिति:<input type="text" placeholder=""> दस्तखत नमूना:
-                 </div>
-              </div>
-            </div>     
+              </li>
+              <li class="list-group-item">
+              <div class="row">
+                  <div class="col-sm">
+                  स्थानिय तह : <b>{{$orgRegister->name_np}} </b>
+                  </div>
+                  <div class="col-sm">
+                  वडा नं.: <b>{{$orgRegister->ward}} </b>
+                  </div>
+                </div>
+                
+            </li>
+            
+              
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    फोन नं.: <b>{{$orgRegister->org_phone}}</b>
+                  </div>
+                  <div class="col-sm">
+                    स्थायी लेखा नं.(PAN): <b>{{$orgRegister->panno}}</b>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">इमेल : <b>{{$orgRegister->email}}</b> </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    अध्यक्षको नाम : <b>{{$orgRegister->chairman_name}} </b> 
+                  </div>
+                  <div class="col-sm">
+                    फोन नं. : <b>{{$orgRegister->chairman_no}} </b>
+                  </div>
+                </div>
+              </li>
 
-            <div>
-              <b>५. नेफ्स्कून प्रति तपाईको थप सल्लाह एवं सुझाव भए :</b>
-              <div>
-                <textarea id="w3review" name="w3review" rows="4" cols="50">
-                </textarea>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    व्यवस्थापकको नाम : <b>{{$orgRegister->managername}} </b>
+                  </div>
+                  <div class="col-sm">
+                    फोन नं. : <b>{{$orgRegister->mobile_no}} </b>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <b>३. २९ औं साधारण सभामा सहभागीताको लागि आधिकारिक निर्णय:</b>
+          <div>
+            यस संघ/संस्थाको मिति <b>{{$orgRepresentive->decision_dt}} </b> गते बसेको सञ्चालक समिति/साधारण सभाको निर्णय अनुसार नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि. को २०७७ साल मंसिर ५ गते सम्पन्न हुने २९ औं साधारण सभामा प्रतिनिधित्व गर्न यस संघ/संस्थाकोतर्फबाट तपसिलमा उल्लेखित ब्यक्तिलाई मनोनयन गरि पठाईएको ब्यहोरा अनुरोध छ ।
+          </div>
+        </div>
+        
+        <div>
+          <b>४. प्रतिनिधिको विवरण:</b>
+          <div class="p-2">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    नाम र थर: <b>{{$orgRepresentive->rep_name}} </b>
+                  </div>
+                  <div class="col-sm">
+                    सदस्यता नं. <b>{{$orgRepresentive->memno}}</b>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    प्रदेशः <b>{{$orgRepresentive->pradesh}}</b>
+                  </div>
+                  <div class="col-sm">
+                    जिल्ला: <b>{{$orgRepresentive->dist_name_np}}</b>
+                  </div> 
+                  <div class="col-sm">
+                  स्थानिय तह: <b>{{$orgRepresentive->name_np}}</b>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    वडा नं. : <b>{{$orgRepresentive->ward}}</b>
+                  </div>
+                  <div class="col-sm">
+                    पेशा : <b>{{$orgRepresentive->occupation}}</b>
+                  </div>
+                  <div class="col-sm">
+                    शैक्षिक योग्यता :<b>{{$orgRepresentive->qualification}}</b>
+                  </div>
+                </div>
+              </li>
+
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    सम्पर्क फोन नं. : <b>{{$orgRepresentive->qualification}}</b>
+                  </div>
+                  <div class="col-sm">
+                    ईमेल : <b>{{$orgRepresentive->email}}</b>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">संघ/संस्थामा निहित पद: <b>{{$orgRepresentive->post}}</b></li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-sm">
+                    आफ्नो संघ/संस्थामा सदस्यता लिएको मिति: <b>{{$orgRepresentive->share_reg_dt}}</b>
+                  </div>
+                  <div class="col-sm">
+                    दस्तखत नमूना: 
+                    <img src="{{asset('images/rep_sign/'.$orgUploads->rep_sign)}}" width="125px" height="65px">
+                  
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>     
+
+        <div>
+          <b>५. नेफ्स्कून प्रति तपाईको थप सल्लाह एवं सुझाव भए :</b>
+          <div class="m-2">
+            <textarea class="form-control" style="min-width: 100%" rows="4">
+            </textarea>
+          </div>
+        </div>
+
+        <div class="p-1 m-b-10">
+          <div class="row">
+            <div class="col-sm-8">
+              <b>प्रतिनिधि मनोनयन गर्ने संघ/संस्थाको तर्फबाट प्रमाणि गर्नेको विवरण : </b>
+              <div>दस्तखत : <img src="{{asset('images/chairman_sign/'.$orgUploads->chairman_sign)}}" width="125px" height="65px"></div>
+              <div>नाम, थर : <b>{{$orgRegister->chairman_name}}</b> </div>
+              <div>संघ/संस्थामा निहित पद : अध्यक्ष</div>
+            </div>
+            <div class="col-sm-4">
+              <div class="border border-primary m-2 p-1 text-center" style="height: auto;">
+              <img src="{{asset('images/org_stamp/'.$orgUploads->org_stamp)}}" width="100px" height="100px">
               </div>
             </div>
-
-            <div class="p-5">
-              <b>प्रतिनिधि मनोनयन गर्ने संघ/संस्थाको तर्फबाट प्रमाणि गर्नेको विवरण ः</b>
-              <div>दस्तखत : </div>
-              <div>नाम, थर ः </div>
-              <div>संघ/संस्थामा निहित पद ः</div>
-            </div>
-        </section>
+          </div>          
+        </div>
+      </section>
 
     </div>
 

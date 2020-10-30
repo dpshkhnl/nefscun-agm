@@ -11,6 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/register.css">
+    
     <script src="{{ url('js/nepali.datepicker.v3.min.js') }}" type="text/javascript"></script>
     <link href="{{ url('css/nepali.datepicker.v3.min.css') }}" rel="stylesheet" type="text/css"/>
 
@@ -45,10 +46,10 @@
               <div class="ican-tabs mt-4">
               <nav>
                   <ul class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <li> <a class="nav-item nav-link @if($signupStep==0) active  @endif  ml-2" id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">संस्था परिचय</a></li>
-                  <li> <a class="nav-item nav-link @if($signupStep==1) active  @endif  ml-2" id="nav-rep-tab" data-toggle="tab" href="#nav-rep" role="tab" aria-controls="nav-rep" aria-selected="true">केन्द्रिय प्रतिनिधि </a></li>
-                  <li> <a class="nav-item nav-link @if($signupStep==2) active  @endif ml-2" id="nav-upload-tab"  data-toggle="tab" href="#nav-upload" role="tab" aria-controls="nav-upload" aria-selected="false">अपलोड </a></li>
-                  <li> <a class="nav-item nav-link @if($signupStep==3) active  @endif ml-2" id="nav-success-tab"  data-toggle="tab" href="#nav-success" role="tab" aria-controls="nav-success" aria-selected="false">Complete</a></li>
+                  <li> <a class="nav-item nav-link @if($signupStep==0) active  @endif  ml-2" id="nav-general-tab" @if($signupStep == 0) data-toggle="tab" @endif href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">संस्था परिचय</a></li>
+                  <li> <a class="nav-item nav-link @if($signupStep==1) active  @endif  ml-2" id="nav-rep-tab" @if($signupStep == 1) data-toggle="tab" @endif href="#nav-rep" role="tab" aria-controls="nav-rep" aria-selected="true">केन्द्रिय प्रतिनिधि </a></li>
+                  <li> <a class="nav-item nav-link @if($signupStep==2) active  @endif ml-2" id="nav-upload-tab"  @if($signupStep == 2) data-toggle="tab" @endif href="#nav-upload" role="tab" aria-controls="nav-upload" aria-selected="false">अपलोड </a></li>
+                  <li> <a class="nav-item nav-link @if($signupStep==3) active  @endif ml-2" id="nav-success-tab" @if($signupStep == 3) data-toggle="tab" @endif  href="#nav-success" role="tab" aria-controls="nav-success" aria-selected="false">Complete</a></li>
 
                   </ul>
                 </nav> 
@@ -69,7 +70,7 @@
                         <label for="email" class="col-md-12"> PAN नम्बर:</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control " id="panno" name="panno">
+                          <input type="number" class="form-control" min="000000000" max="9999999999" id="panno" name="panno">
                         </div>
                       </div>
                       </div>
@@ -98,7 +99,7 @@
                                           
                           <div class="row">
                         <div class="controls col-md-3">
-                                                 <select name="province_id" class="form-control" required>
+                                                 <select id="province_id" name="province_id" class="form-control" required>
                                 <option value="" selected>प्रदेश छान्नुहोस् </option>
                                 @foreach($province as $pro)
                                 <option value="{{$pro->state_id}}">{{$pro->name_np}}</option>
@@ -106,17 +107,17 @@
                             </select>
                                   </div>
                                   <div class="controls col-md-3">
-                                                  <select name="dist_id" class="form-control" required>
+                                                  <select id="dist_id" name="dist_id" class="form-control" required>
                                 <option value="" selected>जिल्ला  छान्नुहोस् </option>
                             </select></div>
 
                             <div class="controls col-md-3">
-                                                <select name="local_id" class="form-control" required>
+                                                <select id="local_id" name="local_id" class="form-control" required>
                                 <option value="" selected> न.पा./गा.पा  छान्नुहोस् </option>
                             </select></div>
 
                             <div class="controls col-md-3">
-                            <input   type="number" class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
+                            <input   type="number" min="1" max="40"  class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
 
                                        </div>
 
@@ -180,7 +181,7 @@
                         <label for="email" class="col-md-12"> अध्यक्षको मोबाईल नं:</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control " id="chairman_no" name="chairman_no">
+                          <input   type="number" class="form-control " id="chairman_no" name="chairman_no">
                         </div>
                       </div>
                       </div>
@@ -249,14 +250,14 @@
                       <div class="form-group col-md-6">
                         <label for="repname" class="col-md-12">नाम</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="repname"  name="repname" >
+                          <input type="text" class="form-control required" id="repname" required  name="repname" >
                         </div>
                       </div>
 
                       <div class="form-group col-md-6">
                         <label for="fullname" class="col-md-12">जन्म मिति :</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="dob"  name="dob">
+                          <input type="text" class="form-control required" id="dob" required name="dob">
                         </div>
                       </div>
 
@@ -269,14 +270,14 @@
                       <div class="form-group col-md-6">
                         <label for="repname" class="col-md-12">पेशा</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="occupation"  name="occupation" >
+                          <input type="text" class="form-control required" id="occupation" required  name="occupation" >
                         </div>
                       </div>
 
                       <div class="form-group col-md-6">
                         <label for="fullname" class="col-md-12">साकोसको सदस्यता नम्बर :</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="memno"  name="memno">
+                          <input type="text" class="form-control required" required id="memno"  name="memno">
                         </div>
                       </div>
 
@@ -309,7 +310,7 @@
                             </select></div>
 
                             <div class="controls col-md-3">
-                            <input   type="number" class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
+                            <input   type="number" class="form-control" required placeholder="वार्ड नं" id="ward" name="ward">
 
                                        </div>
 
@@ -325,14 +326,14 @@
                         <label for="mobile" class="col-md-12">मोबाईल नं:</label>
                         <div class="col-md-12">
                      
-                          <input   type="number" class="form-control " id="mobile" name="mobile">
+                          <input   type="number" required class="form-control " id="mobile" name="mobile">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="email" class="col-md-12">ईमेल:</label>
                         <div class="col-md-12">
                      
-                          <input   type="email" class="form-control " id="email" name="email">
+                          <input   type="email" required class="form-control " id="email" name="email">
                         </div>
                       </div>
                       </div>
@@ -341,14 +342,14 @@
                         <label for="password" class="col-md-6">योग्यता :</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control"  id="qualification" name="qualification">
+                          <input   type="text" required class="form-control"  id="qualification" name="qualification">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="cnfpassword" class="col-md-12">पद :</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control "  id="post" name="post">
+                          <input   type="text" required class="form-control "  id="post" name="post">
                         </div>
                       </div>
                       </div>
@@ -357,14 +358,14 @@
                         <label for="password" class="col-md-6">सेयर सदश्य लिएको मिति  :</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control"  id="share_reg_dt" name="share_reg_dt">
+                          <input   type="text" required class="form-control"  id="share_reg_dt" name="share_reg_dt">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="cnfpassword" class="col-md-12">संचालक समिति को निर्णय मिति  :</label>
+                        <label for="cnfpassword"  class="col-md-12">संचालक समिति को निर्णय मिति  :</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control "  id="decision_dt" name="decision_dt">
+                          <input required  type="text" class="form-control "  id="decision_dt" name="decision_dt">
                         </div>
                       </div>
                       </div>
@@ -385,159 +386,97 @@
                           <form class="application-form" name="uploadform" id="uploadform" method="POST" action="{{ route('frontend.saveUploadDoc') }}" enctype="multipart/form-data">
                               @csrf 
                               <input type="hidden" value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
-                    <input type="hidden" value="{{$result->id}}" class="form-control required" id="register_id"  name="register_id" >
+                    <input type="hidden" value="{{$result->org_rep_id}}" class="form-control required" id="register_id"  name="register_id" >
+                    
+                    <div class="p-y-1">
+                      <div class="row col-md-12">
+                      <div class="row m-b-1">
+    <div class="col-sm-6 offset-sm-3">
+      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('org_stamp').click()">संस्थाको छाप</button>
+      <div class="form-group inputDnD">
+        <label class="sr-only" for="inputFile">File Upload</label>
+        <input type="file"required  class="form-control-file text-success font-weight-bold" id="org_stamp" name="org_stamp" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+     
+      </div>
+    </div>
+</div>
+  
+  <div class="row m-b-1">
+    <div class="col-sm-6 offset-sm-3">
+      <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('photo').click()">प्रतिनिधिको फोटो</button>
+      <div class="form-group inputDnD">
+        <label class="sr-only" for="photo">File Upload</label>
+        <input type="file" required class="form-control-file text-danger font-weight-bold" id="photo" name="photo" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+      </div>
+    </div>
+  </div>
 
-                   
+  <div class="row m-b-1">
+    <div class="col-sm-6 offset-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('rep_sign').click()">प्रतिनिधिको दस्तखत</button>
+      <div class="form-group inputDnD">
+        <label class="sr-only" for="rep_sign">File Upload</label>
+        <input type="file"  required class="form-control-file text-primary font-weight-bold" id="rep_sign" name="rep_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-b-1">
+    <div class="col-sm-6 offset-sm-3">
+      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('chairman_sign').click()">अध्यक्षको दस्तखत</button>
+      <div class="form-group inputDnD">
+        <label class="sr-only" for="chairman_sign">File Upload</label>
+        <input type="file" required class="form-control-file text-success font-weight-bold" id="chairman_sign" name="chairman_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-b-1">
+    <div class="col-sm-6 offset-sm-3">
+      <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('rep_select').click()">प्रतिनिधि छनौट निर्णय</button>
+      <div class="form-group inputDnD">
+        <label class="sr-only" for="rep_select">File Upload</label>
+        <input type="file" required class="form-control-file text-danger font-weight-bold" id="rep_select" name="rep_select" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+      </div>
+    </div>
+  </div>
+   
+   
+    <div class="row m-b-1">
+    <div class="col-sm-6 offset-sm-3">
+      <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('voucher').click()">नविकरण भौचर अपलोड</button>
+      <div class="form-group inputDnD">
+        <label class="sr-only" for="voucher">File Upload</label>
+        <input type="file"  class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-b-1">
+    <div class="col-sm-6 offset-sm-3">
+      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('save_voucher').click()">नियमित बचतको भौचर अपलोड</button>
+      <div class="form-group inputDnD">
+        <label class="sr-only" for="save_voucher">File Upload</label>
+        <input type="file" multiple class="form-control-file text-success font-weight-bold" id="save_voucher" name="save_voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-b-1">
+    <div class="col-sm-6 offset-sm-3">
+      <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('audit_report').click()">अडिट रिपोर्ट</button>
+      <div class="form-group inputDnD">
+        <label class="sr-only" for="audit_report">File Upload</label>
+        <input type="file" class="form-control-file text-danger font-weight-bold" id="audit_report" name="audit_report"  onchange="readUrl(this)" data-title="Drag and drop a file">
+      </div>
+    </div>
+  </div>
+    
+ 
+</div>
+</div>
+               
                               
-                          <div class="ican-uploads-inner mb-4">
-                            <div class="row">
-                              <div class="col-12 col-md-3">
-                                <div class="avatar-upload-wrap">
-                                  <h6 class="mb-3">फोटो</h6>
-                                  <div class="avatar-upload">
-                                    <div class="avatar-edit">
-                                        <input type='file'  id="rep_select" name="rep_select" accept=".png, .jpg, .jpeg" />
-                                        <label for="rep_select"></label>
-                                    </div>
-                                    <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url(http://placehold.it/180);">
-                                        </div>
-                                    </div>
-                                  </div>
-                                 
-                                </div>
-                              </div>
-
-                             
-                              <div class="col-12 col-md-3">
-                                <div class="citizen-passport">
-                                 <label class="mr-3">संस्थाको छाप</label>
-                                 <div class="citizen-passport-wrap">
-                                   <div class="citizen-passport-upload-wrap mb-1">
-                                       <div class="citizen-passport-upload">
-                                         <div class="citizen-passport-edit">
-                                             <input type='file' id="audit_report" name="audit_report" accept=".png, .jpg, .jpeg" />
-                                             <label for="audit_report"></label>
-                                         </div>
-                                         <div class="citizen-passport-preview">
-                                             <div id="citizenPassportPreview" style="background-image: url(http://placehold.it/250x100);">
-                                             </div>
-                                         </div>
-                                     </div>
-                                   </div>
-                                 </div>
-                               </div>
-                              </div>
-                            </div>
-
-                            <div class="ican-uploads-inner mb-4">
-                            <div class="row">
-                              <div class="col-12 col-md-3">
-                                <div class="avatar-upload-wrap">
-                                  <h6 class="mb-3">फोटो</h6>
-                                  <div class="avatar-upload">
-                                    <div class="avatar-edit">
-                                        <input type='file'  id="photo" name="photo" accept=".png, .jpg, .jpeg" />
-                                        <label for="rep_select"></label>
-                                    </div>
-                                    <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url(http://placehold.it/180);">
-                                        </div>
-                                    </div>
-                                  </div>
-                                 
-                                </div>
-                              </div>
-
-                             
-                              <div class="col-12 col-md-3">
-                                <div class="citizen-passport">
-                                 <label class="mr-3">संस्थाको छाप</label>
-                                 <div class="citizen-passport-wrap">
-                                   <div class="citizen-passport-upload-wrap mb-1">
-                                       <div class="citizen-passport-upload">
-                                         <div class="citizen-passport-edit">
-                                             <input type='file' id="org_stamp" name="org_stamp" accept=".png, .jpg, .jpeg" />
-                                             <label for="audit_report"></label>
-                                         </div>
-                                         <div class="citizen-passport-preview">
-                                             <div id="citizenPassportPreview" style="background-image: url(http://placehold.it/250x100);">
-                                             </div>
-                                         </div>
-                                     </div>
-                                   </div>
-                                 </div>
-                               </div>
-                              </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="signature-of-applicant mb-3">
-                                  <h6 class="mb-3">नविकरण र नियमित बचतको भौचर अपलोड</h6>
-                                    <div class="signature-of-applicant-inner">
-                                      <div class="signature-of-applicant-wrap">
-                                        <div class="signature-upload-wrap mb-1">
-                                            <div class="signature-upload">
-                                              <div class="signature-edit">
-                                                  <input type='file' id="voucher" name="voucher" accept=".png, .jpg, .jpeg" />
-                                                  <label for="rep_sign"></label>
-                                              </div>
-                                              <div class="signature-preview">
-                                                  <div id="signaturePreview" style="background-image: url(http://placehold.it/250x100);">
-                                                  </div>
-                                              </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </div>
-                              </div>
-
-                          </div>
-
-                          <div class="col-12 col-md-3">
-                                <div class="signature-of-applicant mb-3">
-                                  <h6 class="mb-3">प्रतिनिधिको दस्तखत</h6>
-                                    <div class="signature-of-applicant-inner">
-                                      <div class="signature-of-applicant-wrap">
-                                        <div class="signature-upload-wrap mb-1">
-                                            <div class="signature-upload">
-                                              <div class="signature-edit">
-                                                  <input type='file' id="rep_sign" name="rep_sign" accept=".png, .jpg, .jpeg" />
-                                                  <label for="rep_sign"></label>
-                                              </div>
-                                              <div class="signature-preview">
-                                                  <div id="signaturePreview" style="background-image: url(http://placehold.it/250x100);">
-                                                  </div>
-                                              </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </div>
-                              </div>
-                              
-
-                              <div class="col-12 col-md-3">
-                                <div class="signature-of-applicant mb-3">
-                                  <h6 class="mb-3"> अध्यक्षको दस्तखत</h6>
-                                    <div class="signature-of-applicant-inner">
-                                      <div class="signature-of-applicant-wrap">
-                                        <div class="signature-upload-wrap mb-1">
-                                            <div class="signature-upload">
-                                              <div class="signature-edit">
-                                                  <input type='file' id="chairman_sign" name="chairman_sign" accept=".png, .jpg, .jpeg" />
-                                                  <label for="chairman_sign"></label>
-                                              </div>
-                                              <div class="signature-preview">
-                                                  <div id="signaturePreview" style="background-image: url(http://placehold.it/250x100);">
-                                                  </div>
-                                              </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </div>
-                              </div>
                           <div class="button-group" role="group" aria-label="button">
                             <button type="submit" class="btn btn-primary">Save</button>
                 
@@ -589,11 +528,81 @@
 
         }
 }
+
+function readUrl(input) {
+  
+  if (input.files && input.files[0]) {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      let imgData = e.target.result;
+      let imgName = input.files[0].name;
+      input.setAttribute("data-title", imgName);
+      console.log(e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+
+}
     $(document).ready(function(){
 
       $('#btnSubmit').click(function(e){
            
            e.preventDefault();
+            var msg = "";
+          
+            var nefscun_mem_no = $("input[name='nefscun_mem_no']").val();
+            var panno = $("input[name='panno']").val();
+            var email = $("input[name='email']").val();
+            var org_name = $("input[name='org_name']").val();
+             var fullnamenp = $("input[name='fullnamenp']").val();
+            var province_id = $("select[name='province_id']").val();
+            var dist_id = $("select[name='dist_id']").val();
+            var local_id = $("select[name='local_id']").val();
+            var ward = $("input[name='ward']").val();
+            var org_phone = $("input[name='org_phone']").val();
+            var managername = $("input[name='managername']").val();
+            var mobile = $("input[name='mobile']").val();
+            var chairman_name = $("input[name='chairman_name']").val();
+            var chairman_no = $("input[name='chairman_no']").val();
+            var password = $("input[name='password']").val();
+
+            if(nefscun_mem_no.length == 0 )
+            msg+="नेफ्स्कून सदस्यता नं भरनुहोस \n";
+            if(panno.length != 9 )
+            msg+="Valid PAN नम्बर भरनुहोस \n";
+            if(org_name.length == 0 )
+            msg+="संस्थाको नाम (अंग्रेजीमा) भरनुहोस \n";
+            if(fullnamenp.length == 0 )
+            msg+="संस्थाको नाम (युनिकोडमा) भरनुहोस \n";
+            if(province_id.length == 0 )
+            msg+="प्रदेश छान्नुहोस् \n";
+            if(dist_id.length == 0 )
+            msg+="जिल्ला  छान्नुहोस् \n";
+            if(local_id.length == 0 )
+            msg+="स्थानिय तह छान्नुहोस् \n";
+            if(ward.length == 0 )
+            msg+="वार्ड नं भरनुहोस \n";
+            if(org_phone.length == 0 )
+            msg+="संस्थाको फोन नम्बर भरनुहोस \n";
+            if(email.length == 0 )
+            msg+="संस्थाको ईमेल भरनुहोस \n";
+            if(managername.length == 0 )
+            msg+="व्यवस्थापकको नाम भरनुहोस \n";
+            if(mobile.length != 10 )
+            msg+="व्यवस्थापकको मोबाईल नं भरनुहोस \n";
+            if(chairman_name.length == 0 )
+            msg+="अध्यक्षको नाम भरनुहोस \n";
+            if(chairman_no.length != 10 )
+            msg+="अध्यक्षको मोबाईल नं भरनुहोस \n";
+            if(password.length == 0 )
+            msg+="पासवर्ड भरनुहोस \n";
+
+            
+          if(msg){
+            alert(msg);
+            return;
+          }
+
            var contact = $("input[name='mobile']").val();
            var email = $("input[name='email']").val();
           var _token = $("input[name='_token']").val();

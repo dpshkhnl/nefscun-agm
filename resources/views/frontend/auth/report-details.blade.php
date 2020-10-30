@@ -14,6 +14,7 @@ body {font-family: "Lato", sans-serif;}
   background-color: #f1f1f1;
   width: 20%;
   height:100%;
+  margin-top:82px;
 }
 
 /* Style the buttons inside the tab */
@@ -50,6 +51,13 @@ body {font-family: "Lato", sans-serif;}
   border-left: none;
  
 }
+h5{
+  color:red;
+}
+label{
+  font-family:bold;
+  color:black;
+}
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
@@ -82,8 +90,8 @@ body {font-family: "Lato", sans-serif;}
               
                    
                     <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank  role="button"></i>Welcome, {{$coop->org_name}}</a>
-
-                    <a class="btn btn-sm btn-outline-primary top-address-btn" href="printForm/1" role="button"><i class="fas fa-unlock mr-2"></i>Profile</a>
+            
+                    <a class="btn btn-sm btn-outline-primary top-address-btn" href="{{url('printForm/'.$coop->id)}}" role="button"><i class="fas fa-unlock mr-2"></i>Profile</a>
 
                         <a class="btn btn-sm btn-outline-primary top-address-btn" href="{{ route('frontend.auth.logout') }}" role="button"><i class="fas fa-unlock mr-2"></i>Logout</a>
 
@@ -97,11 +105,11 @@ body {font-family: "Lato", sans-serif;}
       </div>
     </header>
 
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'chairman')" id="defaultOpen">अध्यक्षको प्रतिवेदन</button>
-  <button class="tablinks" onclick="openCity(event, 'sec')">महासचिवको प्रतिवेदन</button>
-  <button class="tablinks" onclick="openCity(event, 'tresurer')">कोषाध्यक्षको प्रतिवेदन </button>
-  <button class="tablinks" onclick="openCity(event, 'audit')">ले.प. प्रतिवेदन </button>
+<div class="tab mt-10">
+  <button class="tablinks" onclick="openCity(event, 'chairman')" id="id1">अध्यक्षको प्रतिवेदन</button>
+  <button class="tablinks" onclick="openCity(event, 'sec')" id="id2" >महासचिवको प्रतिवेदन</button>
+  <button class="tablinks" onclick="openCity(event, 'tresurer')" id="id3" >कोषाध्यक्षको प्रतिवेदन </button>
+  <button class="tablinks" onclick="openCity(event, 'audit')" id="id4" >ले.प. प्रतिवेदन </button>
 </div>
 <form method="POST" action="{{ route('frontend.saveComment') }}" enctype="multipart/form-data">
 @csrf 
@@ -117,7 +125,7 @@ body {font-family: "Lato", sans-serif;}
   
     <div class="col-md-12 row mt-2">
     <label for="chairmanComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
-    <textarea class="form-control" id="chairmanComment" name="chairmanComment" rows="3">{{$comment->chairman_comment ?? ''}}</textarea>
+    <textarea class="form-control"  @if(!empty($comment->chairman_comment)) readonly @endif id="chairmanComment" name="chairmanComment" rows="3">{{$comment->chairman_comment ?? ''}}</textarea>
      
   <div class="col-md-9 mt-2">
   @if(empty($comment->chairman_comment))
@@ -125,7 +133,7 @@ body {font-family: "Lato", sans-serif;}
   @endif
   </div>
   <div class="col-md-3  mt-2 mb-2">
-  <button class="btn btn-success align-right">महासचिवको प्रतिवेदन</button>
+  <a class="btn btn-success align-right" target=_blank href="{{ url('showReports/2') }}">महासचिवको प्रतिवेदन</a>
 </div>
  </div>
 </div>
@@ -139,7 +147,7 @@ body {font-family: "Lato", sans-serif;}
 <iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
  
     <label for="secComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
-    <textarea class="form-control"  id="secComment" name="secComment" rows="3">{{$comment->sec_comment ?? ''}}</textarea>
+    <textarea class="form-control" @if(!empty($comment->sec_comment)) readonly @endif  id="secComment" name="secComment" rows="3">{{$comment->sec_comment ?? ''}}</textarea>
      
     <div class="col-md-12 row mt-2">
   <div class="col-md-9 mt-2 mb-2">
@@ -148,7 +156,8 @@ body {font-family: "Lato", sans-serif;}
   @endif
   </div>
   <div class="col-md-3 mt-2 mb-2">
-  <button class="btn btn-success align-right">कोषाध्यक्षको प्रतिवेदन</button>
+  <a class="btn btn-success align-right" target=_blank href="{{ url('showReports/3') }}">कोषाध्यक्षको प्रतिवेदन</a>
+
 </div>
 </div>
    
@@ -160,8 +169,8 @@ body {font-family: "Lato", sans-serif;}
 <br/>
 <iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
  
-    <label for="tresComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
-    <textarea class="form-control" name="tresComment" id="tresComment" rows="3">{{$comment->tres_comment ?? ''}}</textarea>
+    प्रतिवेदन उपर सुझाब तथा प्रतिकृया 
+    <textarea class="form-control" @if(!empty($comment->tres_comment)) readonly @endif name="tresComment" id="tresComment" rows="3">{{$comment->tres_comment ?? ''}}</textarea>
   
     <div class="col-md-12 row mt-2">
   <div class="col-md-9 mt-2 mb-2">
@@ -170,20 +179,22 @@ body {font-family: "Lato", sans-serif;}
   @endif
   </div>
   <div class="col-md-3 mt-2 mb-2">
-  <button class="btn btn-success align-right">ले.प. प्रतिवेदन</button>
+  <a class="btn btn-success align-right" target=_blank href="{{ url('showReports/4') }}">ले.प. प्रतिवेदन</a>
+
+  </div>
 </div>
    
 </div>
+   
 
 <div id="audit" class="tabcontent">
 <br/>
 <h5>ले.प. प्रतिवेदन</h5>
 <br/>
-<iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" 
-  name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
-
+<iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
+ 
     <label for="auditComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
-    <textarea class="form-control"  name="auditComment" id="auditComment" rows="3">{{$comment->audit_comment ?? ''}}</textarea>
+    <textarea class="form-control" @if(!empty($comment->audit_comment)) readonly @endif  name="auditComment" id="auditComment" rows="3">{{$comment->audit_comment ?? ''}}</textarea>
      
     <div class="col-md-12 row mt-2">
   <div class="col-md-9 mt-2 mb-2">
@@ -191,7 +202,8 @@ body {font-family: "Lato", sans-serif;}
   <button  type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
   @endif
   </div>
-  
+</div>
+</div>
 </form>
 </div>
 
@@ -212,7 +224,7 @@ function openCity(evt, cityName) {
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+document.getElementById('id'+{{$details->reportid}}).click();
 </script>
    
 </body>
