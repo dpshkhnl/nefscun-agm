@@ -43,6 +43,14 @@
                        
                     </a>
                 </li>
+                <li class="c-sidebar-nav-item">
+                    <a href="{{ route('admin.comments') }}" class="c-sidebar-nav-link">
+                        <i class="c-sidebar-nav-icon cil-briefcase"></i>
+                       
+                            Comments
+                       
+                    </a>
+                </li>
 
         @if (
             $logged_in_user->hasAllAccess() ||

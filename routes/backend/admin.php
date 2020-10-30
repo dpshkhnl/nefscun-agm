@@ -19,6 +19,12 @@ Route::get('register', [ReportController::class, 'index'])
         $trail->push(__('Registered'), route('admin.register'));
     });
 
+    Route::get('comments', [ReportController::class, 'comments'])
+    ->name('comments')
+    ->breadcrumbs(function (Trail $trail) {
+        $trail->push(__('comments'), route('admin.comments'));
+    });
+
     
    
     Route::get('approve-form/{id}', [ReportController::class, 'approve'])

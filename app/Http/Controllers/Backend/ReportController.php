@@ -9,6 +9,7 @@ use App\Domains\Auth\Models\Province;
 use App\Models\OrganizationUpload;
 use App\Models\OrganizationRepresentative;
 use App\Models\Helper;
+use App\Models\PratibedanComment;
 use Auth;
 
 
@@ -33,6 +34,20 @@ class ReportController extends Controller
         ->where('status',0)->get();
         //dd($data);
         return view('backend.reports.registered',compact('data'));
+    }
+
+    public function comments()
+    {
+        $data =  PratibedanComment::select('pratibedan_comments.*','organization_registrations.*','organization_registrations.id as orgid',
+        'organization_representatives.*','provinces.*','districts.*','local_bodies.*','organization_uploads.*')->
+        join('organization_registrations','pratibedan_comments.org_reg_id','organization_registrations.id')
+        ->join('organization_representatives','organization_representatives.org_rep_id','organization_registrations.id')
+        ->join('provinces','provinces.state_id','organization_registrations.province')
+        ->join('districts','districts.dist_id','organization_registrations.district')
+        ->join('local_bodies','local_bodies.id','organization_registrations.local')
+        ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')->get();
+        //dd($data);
+        return view('backend.reports.comment',compact('data'));
     }
 
     function approve($id){ 
