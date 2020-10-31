@@ -447,7 +447,7 @@
       <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('voucher').click()">नविकरण भौचर अपलोड</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="voucher">File Upload</label>
-        <input type="file"  class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" required class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>

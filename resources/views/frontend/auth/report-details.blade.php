@@ -115,6 +115,7 @@ label{
 @csrf 
 <input type="hidden" value="{{$coop->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
                     <input type="hidden" value="{{$coop->id}}" class="form-control required" id="register_id"  name="register_id" >
+                    <input type="hidden" value="{{$details->reportid}}" class="form-control required" id="reportid"  name="reportid" >
 
 <div id="chairman" class="tabcontent">
   <br/>
@@ -220,6 +221,17 @@ function openCity(evt, cityName) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
   document.getElementById(cityName).style.display = "block";
+  var reportid = 0;
+  if(cityName=='chairman')
+  reportid = 1;
+  else if (cityName=='sec')
+  reportid = 2;
+  else if (cityName=='tresurer')
+  reportid = 3;
+  else if (cityName=='audit')
+  reportid = 4;
+  document.getElementById('reportid').value = reportid;
+
   evt.currentTarget.className += " active";
 }
 

@@ -154,7 +154,7 @@ class RegisterController extends Controller
         $comment->audit_comment = $request->get('auditComment');
         $comment->ip = $request->ip();
         $comment->save();
-       return $this->showReports(1);
+       return $this->showReports($request->get('reportid'));
     }
 
     public function generate_otp(Request $r)

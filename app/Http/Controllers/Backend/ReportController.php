@@ -92,7 +92,7 @@ class ReportController extends Controller
         $data->updated_by = Auth::user()->name;
         $data->message = $r->get('rmsg');
         $data->save();
-        Helper::sendEmail($register->email, "Rejected", "your Form Has been Rejected due to ".$r->get('rmsg')."Please Update and Submit again");
+        Helper::sendEmail( $data->email, "Rejected", "your Form Has been Rejected due to ".$r->get('rmsg')."Please Update and Submit again");
 
         $regNo =$data->reg_no;
        
@@ -100,7 +100,7 @@ class ReportController extends Controller
        // UtilController::sendSMS($data->mobile_no,"Dear ".$data->full_name_capital."\n\nYour Registration Form with submission no ". $data->submission_no." has been Rejected. Kindly check your email for further details.\n\n ICAN");
         
         }
-        echo ("Exam Forms Rejected With Message.");
+        echo ("Forms Rejected With Message.");
      //   return response(['msg' => 'Exam Forms Rejected With Message.']);
     }
 
@@ -123,13 +123,23 @@ class ReportController extends Controller
 
     public function approved()
     {
-        $data =  OrganizationRegistration::where('status',1)->get();
+        $data =  OrganizationRegistration::select('organization_registrations.*','organization_registrations.id as orgid',
+        'provinces.*','districts.*','local_bodies.*')
+        ->join('provinces','provinces.state_id','organization_registrations.province')
+        ->join('districts','districts.dist_id','organization_registrations.district')
+        ->join('local_bodies','local_bodies.id','organization_registrations.local')
+        ->where('status',1)->get();
         return view('backend.reports.approved',compact('data'));
     }
 
     public function rejected()
     {
-        $data =  OrganizationRegistration::where('status',2)->get();
+        $data =  OrganizationRegistration::select('organization_registrations.*','organization_registrations.id as orgid',
+        'provinces.*','districts.*','local_bodies.*')
+        ->join('provinces','provinces.state_id','organization_registrations.province')
+        ->join('districts','districts.dist_id','organization_registrations.district')
+        ->join('local_bodies','local_bodies.id','organization_registrations.local')
+        ->where('status',2)->get();
         return view('backend.reports.rejected',compact('data'));
     }
 }
