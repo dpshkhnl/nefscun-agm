@@ -28,7 +28,7 @@
           </div>
           <div class="modal-body">
        
-         <embed src="" width="750px" height="800px" />
+         <embed src="images/popup.jpg" width="750px" height="800px" />
          
           </div>
           <div class="modal-footer">
