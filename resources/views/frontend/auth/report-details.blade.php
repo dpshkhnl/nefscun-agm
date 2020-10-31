@@ -106,10 +106,11 @@ label{
     </header>
 
 <div class="tab mt-10">
-  <button class="tablinks" onclick="openCity(event, 'chairman')" id="id1">अध्यक्षको प्रतिवेदन</button>
+  <button class="tablinks" onclick="openCity(event, 'chairman')" id="id1">अध्यक्षको मन्तब्य </button>
   <button class="tablinks" onclick="openCity(event, 'sec')" id="id2" >महासचिवको प्रतिवेदन</button>
   <button class="tablinks" onclick="openCity(event, 'tresurer')" id="id3" >कोषाध्यक्षको प्रतिवेदन </button>
-  <button class="tablinks" onclick="openCity(event, 'audit')" id="id4" >ले.प. प्रतिवेदन </button>
+  <button class="tablinks" onclick="openCity(event, 'audit')" id="id4" >लेखा परीक्षण प्रतिवेदन </button>
+  <button class="tablinks" onclick="openCity(event, 'auditsup')" id="id5" >लेखा सुपरीवेक्षण समितिको प्रतिवेदन </button>
 </div>
 <form method="POST" action="{{ route('frontend.saveComment') }}" enctype="multipart/form-data">
 @csrf 
@@ -119,19 +120,19 @@ label{
 
 <div id="chairman" class="tabcontent">
   <br/>
-<h5>अध्यक्षको प्रतिवेदन</h5>
+<h5>अध्यक्षको मन्तब्य </h5>
 <br/>
  <iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" 
   style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
   
     <div class="col-md-12 row mt-2">
-    <label for="chairmanComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
+    <!-- <label for="chairmanComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
     <textarea class="form-control"  @if(!empty($comment->chairman_comment)) readonly @endif id="chairmanComment" name="chairmanComment" rows="3">{{$comment->chairman_comment ?? ''}}</textarea>
-     
+      -->
   <div class="col-md-9 mt-2">
-  @if(empty($comment->chairman_comment))
+  <!-- @if(empty($comment->chairman_comment))
   <button  type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
-  @endif
+  @endif -->
   </div>
   <div class="col-md-3  mt-2 mb-2">
   <a class="btn btn-success align-right" target=_blank href="{{ url('showReports/2') }}">महासचिवको प्रतिवेदन</a>
@@ -187,7 +188,6 @@ label{
    
 </div>
    
-
 <div id="audit" class="tabcontent">
 <br/>
 <h5>ले.प. प्रतिवेदन</h5>
@@ -200,6 +200,28 @@ label{
     <div class="col-md-12 row mt-2">
   <div class="col-md-9 mt-2 mb-2">
   @if(empty($comment->audit_comment))
+  <button  type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
+  @endif
+  </div>
+  <div class="col-md-3 mt-2 mb-2">
+  <a class="btn btn-success align-right" target=_blank href="{{ url('showReports/5') }}">लेखा सुपरीवेक्षण समितिको प्रतिवेदन</a>
+
+  </div>
+</div>
+</div>
+
+<div id="auditsup" class="tabcontent">
+<br/>
+<h5>लेखा सुपरीवेक्षण समितिको प्रतिवेदन</h5>
+<br/>
+<iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
+ 
+    <label for="auditComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
+    <textarea class="form-control"  @if(!empty($comment->chairman_comment)) readonly @endif id="chairmanComment" name="chairmanComment" rows="3">{{$comment->chairman_comment ?? ''}}</textarea>
+     
+    <div class="col-md-12 row mt-2">
+  <div class="col-md-9 mt-2 mb-2">
+  @if(empty($comment->chairman_comment))
   <button  type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
   @endif
   </div>

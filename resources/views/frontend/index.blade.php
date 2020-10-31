@@ -115,18 +115,19 @@
       <div class="container">
       <br/>
       
-      <h4 class="text-center" style="color:blue;font-weight:bold">नेफ्स्कूनको २९औ साधारण सभामा उपस्थिति जनाउने प्रकृया</h4>
+      <h4 class="text-center" style="color:blue;font-weight:bold">नेफ्स्कूनको २९औं साधारण सभामा उपस्थिति जनाउने प्रकृया</h4>
         <div class="icon-box-inner">
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+        
+            <a target=_blank href="{{ route('frontend.auth.register') }}">
               <div class="icon-wrap">
                 <i class="fa fa-bank"></i>
               </div>
-              <strong class="icon-title">संस्था दर्ता गर्नुहोस </strong>
+              <strong class="icon-title">१. संस्था दर्ता गर्नुहोस </strong>
             </a>
           </div>
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+            <a target=_blank href="{{ route('frontend.auth.login') }}">
               <div class="icon-wrap">
                 <i class="fas fa-lock"></i>
               </div>
@@ -134,7 +135,7 @@
             </a>
           </div>
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+            <a >
               <div class="icon-wrap">
               <i class="fas fa-book-reader"></i>
             </div>
@@ -142,7 +143,7 @@
             </a>
           </div>
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+            <a >
               <div class="icon-wrap">
               <i class="fas fa-pen-square"></i>
             </div>
@@ -150,7 +151,7 @@
             </a>
           </div>
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+            <a >
               <div class="icon-wrap">
             
               <i class="fas fa-desktop"></i>
@@ -159,49 +160,6 @@
             </a>
           </div>
           
-        </div>
-      </div>
-    </section>
-
-    <section class="home-post">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <article class="home-post-list">
-              <div class="card">
-                <img src="images/paritosh-poudyal-small.jpg" class="card-img-top" alt="paritosh-poudyal-small.jpg">
-                <div class="card-body">
-                  <h3 class="card-title"><a href="#">Message From Chairman</a></h3>
-                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of </p>
-                  <a target=_blank href="#" >Read More</a>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <article class="home-post-list">
-              <div class="card">
-                <img src="images/banner_logo.png" class="card-img-top" alt="students.jpg">
-                <div class="card-body">
-                  <h3 class="card-title"><a href="#">About Nefscun</a></h3>
-                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of</p>
-                  <a target=_blank href="#">Read More</a>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <article class="home-post-list">
-              <div class="card">
-                <img src="images/banner_logo.png" class="card-img-top" alt="members.jpg">
-                <div class="card-body">
-                  <h3 class="card-title"><a href="#">Nefscun</a></h3>
-                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of</p>
-                  <a target=_blank href="#" >Read More</a>
-                </div>
-              </div>
-            </article>
-          </div>
         </div>
       </div>
     </section>
@@ -222,7 +180,7 @@
 व्यवस्थापकको नाम र मोबाईल नम्बर
 अध्यक्षको नाम र मोबाईल नम्बर
 ">
-            <a target=_blank href="#" >
+            <a  >
               <div class="icon-wrap">
                 <i class="fa fa-bank"></i>
               </div>
@@ -241,7 +199,7 @@
 संघ/संस्थामा बहाल रहेको पद
 सञ्चालक समितिको निर्णय मिति
 ">
-            <a target=_blank href="#">
+            <a >
               <div class="icon-wrap">
                 <i class="fa fa-male"></i>
               </div>
@@ -256,7 +214,7 @@
 नविकरण र नियमित बचतको भौचर
 अडिट रिपोर्ट
 ">
-            <a target=_blank href="#">
+            <a >
               <div class="icon-wrap">
               <i class="fa fa-cloud-upload-alt"></i>
             </div>
@@ -264,7 +222,7 @@
             </a>
           </div>
           <div class="icon-list text-center">
-            <a target=_blank href="#">
+            <a >
               <div class="icon-wrap">
               
               <i class="fas fa-paper-plane"></i>
@@ -277,6 +235,51 @@
        
       </div>
     </section>
+
+    <section class="home-post">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+            <article class="home-post-list">
+              <div class="card">
+                <img src="images/paritosh-poudyal-small.jpg" class="card-img-top" alt="paritosh-poudyal-small.jpg">
+                <div class="card-body">
+                  <h3 class="card-title"><a href="#">Message From Chairman</a></h3>
+                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of </p>
+                  <a  >Read More</a>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+            <article class="home-post-list">
+              <div class="card">
+                <img src="images/banner_logo.png" class="card-img-top" alt="students.jpg">
+                <div class="card-body">
+                  <h3 class="card-title"><a href="#">About Nefscun</a></h3>
+                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of</p>
+                  <a >Read More</a>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+            <article class="home-post-list">
+              <div class="card">
+                <img src="images/banner_logo.png" class="card-img-top" alt="members.jpg">
+                <div class="card-body">
+                  <h3 class="card-title"><a href="#">Nefscun</a></h3>
+                  <p class="card-text">Building Resilience through Harmonious Cooperation As we enter the last quarter of 2020, we remain completely COVID stricken and it seems like we have to adjust ourselves to the new normal of</p>
+                  <a  >Read More</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
 
     <footer class="site-footer">
       <div class="container">

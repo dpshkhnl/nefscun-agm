@@ -88,13 +88,11 @@ class RegisterController extends Controller
 
     public function showReports($id){
        
-        $reports =  array("https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview",
-       "https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview",
-    "https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" );
+       
        $details = new OrganizationRegistration;
        $details->reportid = $id;
        $details->reportName="";
-       $details->url = $reports[$id-1];
+     
        $coop =  Session::get('user');
        if(!$coop)
        return view('frontend.index');

@@ -145,6 +145,9 @@
                         <div class="col-md-12">
                      
                           <input   type="email" class="form-control " id="email" name="email">
+                          <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(सम्पुर्ण विवरणहरु यसै ईमेलमा पठाईनेछ)</span>
+
+                          
                         </div>
                       </div>
                       </div>
@@ -162,6 +165,8 @@
                         <div class="col-md-12">
                      
                           <input   type="number" class="form-control " id="mobile" name="mobile">
+                          <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(यस मोबाईलमा कोड पठाईने हुँदा साथमै राख्नुहोला )</span>
+
                         </div>
                       </div>
 
@@ -275,7 +280,7 @@
                       </div>
 
                       <div class="form-group col-md-6">
-                        <label for="fullname" class="col-md-12">साकोसको सदस्यता नम्बर :</label>
+                        <label for="fullname" class="col-md-12">केन्द्रीय प्रतिनिधिको संस्थामा रहेको सदस्यता नम्बर :</label>
                         <div class="col-md-12">
                           <input type="text" class="form-control required" required id="memno"  name="memno">
                         </div>
@@ -572,8 +577,8 @@ function readUrl(input) {
             msg+="Valid PAN नम्बर भरनुहोस \n";
             if(org_name.length == 0 )
             msg+="संस्थाको नाम (अंग्रेजीमा) भरनुहोस \n";
-            if(fullnamenp.length == 0 )
-            msg+="संस्थाको नाम (युनिकोडमा) भरनुहोस \n";
+            // if(fullnamenp.length == 0 )
+            // msg+="संस्थाको नाम (युनिकोडमा) भरनुहोस \n";
             if(province_id.length == 0 )
             msg+="प्रदेश छान्नुहोस् \n";
             if(dist_id.length == 0 )

@@ -99,7 +99,7 @@
               <div class="icon-wrap">
                 <i class="fas fa-users"></i>
               </div>
-              <strong class="icon-title">अध्यक्षको प्रतिवेदन</strong>
+              <strong class="icon-title">अध्यक्षको मन्तब्य </strong>
             </a>
           </div>
           <div class="icon-list text-center">
@@ -124,7 +124,16 @@
               <div class="icon-wrap">
               <i class="fas fa-file-alt"></i>
             </div>
-            <strong class="icon-title">ले.प. प्रतिवेदन</strong>
+            <strong class="icon-title">लेखा परीक्षण प्रतिवेदन</strong>
+            </a>
+          </div>
+
+          <div class="icon-list text-center">
+            <a target=_blank href="showReports/5">
+              <div class="icon-wrap">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <strong class="icon-title">लेखा सुपरीवेक्षण समितिको प्रतिवेदन</strong>
             </a>
           </div>
          
