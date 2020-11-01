@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
 use App\Domains\Auth\Models\Province;
+use App\Domains\Auth\Models\MemberData;
 use App\Domains\Auth\Models\District;
 use App\Domains\Auth\Models\LocalBody;
 use Illuminate\Support\Facades\Hash;
@@ -83,6 +84,23 @@ class RegisterController extends Controller
     public function showForm($signupStep,$result){
         $province = Province::get();
         return view('frontend.auth.register',compact('province','signupStep','result'));
+    }
+
+    public function showDetails(Request $request){
+        $id = $request->get('mem_no');
+        $province = Province::get();
+        $signupStep = 0;
+        $member = MemberData::where('member_no',$id)->first();
+        $result =  new OrganizationRegistration;
+        if($member){
+            $result->nefscun_mem_no = $member->id;
+        $result->org_name =$member->name;
+        $result->panno = $member->pan_no;
+
+        }
+        
+        return $result;
+        //return view('frontend.auth.register',compact('province','signupStep','result'));
     }
 
 
@@ -187,6 +205,10 @@ class RegisterController extends Controller
         $orgRegister->nefscun_mem_no = $request->get('nefscun_mem_no');
         $orgRegister->org_name = $request->get('org_name');
         $orgRegister->org_name_np = $request->get('fullnamenp');
+        $orgRegister->renew_voc = $request->get('renew_voc');
+        $orgRegister->renew_dt = $request->get('renew_dt');
+        $orgRegister->dep_voc_no = $request->get('dep_voc_no');
+        $orgRegister->dep_date = $request->get('dep_date');
         $orgRegister->province = $request->get('province_id');
         $orgRegister->district = $request->get('dist_id');
         $orgRegister->local = $request->get('local_id');
@@ -196,6 +218,7 @@ class RegisterController extends Controller
         $orgRegister->org_phone = $request->get('org_phone');
         $orgRegister->managername = $request->get('managername');
         $orgRegister->chairman_name = $request->get('chairman_name');
+        $orgRegister->verify_post = $request->get('verify_post');
         $orgRegister->chairman_no = $request->get('chairman_no');
         $orgRegister->email = $request->get('email');
         $orgRegister->password =  Hash::make($request->get('password'));
@@ -234,7 +257,7 @@ class RegisterController extends Controller
    public function saveUploadDoc(Request $request){
 
     $orgUpload = new OrganizationUpload;
-   
+    $orgRegister =  OrganizationRegistration::find($request->get('register_id'));
     $orgUpload->nefscun_mem_no = $request->get('nefscun_mem_no');
     $orgUpload->org_reg_id = $request->get('register_id');
     $orgUpload->ip= $request->ip();
@@ -305,6 +328,10 @@ class RegisterController extends Controller
         $orgUpload->photo = $names; //
     }
     $orgUpload->save();
+    Helper::sendEmail($orgRegister, "२९ औं साधारण सभामा सहभागी हुन आवेदन दर्ता ", "तपाईको आवेदन प्राप्त भएको छ। दर्ता सफल भएपश्चात ईमेल मार्फत जानकारी गराइनेछ। धन्यवाद।
+    नेफ्स्कून
+    ");
+
     return $this->showForm(3,$orgUpload);
 }
    

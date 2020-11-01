@@ -40,12 +40,15 @@
                    
                     <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank  role="button"></i>Welcome, {{$coop->org_name}}</a>
 
-                    <a class="btn btn-sm btn-outline-primary top-address-btn" href="{{url('printForm/'.$coop->id)}}" role="button"><i class="fas fa-unlock mr-2"></i>Profile</a>
-
-                        <a class="btn btn-sm btn-outline-primary top-address-btn" href="{{ route('frontend.auth.logout') }}" role="button"><i class="fas fa-unlock mr-2"></i>Logout</a>
-
+<br/>
+                   
                   
               </div>
+              <div class="row">
+              <a class="btn btn-sm btn-outline-primary top-address-btn" href="{{url('printForm/'.$coop->id)}}" role="button"><i class="fas fa-unlock mr-2"></i>Profile</a>
+
+<a class="btn btn-sm btn-outline-primary top-address-btn" href="{{ route('frontend.auth.logout') }}" role="button"><i class="fas fa-unlock mr-2"></i>Logout</a>
+</div>
              
               </div>
             </div>

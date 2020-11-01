@@ -24,7 +24,7 @@
         <div class="row">
           <div class="col-12">
             <div class="logo d-flex justify-content-center">
-              <a href="https://www.nefscun.org.np/"><img src="/images/banner_logo.png" alt="" class="logo img-fluid" /></a>
+              <a href="https:/agm.nefscun.org.np/"><img src="/images/banner_logo.png" alt="" class="logo img-fluid" /></a>
             </div>
             <div id="converter">  
   <div id='toolbar'> </div>
@@ -47,9 +47,9 @@
               <nav>
                   <ul class="nav nav-tabs" id="nav-tab" role="tablist">
                   <li> <a class="nav-item nav-link @if($signupStep==0) active  @endif  ml-2" id="nav-general-tab" @if($signupStep == 0) data-toggle="tab" @endif href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">संस्था परिचय</a></li>
-                  <li> <a class="nav-item nav-link @if($signupStep==1) active  @endif  ml-2" id="nav-rep-tab" @if($signupStep == 1) data-toggle="tab" @endif href="#nav-rep" role="tab" aria-controls="nav-rep" aria-selected="true">केन्द्रिय प्रतिनिधि </a></li>
+                  <li> <a class="nav-item nav-link @if($signupStep==1) active  @endif  ml-2" id="nav-rep-tab" @if($signupStep == 1) data-toggle="tab" @endif href="#nav-rep" role="tab" aria-controls="nav-rep" aria-selected="true">केन्द्रीय प्रतिनिधि </a></li>
                   <li> <a class="nav-item nav-link @if($signupStep==2) active  @endif ml-2" id="nav-upload-tab"  @if($signupStep == 2) data-toggle="tab" @endif href="#nav-upload" role="tab" aria-controls="nav-upload" aria-selected="false">अपलोड </a></li>
-                  <li> <a class="nav-item nav-link @if($signupStep==3) active  @endif ml-2" id="nav-success-tab" @if($signupStep == 3) data-toggle="tab" @endif  href="#nav-success" role="tab" aria-controls="nav-success" aria-selected="false">Complete</a></li>
+                  <li> <a class="nav-item nav-link @if($signupStep==3) active  @endif ml-2" id="nav-success-tab" @if($signupStep == 3) data-toggle="tab" @endif  href="#nav-success" role="tab" aria-controls="nav-success" aria-selected="false">अन्त्य</a></li>
 
                   </ul>
                 </nav> 
@@ -92,9 +92,42 @@
 
                       </div>
 
+                      <div class="row">
+                    
+                    <div class="form-group col-md-3">
+                      <label for="org_name" class="col-md-12">नविकरण भौचर नम्बर:</label>
+                      <div class="col-md-12">
+                        <input type="number" value="{{$result->renew_voc}}" class="form-control required" id="renew_voc"  name="renew_voc" style="text-transform: uppercase;">
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="fullname" class="col-md-12">नविकरण भौचर मिति </label>
+                      <div class="col-md-12">
+                        <input type="text" value="{{$result->renew_dt}}" class="form-control  required" id="renew_dt"  name="renew_dt" >
+                      </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="org_name" class="col-md-12">नियमित बचतको भौचर नम्बर:</label>
+                      <div class="col-md-12">
+                        <input type="number" value="{{$result->dep_voc_no}}" class="form-control required" id="dep_voc_no"  name="dep_voc_no" style="text-transform: uppercase;">
+                      </div>
+                      <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(यदि नविकरणको भन्दा फरक भएमा मात्र)</span>
+
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="fullname" class="col-md-12">नियमित बचतको भौचर मिति </label>
+                      <div class="col-md-12">
+                        <input type="text" value="{{$result->dep_date}}" class="form-control required" id="dep_date"  name="dep_date" >
+                      </div>
+                    </div>
+
+                    </div>
+
                       <div class="form-group col-md-12">
                       <label id="label-phone" for="phone" class="control-label">
-                                             ठेगाना (प्रदेश, जिल्ला, स्थानिय तह, वार्ड नं)  
+                                             ठेगाना (प्रदेश, जिल्ला, स्थानीय तह, वार्ड नं)  
                                              </label> <i class="required-star">*</i> 
                                           
                           <div class="row">
@@ -145,7 +178,7 @@
                         <div class="col-md-12">
                      
                           <input   type="email" class="form-control " id="email" name="email">
-                          <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(सम्पुर्ण विवरणहरु यसै ईमेलमा पठाईनेछ)</span>
+                          <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(सम्पूर्ण विवरणहरु यसै ईमेल मार्फत पठाईनेछ)</span>
 
                           
                         </div>
@@ -165,7 +198,7 @@
                         <div class="col-md-12">
                      
                           <input   type="number" class="form-control " id="mobile" name="mobile">
-                          <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(यस मोबाईलमा कोड पठाईने हुँदा साथमै राख्नुहोला )</span>
+                          <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(यस मोबाईल नम्बरमा कोड पठाइने छ)</span>
 
                         </div>
                       </div>
@@ -174,16 +207,32 @@
                       </div>
 
                       <div class="row">       
-                      <div class="form-group col-md-6">
-                        <label for="email" class="col-md-12">अध्यक्षको नाम:</label>
+
+                      <div class="controls col-md-4">
+                      <label for="email" class="col-md-12">प्रमाणित गर्नेको पद:</label>
+                      <div class="col-md-12">
+                                                 <select id="verify_post" name="verify_post" class="form-control" required>
+                                <option value="अध्यक्ष" selected> अध्यक्ष</option>
+                                <option value="वरिष्ठ उपाध्यक्ष" selected> वरिष्ठ उपाध्यक्ष</option>
+                                <option value="उपाध्यक्ष" selected> उपाध्यक्ष</option>
+                                <option value="महासचिव" selected> महासचिव</option>
+                                <option value="कोषाध्यक्ष" selected> कोषाध्यक्ष</option>
+                                <option value="सञ्चालक सदस्य" selected> सञ्चालक सदस्य</option>
+                            
+                            </select>
+</div>
+                                  </div>
+
+                      <div class="form-group col-md-4">
+                        <label for="email" class="col-md-12">प्रमाणित गर्नेको नाम:</label>
                         <div class="col-md-12">
                      
                           <input   type="text" class="form-control " id="chairman_name" name="chairman_name">
                         </div>
                       </div>
 
-                      <div class="form-group col-md-6">
-                        <label for="email" class="col-md-12"> अध्यक्षको मोबाईल नं:</label>
+                      <div class="form-group col-md-4">
+                        <label for="email" class="col-md-12"> प्रमाणित गर्नेको मोबाईल नं:</label>
                         <div class="col-md-12">
                      
                           <input   type="number" class="form-control " id="chairman_no" name="chairman_no">
@@ -377,7 +426,7 @@
                   
 </div>
                     <div class="button-group" role="group" aria-label="button">
-                      <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary">Save</button>
+                      <button type="submit" id="btnSubmit" onclick="this.disabled = true;" name="btnSubmit" class="btn btn-primary">Save</button>
                       <!-- <button type="button" class="btn btn-secondary">Cancel</button> -->
                     </div>
                     </form> 
@@ -397,7 +446,7 @@
                       <div class="row col-md-12">
                       <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
-      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('org_stamp').click()">संस्थाको छाप</button>
+      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('org_stamp').click()">संस्थाको छाप वा लोगो</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="inputFile">File Upload</label>
         <input type="file"required  class="form-control-file text-success font-weight-bold" id="org_stamp" name="org_stamp" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
@@ -447,7 +496,7 @@
   </div>
    
    
-    <div class="row m-b-1">
+    <!-- <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
       <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('voucher').click()">नविकरण भौचर अपलोड</button>
       <div class="form-group inputDnD">
@@ -455,9 +504,9 @@
         <input type="file" required class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="row m-b-1">
+  <!-- <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
       <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('save_voucher').click()">नियमित बचतको भौचर अपलोड</button>
       <div class="form-group inputDnD">
@@ -465,7 +514,7 @@
         <input type="file" multiple class="form-control-file text-success font-weight-bold" id="save_voucher" name="save_voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
@@ -483,7 +532,7 @@
                
                               
                           <div class="button-group" role="group" aria-label="button">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" onclick="this.disabled = true;" class="btn btn-primary">Save</button>
                 
                           </div>
                           </form>
@@ -496,7 +545,9 @@
                     <div class="ican-uploads">
                       <div class="row">
                         <div class="col-12">
-                          Thank you!! Your Request Has been submitted.
+                        तपाईको आवेदन प्राप्त भएको छ। दर्ता सफल भएपश्चात ईमेल मार्फत जानकारी गराइनेछ। धन्यवाद।
+नेफ्स्कून
+
                         </div>
                       </div>
                     </div>
@@ -550,6 +601,36 @@ function readUrl(input) {
 }
     $(document).ready(function(){
 
+      $('#nefscun_mem_no').focusout(function(e){
+        var _token = $("input[name='_token']").val();
+        
+           var memno = $("input[name='nefscun_mem_no']").val();
+           var url = "{!! route('frontend.showDetails') !!}";
+        //  alert(url);
+           $.ajax({
+          url:url,
+          type: 'POST',
+          data: {mem_no:memno, _token: _token},
+          success: function(result){
+            
+            if(result){
+              $("input[name='org_name']").val(result.org_name);
+              $("input[name='panno']").val(result.panno);
+            
+           } else
+           {
+            $("input[name='org_name']").val("");
+              $("input[name='panno']").val("");
+           }
+          }
+        });
+         
+
+      });
+      $('body').on('keypress', '.convert-romanize', function (event) {
+	return setUnicode(event,this);
+});
+
       $('#btnSubmit').click(function(e){
            
            e.preventDefault();
@@ -570,6 +651,9 @@ function readUrl(input) {
             var chairman_name = $("input[name='chairman_name']").val();
             var chairman_no = $("input[name='chairman_no']").val();
             var password = $("input[name='password']").val();
+            var renew_voc = $("input[name='renew_voc']").val();
+            var renew_dt = $("input[name='renew_dt']").val();
+            
 
             if(nefscun_mem_no.length == 0 )
             msg+="नेफ्स्कून सदस्यता नं भरनुहोस \n";
@@ -577,6 +661,10 @@ function readUrl(input) {
             msg+="Valid PAN नम्बर भरनुहोस \n";
             if(org_name.length == 0 )
             msg+="संस्थाको नाम (अंग्रेजीमा) भरनुहोस \n";
+            if(renew_voc.length == 0 )
+            msg+="नविकरण भौचर नम्बर भरनुहोस \n";
+            if(renew_dt.length == 0 )
+            msg+="नविकरण भौचर मिति भरनुहोस \n";
             // if(fullnamenp.length == 0 )
             // msg+="संस्थाको नाम (युनिकोडमा) भरनुहोस \n";
             if(province_id.length == 0 )
@@ -607,7 +695,7 @@ function readUrl(input) {
             alert(msg);
             return;
           }
-
+          $( "#btnSubmit" ).val( "Processing" );
            var contact = $("input[name='mobile']").val();
            var email = $("input[name='email']").val();
           var _token = $("input[name='_token']").val();
@@ -631,7 +719,9 @@ function readUrl(input) {
             if(result.status == 1){
               // var text = '<p>OTP Verified. <br> <strong>Please Wait. Your Form is being Submitted.</strong></p>';
               // $('#modal-box2 .modal-body').append(text);
+              $( "#btnSubmit" ).prop( "disabled", true );
               $('#firstform').unbind('submit').submit();
+              $( "#btnSubmit" ).val( "Save" );
            } else
            {
                 var text = '<p>Invalid OTP. <br> <strong>Please input the correct OTP sent in your phone.</strong></p>';
@@ -650,9 +740,15 @@ function readUrl(input) {
 var mainInput = document.getElementById("dob");
 var decision_dt = document.getElementById("decision_dt");
 var share_reg_dt = document.getElementById("share_reg_dt");
+var dep_date = document.getElementById("dep_date");
+var renew_dt = document.getElementById("renew_dt");
+
+
       mainInput.nepaliDatePicker();
       decision_dt.nepaliDatePicker();
       share_reg_dt.nepaliDatePicker();
+      dep_date.nepaliDatePicker();
+      renew_dt.nepaliDatePicker();
 
  $("select[name='province_id']").change(function(){
     var province_id = $(this).children("option:selected").val();

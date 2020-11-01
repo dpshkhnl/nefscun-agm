@@ -21,7 +21,8 @@ Route::get('terms', [TermsController::class, 'index'])
         $trail->parent('frontend.index')
             ->push(__('Terms & Conditions'), route('frontend.pages.terms'));
     });
-
+    
+    Route::post('/showDetails', [RegisterController::class, 'showDetails'])->name('showDetails');
     Route::post('/getDistrict',  [HomeController::class, 'getDistrict'])->name('getDistrict');
     Route::post('/getLocal', [HomeController::class, 'getLocal'])->name('getLocal');
     Route::post('/saveBasic', [RegisterController::class, 'saveBasic'])->name('saveBasic');

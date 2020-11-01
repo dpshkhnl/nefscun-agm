@@ -22,12 +22,12 @@
                             <th>संस्थाको नाम</th>
                             <th>ठेगाना</th>
                             <th>प्रतिनिधिको नाम</th>
-                            <th>अध्यक्षको प्रतिवेदन उपर सुझाव</th>
+                           
                             <th>महासचिवको प्रतिवेदन उपर सुझाव</th>
                             
                             <th>कोषाध्यक्षको प्रतिवेदन उपर सुझाव</th>
                             <th>ले.प. प्रतिवेदन उपर सुझाव</th>
-                          
+                            <th>लेखा सुपरीवेक्षण समितिको <br/> प्रतिवेदन उपर सुझाव</th>
                             
                         </tr>
                     </thead>
@@ -40,11 +40,11 @@
                        <td>{{$dt->name_np}},{{$dt->ward}} <br/>{{$dt->dist_name_np}}</td>
                        
                        <td>{{$dt->rep_name}}</td>
-                       <td>{{$dt->chairman_comment}}</td>
                        <td>{{$dt->sec_comment}}</td>
                        <td>{{$dt->tres_comment}}</td>
                        <td>{{$dt->audit_comment}}</td>
-                       
+                       <td>{{$dt->chairman_comment}}</td>
+
                        
                        </tr>
                        @endforeach

@@ -41,7 +41,13 @@
         <div>
           <b>१. संघ/संस्थाको नाम:</b> <b>{{$orgRegister->org_name_np}}</b>
         </div>
-
+        <div>
+          <b>    &nbsp;
+          &nbsp;
+          
+        
+ नेफ्स्कून सदस्यता नं:</b> <b>{{$orgRegister->nefscun_mem_no}}</b>
+        </div>
         <div>
           <b>२. ठेगाना : </b>
           <div class="p-2">
