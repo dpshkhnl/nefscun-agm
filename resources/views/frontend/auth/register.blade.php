@@ -18,7 +18,40 @@
     <script type="text/javascript" src="/js/unicodeNepali.js"></script>
   </head>
   <body>
+
+  
     <!-- Modal -->
+
+    <div class="modal"  tabindex="-1" role="dialog" id="modal-box3">
+  <div class="modal-dialog-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">नेफ्स्कून सदस्यता नं :</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      संस्थाको नाम (अंग्रेजीमा):
+        <input type="text" id="autoname" name="autoname" class="form-control">
+        <table class="table" border='1' id='userTable' style='border-collapse: collapse;'>
+       <thead>
+        <tr>
+          <th>नेफ्स्कून सदस्यता नम्बर</th>
+          <th>साकोसको नाम</th>
+          <th>साकोसको ठेगाना</th>
+          <th>जिल्ला</th>
+          <th>प्यान नम्बर</th>
+          <th>कैफियत</th>
+        </tr>
+       </thead>
+       <tbody></tbody>
+     </table>
+      </div>
+      
+    </div>
+  </div>
+</div>
     <div class="ican-application-form cap-1 py-4">
       <div class="container-fluid">
         <div class="row">
@@ -55,6 +88,8 @@
                 </nav> 
                 <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade @if($signupStep==0) active show @endif" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                <a href="#test" data-toggle="modal" data-target="#modal-box3" class="more-link">Read More</a>
+
                  <form class="application-form" name="firstform" id="firstform" method="POST" action="{{ route('frontend.saveBasic') }}" enctype="multipart/form-data">
             @csrf  
                
@@ -86,7 +121,7 @@
                       <div class="form-group col-md-6">
                         <label for="fullname" class="col-md-12">संस्थाको नाम (युनिकोडमा)</label>
                         <div class="col-md-12">
-                          <input type="text" value="{{$result->org_name_np}}" class="form-control convert-romanize required" id="fullnamenp"  name="fullnamenp" >
+                          <input type="text" class="form-control convert-romanize required" id="fullnamenp"  name="fullnamenp" >
                         </div>
                       </div>
 
@@ -94,34 +129,34 @@
 
                       <div class="row">
                     
-                    <div class="form-group col-md-3">
+                    <!-- <div class="form-group col-md-3">
                       <label for="org_name" class="col-md-12">नविकरण भौचर नम्बर:</label>
                       <div class="col-md-12">
                         <input type="number" value="{{$result->renew_voc}}" class="form-control required" id="renew_voc"  name="renew_voc" style="text-transform: uppercase;">
                       </div>
-                    </div>
+                    </div> -->
 
-                    <div class="form-group col-md-3">
+                    <!-- <div class="form-group col-md-3">
                       <label for="fullname" class="col-md-12">नविकरण भौचर मिति </label>
                       <div class="col-md-12">
                         <input type="text" value="{{$result->renew_dt}}" class="form-control  required" id="renew_dt"  name="renew_dt" >
                       </div>
-                    </div>
-                    <div class="form-group col-md-3">
+                    </div> -->
+                    <!-- <div class="form-group col-md-3">
                       <label for="org_name" class="col-md-12">नियमित बचतको भौचर नम्बर:</label>
                       <div class="col-md-12">
                         <input type="number" value="{{$result->dep_voc_no}}" class="form-control required" id="dep_voc_no"  name="dep_voc_no" style="text-transform: uppercase;">
                       </div>
                       <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(यदि नविकरणको भन्दा फरक भएमा मात्र)</span>
 
-                    </div>
+                    </div> -->
 
-                    <div class="form-group col-md-3">
+                    <!-- <div class="form-group col-md-3">
                       <label for="fullname" class="col-md-12">नियमित बचतको भौचर मिति </label>
                       <div class="col-md-12">
                         <input type="text" value="{{$result->dep_date}}" class="form-control required" id="dep_date"  name="dep_date" >
                       </div>
-                    </div>
+                    </div> -->
 
                     </div>
 
@@ -199,8 +234,9 @@
                      
                           <input   type="number" class="form-control " id="mobile" name="mobile">
                           <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(यस मोबाईल नम्बरमा कोड पठाइने छ)</span>
-
+                       
                         </div>
+                        <br/>
                       </div>
 
                      
@@ -209,7 +245,7 @@
                       <div class="row">       
 
                       <div class="controls col-md-4">
-                      <label for="email" class="col-md-12">प्रमाणित गर्नेको पद:</label>
+                      <label for="email" class="col-md-12">प्रमाणित गर्ने व्यक्तिको पद:</label>
                       <div class="col-md-12">
                                                  <select id="verify_post" name="verify_post" class="form-control" required>
                                 <option value="अध्यक्ष" selected> अध्यक्ष</option>
@@ -224,7 +260,7 @@
                                   </div>
 
                       <div class="form-group col-md-4">
-                        <label for="email" class="col-md-12">प्रमाणित गर्नेको नाम:</label>
+                        <label for="email" class="col-md-12">प्रमाणित गर्ने व्यक्तिको नाम:</label>
                         <div class="col-md-12">
                      
                           <input   type="text" class="form-control " id="chairman_name" name="chairman_name">
@@ -232,7 +268,7 @@
                       </div>
 
                       <div class="form-group col-md-4">
-                        <label for="email" class="col-md-12"> प्रमाणित गर्नेको मोबाईल नं:</label>
+                        <label for="email" class="col-md-12"> प्रमाणित गर्ने व्यक्तिको मोबाईल नं:</label>
                         <div class="col-md-12">
                      
                           <input   type="number" class="form-control " id="chairman_no" name="chairman_no">
@@ -265,7 +301,6 @@
                     <div class="button-group" role="group" aria-label="button">
                     
                       <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary align-right">Next</button>
-                      <!-- <button type="button" class="btn btn-secondary">Cancel</button> -->
                     </div>
                     <div class="modal" tabindex="-1" role="dialog" id="modal-box2">
   <div class="modal-dialog" role="document">
@@ -341,7 +376,7 @@
 
                       <div class="form-group col-md-12">
                       <label id="label-phone" for="phone" class="control-label">
-                                             ठेगाना (प्रदेश, जिल्ला, स्थानिय तह, वार्ड नं)  
+                                             ठेगाना (प्रदेश, जिल्ला, स्थानीय तह, वार्ड नं)  
                                              </label> <i class="required-star">*</i> 
                                           
                           <div class="row">
@@ -393,14 +428,14 @@
                       </div>
                       <div class="row">
                       <div class="form-group col-md-6">
-                        <label for="password" class="col-md-6">योग्यता :</label>
+                        <label for="password" class="col-md-6">माथिल्लो शैक्षिक योग्यता:</label>
                         <div class="col-md-12">
                      
                           <input   type="text" required class="form-control"  id="qualification" name="qualification">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="cnfpassword" class="col-md-12">पद :</label>
+                        <label for="cnfpassword" class="col-md-12">संघ/संस्थामा कायम रहेको पद :</label>
                         <div class="col-md-12">
                      
                           <input   type="text" required class="form-control "  id="post" name="post">
@@ -409,7 +444,7 @@
                       </div>
                       <div class="row">
                       <div class="form-group col-md-6">
-                        <label for="password" class="col-md-6">सेयर सदश्य लिएको मिति  :</label>
+                        <label for="password" class="col-md-6">सेयर सदस्यता लिएको मिति :</label>
                         <div class="col-md-12">
                      
                           <input   type="text" required class="form-control"  id="share_reg_dt" name="share_reg_dt">
@@ -426,7 +461,7 @@
                   
 </div>
                     <div class="button-group" role="group" aria-label="button">
-                      <button type="submit" id="btnSubmit" onclick="this.disabled = true;" name="btnSubmit" class="btn btn-primary">Save</button>
+                      <button type="submit" id="btn" name="btn" class="btn btn-primary">Next</button>
                       <!-- <button type="button" class="btn btn-secondary">Cancel</button> -->
                     </div>
                     </form> 
@@ -496,7 +531,7 @@
   </div>
    
    
-    <!-- <div class="row m-b-1">
+    <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
       <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('voucher').click()">नविकरण भौचर अपलोड</button>
       <div class="form-group inputDnD">
@@ -504,9 +539,9 @@
         <input type="file" required class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
-  </div> -->
+  </div>
 
-  <!-- <div class="row m-b-1">
+  <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
       <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('save_voucher').click()">नियमित बचतको भौचर अपलोड</button>
       <div class="form-group inputDnD">
@@ -514,7 +549,7 @@
         <input type="file" multiple class="form-control-file text-success font-weight-bold" id="save_voucher" name="save_voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
-  </div> -->
+  </div>
 
   <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
@@ -532,7 +567,7 @@
                
                               
                           <div class="button-group" role="group" aria-label="button">
-                            <button type="submit" onclick="this.disabled = true;" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Next</button>
                 
                           </div>
                           </form>
@@ -566,7 +601,8 @@
     <script type="text/javascript"  src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+    
     <script type='text/javascript'>
     function checkPass(){
    
@@ -585,6 +621,103 @@
         }
 }
 
+function fillData(member_no)
+{
+  $("input[name='nefscun_mem_no']").val(member_no);
+  
+  $('#modal-box3').modal('hide');
+  var _token = $("input[name='_token']").val();
+        
+        var memno = $("input[name='nefscun_mem_no']").val();
+        var url = "{!! route('frontend.showDetails') !!}";
+     //  alert(url);
+        $.ajax({
+       url:url,
+       type: 'POST',
+       data: {mem_no:memno, _token: _token},
+       success: function(result){
+         
+         if(result){
+           $("input[name='org_name']").val(result.org_name);
+           $("input[name='panno']").val(result.panno);
+         
+        } else
+        {
+         $("input[name='org_name']").val("");
+           $("input[name='panno']").val("");
+        }
+       }
+     });
+
+}
+
+$("#autoname").on("input", function(e) {
+  var input = $(this);
+  var val = input.val();
+  if(val.length <3)
+  return;
+
+  if (input.data("lastval") != val) {
+    input.data("lastval", val);
+
+      fetchRecords(val);
+    //your change action goes here 
+    console.log(val);
+  }
+
+});
+
+
+function fetchRecords(query){
+       $.ajax({
+         url: 'autocomplete/'+query,
+         type: 'get',
+         dataType: 'json',
+         success: function(response){
+
+           var len = 0;
+           $('#userTable tbody').empty(); // Empty <tbody>
+           if(response['data'] != null){
+              len = response['data'].length;
+           }
+
+           if(len > 0){
+              for(var i=0; i<len; i++){
+                 var id = response['data'][i].id;
+                 var member_no = response['data'][i].member_no;
+                 var name = response['data'][i].name;
+                 var address = response['data'][i].address;
+                 var district = response['data'][i].district;
+                 var pan_no = response['data'][i].pan_no;
+
+                 var tr_str = "<tr>" +
+                 
+                   "<td align='center'>" + member_no + "</td>" +
+                   "<td align='center'>" + name + "</td>" +
+                   "<td align='center'>" + address + "</td>" +
+                   "<td align='center'>" + district + "</td>" +
+                   "<td align='center'>" + pan_no + "</td>" +
+                   '<td><button  onclick="fillData('+member_no+')">Use</button></td>';
+
+                 "</tr>";
+
+                 $("#userTable tbody").append(tr_str);
+              }
+           }else{
+              var tr_str = "<tr>" +
+                  "<td align='center' colspan='4'>No record found.</td>" +
+              "</tr>";
+
+              $("#userTable tbody").append(tr_str);
+           }
+
+         }
+       });
+     
+      }
+
+      
+
 function readUrl(input) {
   
   if (input.files && input.files[0]) {
@@ -600,6 +733,20 @@ function readUrl(input) {
 
 }
     $(document).ready(function(){
+
+
+     
+
+      $("form.firstform").submit(function (e) {
+    // Check if we have submitted before
+    if ( $("#submit-btn").attr('attempted') == 'true' ) {
+      //stop submitting the form because we have already clicked submit.
+      e.preventDefault();
+    }
+    else {
+      $("#submit-btn").attr("attempted", 'true');
+    }
+  });
 
       $('#nefscun_mem_no').focusout(function(e){
         var _token = $("input[name='_token']").val();
@@ -627,14 +774,15 @@ function readUrl(input) {
          
 
       });
-      $('body').on('keypress', '.convert-romanize', function (event) {
-	return setUnicode(event,this);
-});
+     
 
       $('#btnSubmit').click(function(e){
            
            e.preventDefault();
             var msg = "";
+           
+
+
           
             var nefscun_mem_no = $("input[name='nefscun_mem_no']").val();
             var panno = $("input[name='panno']").val();
@@ -651,8 +799,8 @@ function readUrl(input) {
             var chairman_name = $("input[name='chairman_name']").val();
             var chairman_no = $("input[name='chairman_no']").val();
             var password = $("input[name='password']").val();
-            var renew_voc = $("input[name='renew_voc']").val();
-            var renew_dt = $("input[name='renew_dt']").val();
+          //  var renew_voc = $("input[name='renew_voc']").val();
+         //   var renew_dt = $("input[name='renew_dt']").val();
             
 
             if(nefscun_mem_no.length == 0 )
@@ -661,10 +809,10 @@ function readUrl(input) {
             msg+="Valid PAN नम्बर भरनुहोस \n";
             if(org_name.length == 0 )
             msg+="संस्थाको नाम (अंग्रेजीमा) भरनुहोस \n";
-            if(renew_voc.length == 0 )
-            msg+="नविकरण भौचर नम्बर भरनुहोस \n";
-            if(renew_dt.length == 0 )
-            msg+="नविकरण भौचर मिति भरनुहोस \n";
+            // if(renew_voc.length == 0 )
+            // msg+="नविकरण भौचर नम्बर भरनुहोस \n";
+            // if(renew_dt.length == 0 )
+            // msg+="नविकरण भौचर मिति भरनुहोस \n";
             // if(fullnamenp.length == 0 )
             // msg+="संस्थाको नाम (युनिकोडमा) भरनुहोस \n";
             if(province_id.length == 0 )
@@ -672,7 +820,7 @@ function readUrl(input) {
             if(dist_id.length == 0 )
             msg+="जिल्ला  छान्नुहोस् \n";
             if(local_id.length == 0 )
-            msg+="स्थानिय तह छान्नुहोस् \n";
+            msg+="स्थानीय तह छान्नुहोस् \n";
             if(ward.length == 0 )
             msg+="वार्ड नं भरनुहोस \n";
             if(org_phone.length == 0 )
@@ -684,9 +832,9 @@ function readUrl(input) {
             if(mobile.length != 10 )
             msg+="व्यवस्थापकको मोबाईल नं भरनुहोस \n";
             if(chairman_name.length == 0 )
-            msg+="अध्यक्षको नाम भरनुहोस \n";
+            msg+="प्रमाणित गर्ने व्यक्तिको नाम भरनुहोस \n";
             if(chairman_no.length != 10 )
-            msg+="अध्यक्षको मोबाईल नं भरनुहोस \n";
+            msg+="प्रमाणित गर्ने व्यक्तिको मोबाईल नं भरनुहोस \n";
             if(password.length == 0 )
             msg+="पासवर्ड भरनुहोस \n";
 
@@ -695,6 +843,8 @@ function readUrl(input) {
             alert(msg);
             return;
           }
+
+      
           $( "#btnSubmit" ).val( "Processing" );
            var contact = $("input[name='mobile']").val();
            var email = $("input[name='email']").val();
@@ -740,15 +890,15 @@ function readUrl(input) {
 var mainInput = document.getElementById("dob");
 var decision_dt = document.getElementById("decision_dt");
 var share_reg_dt = document.getElementById("share_reg_dt");
-var dep_date = document.getElementById("dep_date");
-var renew_dt = document.getElementById("renew_dt");
+//var dep_date = document.getElementById("dep_date");
+//var renew_dt = document.getElementById("renew_dt");
 
 
       mainInput.nepaliDatePicker();
       decision_dt.nepaliDatePicker();
       share_reg_dt.nepaliDatePicker();
-      dep_date.nepaliDatePicker();
-      renew_dt.nepaliDatePicker();
+     // dep_date.nepaliDatePicker();
+      //renew_dt.nepaliDatePicker();
 
  $("select[name='province_id']").change(function(){
     var province_id = $(this).children("option:selected").val();

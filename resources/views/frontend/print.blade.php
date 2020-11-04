@@ -10,6 +10,13 @@
 
     <title>NEFSCUN</title>
     <link rel="stylesheet" href="style.css" />
+    <style type="text/css">
+@media print {
+    #myPrntbtn {
+        display :  none;
+    }
+}
+</style>
   </head>
   <body>
     <div class="container m-b-10">
@@ -65,7 +72,7 @@
               <li class="list-group-item">
               <div class="row">
                   <div class="col-sm">
-                  स्थानिय तह : <b>{{$orgRegister->name_np}} </b>
+                  स्थानीय तह : <b>{{$orgRegister->name_np}} </b>
                   </div>
                   <div class="col-sm">
                   वडा नं.: <b>{{$orgRegister->ward}} </b>
@@ -112,9 +119,9 @@
         </div>
 
         <div>
-          <b>३. २९ औं साधारण सभामा सहभागीताको लागि आधिकारिक निर्णय:</b>
+          <b>३. २९ औं साधारण सभामा सहभागिताका लागि आधिकारिक निर्णय:</b>
           <div>
-            यस संघ/संस्थाको मिति <b>{{$orgRepresentive->decision_dt}} </b> गते बसेको सञ्चालक समिति/साधारण सभाको निर्णय अनुसार नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि. को २०७७ साल मंसिर ५ गते सम्पन्न हुने २९ औं साधारण सभामा प्रतिनिधित्व गर्न यस संघ/संस्थाकोतर्फबाट तपसिलमा उल्लेखित ब्यक्तिलाई मनोनयन गरि पठाईएको ब्यहोरा अनुरोध छ ।
+            यस संघ/संस्थाको मिति <b>{{$orgRepresentive->decision_dt}} </b> गते बसेको सञ्चालक समिति/साधारण सभाको निर्णय अनुसार नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि. को २०७७ साल मंसिर ५ गते सम्पन्न हुने २९ औं साधारण सभामा प्रतिनिधित्व गर्न यस संघ/संस्थाको तर्फबाट तपसिलमा उल्लेखित व्यक्तिलाई मनोनयन गरी पठाईएको व्यहोरा अनुरोध छ ।
           </div>
         </div>
         
@@ -141,7 +148,7 @@
                     जिल्ला: <b>{{$orgRepresentive->dist_name_np}}</b>
                   </div> 
                   <div class="col-sm">
-                  स्थानिय तह: <b>{{$orgRepresentive->name_np}}</b>
+                  स्थानीय तह: <b>{{$orgRepresentive->name_np}}</b>
                   </div>
                 </div>
               </li>
@@ -197,7 +204,7 @@
         <div class="p-1 m-b-10">
           <div class="row">
             <div class="col-sm-8">
-              <b>प्रतिनिधि मनोनयन गर्ने संघ/संस्थाको तर्फबाट प्रमाणि गर्नेको विवरण : </b>
+              <b>प्रतिनिधि मनोनयन गर्ने संघ/संस्थाको तर्फबाट प्रमाणित गर्नेको विवरण : </b>
               <div>दस्तखत : <img src="{{asset('images/chairman_sign/'.$orgUploads->chairman_sign)}}" width="125px" height="65px"></div>
               <div>नाम, थर : <b>{{$orgRegister->chairman_name}}</b> </div>
               <div>संघ/संस्थामा निहित पद : अध्यक्ष</div>
@@ -210,7 +217,16 @@
           </div>          
         </div>
       </section>
+      <div class="text-center">
+      <br/>
+      <br/>
+      <br/>
+      <p>यो कम्प्युटर द्वारा जारी गरिएको कागजात हो। कुनै हस्ताक्षर आवश्यक छैन।</p>
+      </div>
+      <div class="float-right">
+      <input id ="myPrntbtn" type="button" class="btn btn-primary" value="Print" onclick="window.print();" >
 
+      </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -224,5 +240,14 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     -->
+    <script type='text/javascript'>
+ $(document).ready(function(){
+    $('#printMe').click(function(){
+    
+     window.print();
+});
+});
+
+</script>
   </body>
 </html>

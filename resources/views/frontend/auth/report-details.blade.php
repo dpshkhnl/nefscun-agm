@@ -109,7 +109,7 @@ label{
   <button class="tablinks" onclick="openCity(event, 'chairman')" id="id1">अध्यक्षको मन्तब्य </button>
   <button class="tablinks" onclick="openCity(event, 'sec')" id="id2" >महासचिवको प्रतिवेदन</button>
   <button class="tablinks" onclick="openCity(event, 'tresurer')" id="id3" >कोषाध्यक्षको प्रतिवेदन </button>
-  <button class="tablinks" onclick="openCity(event, 'audit')" id="id4" >लेखा परीक्षण प्रतिवेदन </button>
+  <button class="tablinks" onclick="openCity(event, 'audit')" id="id4" >वार्षिक लेखा परीक्षण प्रतिवेदन </button>
   <button class="tablinks" onclick="openCity(event, 'auditsup')" id="id5" >लेखा सुपरीवेक्षण समितिको प्रतिवेदन </button>
 </div>
 <form method="POST" action="{{ route('frontend.saveComment') }}" enctype="multipart/form-data">
@@ -181,7 +181,7 @@ label{
   @endif
   </div>
   <div class="col-md-3 mt-2 mb-2">
-  <a class="btn btn-success align-right" target=_blank href="{{ url('showReports/4') }}">ले.प. प्रतिवेदन</a>
+  <a class="btn btn-success align-right" target=_blank href="{{ url('showReports/4') }}"> वार्षिक लेखा परीक्षण प्रतिवेदन</a>
 
   </div>
 </div>
@@ -190,7 +190,7 @@ label{
    
 <div id="audit" class="tabcontent">
 <br/>
-<h5>ले.प. प्रतिवेदन</h5>
+<h5> वार्षिक लेखा परीक्षण प्रतिवेदन</h5>
 <br/>
 <iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
  

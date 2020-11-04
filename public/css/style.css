@@ -248,7 +248,9 @@ table.gsc-search-box td.gsc-input {
 }
 .home-post-list .card .card-img-top{
 	height: 200px;
+	object-fit: contain;
 }
+
 .home-post-list .card-body{
 	text-align: center;
 }
@@ -462,4 +464,10 @@ table.gsc-search-box td.gsc-input {
 	    flex: 0 0 100%;
 	    max-width: 100%;
 	}
+	@media print {
+		/* style sheet for print goes here */
+		.noprint {
+		  visibility: hidden;
+		}
+	  }
 }

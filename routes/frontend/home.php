@@ -29,3 +29,4 @@ Route::get('terms', [TermsController::class, 'index'])
     Route::post('/saveRepresentative', [RegisterController::class, 'saveRepresentative'])->name('saveRepresentative');
     Route::post('/saveUploadDoc', [RegisterController::class, 'saveUploadDoc'])->name('saveUploadDoc');
     Route::post('/saveComment', [RegisterController::class, 'saveComment'])->name('saveComment');
+    Route::get('/autocomplete/{query}', [RegisterController::class, 'autocomplete'])->name('autocomplete');

@@ -198,17 +198,27 @@ class RegisterController extends Controller
         }
     }
 
+  
+    public function autocomplete($query){
+        
+        $member = MemberData::where('name','like','%'.$query.'%')->get()->take(10);
+           $userData['data'] = $member;
 
+        echo json_encode($userData);
+        
+    }
+
+   
    public function saveBasic(Request $request)
    {
         $orgRegister = new OrganizationRegistration;
         $orgRegister->nefscun_mem_no = $request->get('nefscun_mem_no');
         $orgRegister->org_name = $request->get('org_name');
         $orgRegister->org_name_np = $request->get('fullnamenp');
-        $orgRegister->renew_voc = $request->get('renew_voc');
-        $orgRegister->renew_dt = $request->get('renew_dt');
-        $orgRegister->dep_voc_no = $request->get('dep_voc_no');
-        $orgRegister->dep_date = $request->get('dep_date');
+       // $orgRegister->renew_voc = $request->get('renew_voc');
+       // $orgRegister->renew_dt = $request->get('renew_dt');
+        //$orgRegister->dep_voc_no = $request->get('dep_voc_no');
+        //$orgRegister->dep_date = $request->get('dep_date');
         $orgRegister->province = $request->get('province_id');
         $orgRegister->district = $request->get('dist_id');
         $orgRegister->local = $request->get('local_id');

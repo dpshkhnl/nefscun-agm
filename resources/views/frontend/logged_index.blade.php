@@ -127,7 +127,7 @@
               <div class="icon-wrap">
               <i class="fas fa-file-alt"></i>
             </div>
-            <strong class="icon-title">लेखा परीक्षण प्रतिवेदन</strong>
+            <strong class="icon-title"> वार्षिक लेखा परीक्षण प्रतिवेदन</strong>
             </a>
           </div>
 
@@ -161,16 +161,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-8 col-lg-8">
               <ul class="footer-links">
-                <li>
-                  <a target=_blank href="#">Home</a>
-                </li>
-                <li>
-                  <a target=_blank href="#">Useful Links</a>
-                </li>
-               
-                <li>
-                  <a target=_blank href="#">Contact Us</a>
-                </li>
+                
                 <li class="copyright">
                   &copy Copyright 2020 NEFSCUN
                 </li>
