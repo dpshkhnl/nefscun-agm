@@ -464,10 +464,5 @@ table.gsc-search-box td.gsc-input {
 	    flex: 0 0 100%;
 	    max-width: 100%;
 	}
-	@media print {
-		/* style sheet for print goes here */
-		.noprint {
-		  visibility: hidden;
-		}
-	  }
+
 }

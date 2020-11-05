@@ -9,6 +9,7 @@ use App\Domains\Auth\Models\District;
 use App\Domains\Auth\Models\LocalBody;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\OrganizationRegistration;
 
 
 /**
@@ -21,6 +22,29 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
+       $coop =  Session::get('user');
+        if(!$coop)
+        return view('frontend.index');
+        else{
+            return view('frontend.logged_index',compact('coop'));
+        }
+       
+    }
+    public function indexNew($rc)
+    {
+       // dd($rc);
+        $orgReg  =  OrganizationRegistration::where('token',$rc)->first();
+        //dd($orgReg);
+        if($orgReg){
+            if($orgReg->status==2){
+                $signupStep= 2;
+                $province = Province::get();
+                $result = $orgReg;
+                return view('frontend.auth.register',compact('province','signupStep','result'));
+            }
+        }
+
        $coop =  Session::get('user');
         if(!$coop)
         return view('frontend.index');

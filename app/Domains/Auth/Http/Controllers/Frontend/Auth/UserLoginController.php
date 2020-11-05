@@ -29,8 +29,8 @@ class UserLoginController extends Controller
     public function validate_user(Request $request)
     {
         $orgRegister = OrganizationRegistration::where('nefscun_mem_no',$request->get('email'))
-        //->where('status',1)
-        //->where('password',Hash::make($request->get('password')))
+        ->where('status',1)
+        ->where('password',Hash::make($request->get('password')))
         ->first();
 
         

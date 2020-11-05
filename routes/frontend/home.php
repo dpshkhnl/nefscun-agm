@@ -15,6 +15,9 @@ Route::get('/', [HomeController::class, 'index'])
         $trail->push(__('Home'), route('frontend.index'));
     });
 
+Route::get('/update/{rc}', [HomeController::class, 'indexNew'])->name('update');
+
+
 Route::get('terms', [TermsController::class, 'index'])
     ->name('pages.terms')
     ->breadcrumbs(function (Trail $trail) {

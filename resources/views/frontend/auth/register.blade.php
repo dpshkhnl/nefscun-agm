@@ -23,7 +23,7 @@
     <!-- Modal -->
 
     <div class="modal"  tabindex="-1" role="dialog" id="modal-box3">
-  <div class="modal-dialog-lg" role="document">
+  <div class="modal-dialog modal-xl" style="width:800px !important;" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">नेफ्स्कून सदस्यता नं :</h5>
@@ -34,6 +34,7 @@
       <div class="modal-body">
       संस्थाको नाम (अंग्रेजीमा):
         <input type="text" id="autoname" name="autoname" class="form-control">
+        <div class="table-responsive">
         <table class="table" border='1' id='userTable' style='border-collapse: collapse;'>
        <thead>
         <tr>
@@ -47,6 +48,7 @@
        </thead>
        <tbody></tbody>
      </table>
+</div>
       </div>
       
     </div>
@@ -77,6 +79,8 @@
 
           
               <div class="ican-tabs mt-4">
+              <a href="#test"  data-toggle="modal" data-target="#modal-box3" class="more-link float-right">नेफ्स्कून सदस्यता नं खोज्नुहोस </a>
+
               <nav>
                   <ul class="nav nav-tabs" id="nav-tab" role="tablist">
                   <li> <a class="nav-item nav-link @if($signupStep==0) active  @endif  ml-2" id="nav-general-tab" @if($signupStep == 0) data-toggle="tab" @endif href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">संस्था परिचय</a></li>
@@ -88,7 +92,6 @@
                 </nav> 
                 <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade @if($signupStep==0) active show @endif" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
-                <a href="#test" data-toggle="modal" data-target="#modal-box3" class="more-link">Read More</a>
 
                  <form class="application-form" name="firstform" id="firstform" method="POST" action="{{ route('frontend.saveBasic') }}" enctype="multipart/form-data">
             @csrf  
@@ -98,7 +101,7 @@
                     <div class="form-group col-md-6">
                         <label for="memno" class="col-md-6">नेफ्स्कून सदस्यता नं:</label>
                         <div class="col-md-12">
-                          <input type="number" value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
+                          <input type="number" min="0" value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
                         </div>
                       </div>
                       <div class="form-group col-md-6">
@@ -249,11 +252,11 @@
                       <div class="col-md-12">
                                                  <select id="verify_post" name="verify_post" class="form-control" required>
                                 <option value="अध्यक्ष" selected> अध्यक्ष</option>
-                                <option value="वरिष्ठ उपाध्यक्ष" selected> वरिष्ठ उपाध्यक्ष</option>
-                                <option value="उपाध्यक्ष" selected> उपाध्यक्ष</option>
-                                <option value="महासचिव" selected> महासचिव</option>
-                                <option value="कोषाध्यक्ष" selected> कोषाध्यक्ष</option>
-                                <option value="सञ्चालक सदस्य" selected> सञ्चालक सदस्य</option>
+                                <option value="वरिष्ठ उपाध्यक्ष" > वरिष्ठ उपाध्यक्ष</option>
+                                <option value="उपाध्यक्ष" > उपाध्यक्ष</option>
+                                <option value="महासचिव" > महासचिव</option>
+                                <option value="कोषाध्यक्ष" > कोषाध्यक्ष</option>
+                                <option value="सञ्चालक सदस्य" > सञ्चालक सदस्य</option>
                             
                             </select>
 </div>
@@ -314,6 +317,9 @@
       <div class="modal-body">
         OTP has been sent to your mobile number.
         <input type="number" id="otp" name="otp_code" class="form-control">
+      </div>
+      <div class="errormsg ml-10">
+      
       </div>
       <div class="modal-footer">
           <button type="button" id="validate" name="validate" class="btn btn-primary" >Verify</button>
@@ -472,11 +478,13 @@
                     <div class="ican-uploads">
                       <div class="row">
                         <div class="col-12">
+                        <label   style="color:red">{{$result->message ?? ''}}</label>
+
                           <form class="application-form" name="uploadform" id="uploadform" method="POST" action="{{ route('frontend.saveUploadDoc') }}" enctype="multipart/form-data">
                               @csrf 
-                              <input type="hidden" value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
-                    <input type="hidden" value="{{$result->org_rep_id}}" class="form-control required" id="register_id"  name="register_id" >
-                    
+                              <input hidden value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
+                    <input hidden value="{{$result->id}}" class="form-control required" id="register_id"  name="register_id" >
+
                     <div class="p-y-1">
                       <div class="row col-md-12">
                       <div class="row m-b-1">
@@ -484,8 +492,8 @@
       <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('org_stamp').click()">संस्थाको छाप वा लोगो</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="inputFile">File Upload</label>
-        <input type="file"required  class="form-control-file text-success font-weight-bold" id="org_stamp" name="org_stamp" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
-     
+        <input type="file" @if(!$result->message) required @endif class="form-control-file text-success font-weight-bold" id="org_stamp" name="org_stamp" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+
       </div>
     </div>
 </div>
@@ -495,7 +503,7 @@
       <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('photo').click()">प्रतिनिधिको फोटो</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="photo">File Upload</label>
-        <input type="file" required class="form-control-file text-danger font-weight-bold" id="photo" name="photo" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message) required @endif class="form-control-file text-danger font-weight-bold" id="photo" name="photo" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
@@ -505,7 +513,7 @@
       <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('rep_sign').click()">प्रतिनिधिको दस्तखत</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="rep_sign">File Upload</label>
-        <input type="file"  required class="form-control-file text-primary font-weight-bold" id="rep_sign" name="rep_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file"  @if(!$result->message) required @endif class="form-control-file text-primary font-weight-bold" id="rep_sign" name="rep_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
@@ -515,7 +523,7 @@
       <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('chairman_sign').click()">अध्यक्षको दस्तखत</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="chairman_sign">File Upload</label>
-        <input type="file" required class="form-control-file text-success font-weight-bold" id="chairman_sign" name="chairman_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message) required @endif class="form-control-file text-success font-weight-bold" id="chairman_sign" name="chairman_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
@@ -525,7 +533,7 @@
       <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('rep_select').click()">प्रतिनिधि छनौट निर्णय</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="rep_select">File Upload</label>
-        <input type="file" required class="form-control-file text-danger font-weight-bold" id="rep_select" name="rep_select" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message) required @endif class="form-control-file text-danger font-weight-bold" id="rep_select" name="rep_select" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
@@ -536,7 +544,7 @@
       <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('voucher').click()">नविकरण भौचर अपलोड</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="voucher">File Upload</label>
-        <input type="file" required class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message) required @endif class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
@@ -874,8 +882,10 @@ function readUrl(input) {
               $( "#btnSubmit" ).val( "Save" );
            } else
            {
-                var text = '<p>Invalid OTP. <br> <strong>Please input the correct OTP sent in your phone.</strong></p>';
-              $('#modal-box2 .modal-body').append(text);
+                var text = '<p id="msg">Invalid OTP. <br> <strong>Please input the correct OTP sent in your phone.</strong></p>';
+                $('.errormsg').html("");
+
+              $('#modal-box2 .errormsg').append(text);
            }
           }
         }); 

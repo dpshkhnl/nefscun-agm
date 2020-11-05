@@ -15,15 +15,21 @@
         
         <div class="row">
         <div class=" form-group">
+
                     <label class="required">&nbsp</label>
+                    @if($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.register.approve'))
+
                     <button class="btn btn-success mt-4" id="approve-btn">Verify</button>
-                
+                @endif
                 </div>
+                @if($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.register.reject'))
+
                 <div class="form-group">
                 <label class="required">&nbsp</label>
                 <button class="btn btn-danger mt-4 " id="reject-btn">Reject</button>
                 
                 </div>
+                @endif
                 </div>
         <div class="table-responsive">
                 <table class="table table-head-fixed table-bordered text-nowrap" id="data-table">
@@ -69,11 +75,14 @@
                         </a>
                <br/>
                <br/>
+               @if($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.register.approve'))
                <button onclick=approveform({{$dt->orgid}}) class="btn btn-success mt-2 appbtn" style="width:60px" >Verify </button>
+               @endif
                <br/>
                <br/>
+               @if($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.register.reject'))
                <button onclick=rejectform({{$dt->orgid}}) class="btn btn-danger mt-2 1-reject" style="width:60px" >Reject </button>
-              
+               @endif
                
             
            

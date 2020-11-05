@@ -21,6 +21,8 @@ use App\Models\OrganizationUpload;
 use App\Models\OrganizationRepresentative;
 use App\Models\Helper;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+
 
 use Illuminate\Http\Request;
 
@@ -211,7 +213,21 @@ class RegisterController extends Controller
    
    public function saveBasic(Request $request)
    {
+       if($request->get('nefscun_mem_no')){
+        $orgRegister =  OrganizationRegistration::where('nefscun_mem_no',$request->get('nefscun_mem_no'))->first();
+       }
+       if($orgRegister)
+       {
+           if($orgRegister->status ==1)
+           {
+                $province = Province::get();
+                return view('frontend.auth.register',compact('province','signupStep','result'))->withFlashDanger('You Cannot change form Once Approved'); 
+           }
+       }else
+       {
         $orgRegister = new OrganizationRegistration;
+       }
+
         $orgRegister->nefscun_mem_no = $request->get('nefscun_mem_no');
         $orgRegister->org_name = $request->get('org_name');
         $orgRegister->org_name_np = $request->get('fullnamenp');
@@ -235,6 +251,8 @@ class RegisterController extends Controller
         $orgRegister->is_verified = 0;
         $orgRegister->status = 0;
         $orgRegister->ip= $request->ip();
+        $token= (string)Str::uuid();
+        $orgRegister->token = $token;
         $orgRegister->save();
         return $this->showForm(1,$orgRegister);
    }
@@ -242,7 +260,14 @@ class RegisterController extends Controller
    public function saveRepresentative(Request $request)
    {
 
+    if($request->get('nefscun_mem_no')){
+        $orgRep =  OrganizationRepresentative::where('nefscun_mem_no',$request->get('nefscun_mem_no'))->first();
+       }
+       if(empty($orgRep))
+       {
         $orgRep = new OrganizationRepresentative;
+       }
+
         $orgRep->nefscun_mem_no = $request->get('nefscun_mem_no');
         $orgRep->org_rep_id = $request->get('register_id');
         $orgRep->rep_name = $request->get('repname');
@@ -266,7 +291,15 @@ class RegisterController extends Controller
 
    public function saveUploadDoc(Request $request){
 
-    $orgUpload = new OrganizationUpload;
+    
+    if($request->get('nefscun_mem_no')){
+        $orgUpload =  OrganizationUpload::where('nefscun_mem_no',$request->get('nefscun_mem_no'))->first();
+       }
+       if(empty($orgUpload))
+       {
+        $orgUpload = new OrganizationUpload;
+       }
+
     $orgRegister =  OrganizationRegistration::find($request->get('register_id'));
     $orgUpload->nefscun_mem_no = $request->get('nefscun_mem_no');
     $orgUpload->org_reg_id = $request->get('register_id');
@@ -337,6 +370,8 @@ class RegisterController extends Controller
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->photo = $names; //
     }
+    $orgRegister->status = 0;
+    $orgRegister->save();
     $orgUpload->save();
     Helper::sendEmail($orgRegister, "२९ औं साधारण सभामा सहभागी हुन आवेदन दर्ता ", "तपाईको आवेदन प्राप्त भएको छ। दर्ता सफल भएपश्चात ईमेल मार्फत जानकारी गराइनेछ। धन्यवाद।
     नेफ्स्कून

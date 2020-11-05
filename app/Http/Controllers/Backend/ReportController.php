@@ -10,6 +10,7 @@ use App\Models\OrganizationUpload;
 use App\Models\OrganizationRepresentative;
 use App\Models\Helper;
 use App\Models\PratibedanComment;
+use Illuminate\Support\Str;
 use Auth;
 
 
@@ -92,7 +93,17 @@ class ReportController extends Controller
         $data->updated_by = Auth::user()->name;
         $data->message = $r->get('rmsg');
         $data->save();
-        Helper::sendEmail( $data->email, "Rejected", "your Form Has been Rejected due to ".$r->get('rmsg')."Please Update and Submit again");
+        $token = $data->token;
+        if(empty($token))
+        {
+            $token= (string)Str::uuid();
+            $data->token = $token;
+            $data->save();
+        } 
+        dd('http://agm.shutradhar.com.np/rc='.$token);
+        Helper::sendEmail( $data->email, "Rejected", "your Form Has been Rejected due to ".$r->get('rmsg')."Please Update and Submit again 
+        following the on clicking the link below <br/>".'http://agm.shutradhar.com.np/rc='.$token
+    );
 
         $regNo =$data->reg_no;
        

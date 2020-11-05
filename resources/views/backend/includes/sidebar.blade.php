@@ -17,15 +17,27 @@
                 icon="c-sidebar-nav-icon cil-speedometer"
                 :text="__('Dashboard')" />
         </li>
-
+        @php
+    $data = App\Models\OrganizationRegistration::select('*')->
+        join('organization_representatives','organization_representatives.org_rep_id','organization_registrations.id')
+        ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')
+        ->where('status',0)->count();
+   
+    @endphp
+    
+            @if($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.register.show'))
+               
         <li class="c-sidebar-nav-item">
                     <a href="{{ route('admin.register') }}" class="c-sidebar-nav-link">
                         <i class="c-sidebar-nav-icon cil-briefcase"></i>
                        
-                            Registered List
+                            Registered List <span class="badge badge-light">{{ $data}}</span>
                        
                     </a>
                 </li>
+                @endif
+                @if($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.approved'))
+
                 <li class="c-sidebar-nav-item">
                     <a href="{{ route('admin.approved') }}" class="c-sidebar-nav-link">
                         <i class="c-sidebar-nav-icon cil-briefcase"></i>
@@ -34,7 +46,8 @@
                        
                     </a>
                 </li>
-
+                @endif
+                @if($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.rejected'))
                 <li class="c-sidebar-nav-item">
                     <a href="{{ route('admin.rejected') }}" class="c-sidebar-nav-link">
                         <i class="c-sidebar-nav-icon cil-briefcase"></i>
@@ -43,6 +56,9 @@
                        
                     </a>
                 </li>
+                @endif
+                @if($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.comment'))
+
                 <li class="c-sidebar-nav-item">
                     <a href="{{ route('admin.comments') }}" class="c-sidebar-nav-link">
                         <i class="c-sidebar-nav-icon cil-briefcase"></i>
@@ -51,7 +67,8 @@
                        
                     </a>
                 </li>
-
+                @endif
+           
         @if (
             $logged_in_user->hasAllAccess() ||
             (
