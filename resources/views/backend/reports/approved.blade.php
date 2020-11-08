@@ -65,3 +65,21 @@
         </x-slot>
     </x-backend.card>
 @endsection
+
+@section('scripts')
+
+<script>
+    $(document).ready(function() {
+        $('.table').DataTable({
+            dom: 'Blfrtip',
+            "lengthMenu": [[10, 25, 50], [10, 25, 50]],
+            buttons: [
+                {
+                    extend: 'excel',
+                    className: 'btn btn-warning'
+                }
+            ]
+        });
+    });
+</script>
+@endsection

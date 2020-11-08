@@ -87,7 +87,9 @@ Route::group(['as' => 'auth.'], function () {
     Route::get('printForm/{id}', [RegisterController::class, 'printForm'])->name('printForm');
     Route::post('generate_otp', [RegisterController::class,'generate_otp'])->name('generate_otp');
     Route::post('check_otp', [RegisterController::class,'check_otp'])->name('check_otp');
+    Route::post('generate_otp_old', [RegisterController::class,'generate_otp_old'])->name('generate_otp_old');
 
+    
     Route::post('register', [RegisterController::class, 'register']);
     Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 

@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Alegreya&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" type="image/png" href="images/logo-favicon.jpg"/>
+    <link rel="stylesheet" href="{{ url('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url('css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ url('css/style.css')}}">
+    <link rel="shortcut icon" type="image/png" href="{{ url('images/logo-favicon.jpg')}}"/>
     <title>NEFSCUN</title>
   </head>
   <body>
@@ -117,7 +117,7 @@
               <a class="btn btn-sm btn-outline-primary top-address-btn" target=_blank href="#" role="button"><i class="fas fa-lock mr-2"></i>Login</a>
             </div>
             <div class="logo">
-              <img src="images/banner_logo.png" class="img-fluid" alt="Nefscun Logo">
+              <img src="{{ url('images/banner_logo.png')}}" class="img-fluid" alt="Nefscun Logo">
             </div>
           </div>
           <div class="col-12 col-sm-12 col-md-6 col-lg-6">
@@ -164,7 +164,7 @@
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="images/s1.jpg" class="d-block w-100" alt="...">
+              <img src="{{ url('images/s1.jpg')}}" class="d-block w-100" alt="...">
             </div>
            
           </div>
@@ -311,7 +311,7 @@
           <div class="col-12 col-sm-12 col-md-4 col-lg-4">
             <article class="home-post-list">
               <div class="card">
-                <img src="images/nepsun_logo_np.png" class="card-img-top" alt="paritosh-poudyal-small.jpg">
+                <img src="{{ url('images/nepsun_logo_np.png')}}" class="card-img-top" alt="paritosh-poudyal-small.jpg">
                 <div class="card-body">
                   <h3 class="card-title"><a href="#">२९ औं साधारण सभाका सम्बन्धमा </a></h3>
                   <p class="card-text"> नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि. नेफ्स्कूनको २९ औं वार्षिक साधारण सभा हाल विश्वव्यापी फैलिएको कोरोना भाइरसको संक्रमणका कारण अभौतिक (भर्चुअल) गर्ने संघको सञ्चालक समितिको निर्णयानुसार जोडतोडका साथ तयारी भैरहेको सर्वविदितै छ ।सहकारी विभागले गत असोज १ गते जारी गरेको साधारण सभा सञ्चालन सम्बन्धी सूचना र संघले तयार पारी सञ्चालक समितिको बैठकवाट स्वीकृत
@@ -326,7 +326,7 @@
           <div class="col-12 col-sm-12 col-md-4 col-lg-4">
             <article class="home-post-list">
               <div class="card">
-                <img src="images/paritosh-poudyal-small.jpg" class="card-img-top" alt="students.jpg">
+                <img src="{{ url('images/paritosh-poudyal-small.jpg')}}" class="card-img-top" alt="students.jpg">
                 <div class="card-body">
                   <h3 class="card-title"><a href="#">स्वागत मन्तव्य (अध्यक्ष)</a></h3>
                   <p class="card-text">कोभिड–१९ को विषम परिस्थितिका बीच हामी २९ औं साधारण सभाको संघारमा छौं । प्रविधिलाई आत्मसात् गर्दै र आवश्यक स्वास्थ्य मापदण्ड पालना गर्दै हामी सबैभन्दा महत्वपूर्ण वार्षिक जमघटको तयारीमा छौं । नेफ्स्कूनको ३ दशक भन्दा लामो इतिहासमा हामी पहिलो पटक नयाँ अभ्यासको थालनी गर्दैछौं । यसले भोलीका दिनमा हामीलाई हाम्रा सेवाहरुलाई समयानूकुल प्रविधि मैत्री बनाउन सहयोग पुर्याउने विश्वास लिएका छु ।...</p>
@@ -337,20 +337,20 @@
             </article>
           </div>
           <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <article class="home-post-list">
-              <div class="card">
-                <img src="images/Chandra-Prasad-Dhakal.jpg" class="card-img-top" alt="members.jpg">
-                <div class="card-body"> 
-                  <h3 class="card-title">
-                <a href="#chairman2" data-toggle="modal" data-target="#chairman2" class="more-link">बरिष्ठ उपाध्यक्ष</a>
-</h3>
-                  <p class="card-text">विश्व महामारीका बीच हामी नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि. (नेफ्स्कून) को २९ औं साधारण सभाको वार्षिक नियमिततामा छौं । असहज परिस्थितिकाबीच हामी सहकारी ऐन, सहकारी विभागको सूचना र संघको आफ्नै महामारीमा साधारण सभा सञ्चालन कार्यविधि अनुरुप सबै प्रक्रियाहरु सकेर सभा गर्दैछौं । यसबीच, हामी उच्च स्वास्थ्य सतर्कतासहित भर्चुअल पर्वीय जमघटमा जुटेका छौं ।...</p>
+<!--            <article class="home-post-list">-->
+<!--              <div class="card">-->
+<!--                <img src="images/Chandra-Prasad-Dhakal.jpg" class="card-img-top" alt="members.jpg">-->
+<!--                <div class="card-body"> -->
+<!--                  <h3 class="card-title">-->
+<!--                <a href="#chairman2" data-toggle="modal" data-target="#chairman2" class="more-link">बरिष्ठ उपाध्यक्ष</a>-->
+<!--</h3>-->
+<!--                  <p class="card-text">विश्व महामारीका बीच हामी नेपाल बचत तथा ऋण केन्द्रीय सहकारी संघ लि. (नेफ्स्कून) को २९ औं साधारण सभाको वार्षिक नियमिततामा छौं । असहज परिस्थितिकाबीच हामी सहकारी ऐन, सहकारी विभागको सूचना र संघको आफ्नै महामारीमा साधारण सभा सञ्चालन कार्यविधि अनुरुप सबै प्रक्रियाहरु सकेर सभा गर्दैछौं । यसबीच, हामी उच्च स्वास्थ्य सतर्कतासहित भर्चुअल पर्वीय जमघटमा जुटेका छौं ।...</p>-->
                 
-                  <a href="#chairman2" data-toggle="modal" data-target="#chairman2" class="more-link">Read More</a>
+<!--                  <a href="#chairman2" data-toggle="modal" data-target="#chairman2" class="more-link">Read More</a>-->
 
-                </div>
-              </div>
-            </article>
+<!--                </div>-->
+<!--              </div>-->
+<!--            </article>-->
           </div>
         </div>
       </div>

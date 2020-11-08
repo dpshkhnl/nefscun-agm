@@ -146,7 +146,7 @@ label{
 <br/>
 <h5>महासचिवको प्रतिवेदन</h5>
 <br/>
-<iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1MpReD2GE2I4OG5brtcolHFf8nCb24XFQ/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
  
     <label for="secComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
     <textarea class="form-control" @if(!empty($comment->sec_comment)) readonly @endif  id="secComment" name="secComment" rows="3">{{$comment->sec_comment ?? ''}}</textarea>
@@ -169,7 +169,7 @@ label{
 <br/>
 <h5>कोषाध्यक्षको प्रतिवेदन </h5>
 <br/>
-<iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1AGcnM1zdeC1NJ56-ZO5XOxAL1NCuXhSI/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
  
     प्रतिवेदन उपर सुझाब तथा प्रतिकृया 
     <textarea class="form-control" @if(!empty($comment->tres_comment)) readonly @endif name="tresComment" id="tresComment" rows="3">{{$comment->tres_comment ?? ''}}</textarea>
@@ -214,8 +214,9 @@ label{
 <br/>
 <h5>लेखा सुपरीवेक्षण समितिको प्रतिवेदन</h5>
 <br/>
-<iframe src="https://drive.google.com/file/d/1Q_uqxapFvHf3tm3rwP8mc5yZjuGKue4p/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
- 
+<iframe src="https://drive.google.com/file/d/1Ks52iAiybY65hBZU51FnSEsZ8Mkk3FxY/preview" style="border:2px #rafdsyg solid;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="1000px" allowfullscreen></iframe>
+
+
     <label for="auditComment">प्रतिवेदन उपर सुझाब तथा प्रतिकृया </label>
     <textarea class="form-control"  @if(!empty($comment->chairman_comment)) readonly @endif id="chairmanComment" name="chairmanComment" rows="3">{{$comment->chairman_comment ?? ''}}</textarea>
      

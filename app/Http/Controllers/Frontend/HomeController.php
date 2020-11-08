@@ -10,6 +10,7 @@ use App\Domains\Auth\Models\LocalBody;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\OrganizationRegistration;
+use App\Models\OrganizationRepresentative;
 
 
 /**
@@ -35,13 +36,24 @@ class HomeController extends Controller
     {
        // dd($rc);
         $orgReg  =  OrganizationRegistration::where('token',$rc)->first();
-        //dd($orgReg);
+      //  dd($orgReg);
         if($orgReg){
             if($orgReg->status==2){
                 $signupStep= 2;
                 $province = Province::get();
                 $result = $orgReg;
                 return view('frontend.auth.register',compact('province','signupStep','result'));
+            }else
+            {
+                $signupStep= 0;
+                $province = Province::get();
+                $district = District::where('state_id',$orgReg->province)->get();
+                $local = LocalBody::where('dist_id',$orgReg->district)->get();
+               // $orgRepresentive = OrganizationRepresentative::where("org_rep_id",$orgReg->id)->first();
+                $result = $orgReg;
+                //dd($result);
+                //$result->orgRepresentive = $orgRepresentive;
+                return view('frontend.auth.register',compact('province','signupStep','result','district','local'));
             }
         }
 

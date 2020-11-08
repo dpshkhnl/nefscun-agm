@@ -9,13 +9,13 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/register.css">
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/register.css') }}">
     
     <script src="{{ url('js/nepali.datepicker.v3.min.js') }}" type="text/javascript"></script>
     <link href="{{ url('css/nepali.datepicker.v3.min.css') }}" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="/js/unicodeNepali.js"></script>
+    <script type="text/javascript" src="{{ url('/js/unicodeNepali.js')}}"></script>
   </head>
   <body>
 
@@ -54,6 +54,62 @@
     </div>
   </div>
 </div>
+
+<!-- modal for manager number -->
+
+<div class="modal" tabindex="-1" role="dialog" id="modal-box-manager" data-backdrop="static" data-keyboard="false" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">व्यवस्थापकको मोबाईल नं:   :</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      अघि  बढ्न व्यवस्थापकको मोबाईल नं हाल्नुहोस:
+        <input type="number" id="phone-manager" name="phone-manager" class="form-control">
+      </div>
+      <div class="errormsg ml-10">
+      
+      </div>
+      <div class="modal-footer">
+          <button type="button" id="validate" name="validate" class="btn btn-primary" >Verify</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- modal for manager number -->
+
+<div class="modal" tabindex="-1" role="dialog" id="modal-box-manager-otp" data-backdrop="static" data-keyboard="false" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">व्यवस्थापकको मोबाईल नं OTP:   :</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+     OTP हाल्नुहोस:
+        <input type="number" id="OTP" name="OTP" class="form-control">
+      </div>
+      <div class="errormsg ml-10">
+      
+      </div>
+      <div class="modal-footer">
+          <button type="button" id="validate" name="validate" class="btn btn-primary" >Verify</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     <div class="ican-application-form cap-1 py-4">
       <div class="container-fluid">
         <div class="row">
@@ -108,7 +164,7 @@
                         <label for="email" class="col-md-12"> PAN नम्बर:</label>
                         <div class="col-md-12">
                      
-                          <input type="number" class="form-control" min="000000000" max="9999999999" id="panno" name="panno">
+                          <input type="number" value="{{$result->panno}}" class="form-control" min="000000000" max="9999999999" id="panno" name="panno">
                         </div>
                       </div>
                       </div>
@@ -124,7 +180,7 @@
                       <div class="form-group col-md-6">
                         <label for="fullname" class="col-md-12">संस्थाको नाम (युनिकोडमा)</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control convert-romanize required" id="fullnamenp"  name="fullnamenp" >
+                          <input type="text" value="{{$result->org_name}}" class="form-control convert-romanize required" id="fullnamenp"  name="fullnamenp" >
                         </div>
                       </div>
 
@@ -170,25 +226,40 @@
                                           
                           <div class="row">
                         <div class="controls col-md-3">
-                                                 <select id="province_id" name="province_id" class="form-control" required>
+                                                 <select id="province_id" name="province_id" class="form-control"  required>
                                 <option value="" selected>प्रदेश छान्नुहोस् </option>
                                 @foreach($province as $pro)
-                                <option value="{{$pro->state_id}}">{{$pro->name_np}}</option>
+                                <option @if($pro->state_id == $result->province) selected @endif value="{{$pro->state_id}}">{{$pro->name_np}}</option>
                                 @endforeach
                             </select>
                                   </div>
                                   <div class="controls col-md-3">
-                                                  <select id="dist_id" name="dist_id" class="form-control" required>
-                                <option value="" selected>जिल्ला  छान्नुहोस् </option>
+                                                  <select id="dist_id"  name="dist_id" class="form-control" required>
+                                                  <option value="" >जिल्ला  छान्नुहोस् </option>
+                                                  @if($district ?? ''){
+                                                    @foreach($district as $dist)
+                                      <option @if($dist->dist_id == $result->district) selected @endif  value="{{$dist->dist_id}}">{{$dist->dist_name_np}}</option>
+                                      @endforeach
+                                                  }
+                                             
+                                @endif
+
+                              
                             </select></div>
 
                             <div class="controls col-md-3">
-                                                <select id="local_id" name="local_id" class="form-control" required>
+                                                <select value="{{$result->local}}" id="local_id" name="local_id" class="form-control" required>
                                 <option value="" selected> न.पा./गा.पा  छान्नुहोस् </option>
+                                @if($local ?? '')
+                                                  @foreach($local as $local)
+                                <option @if($local->id == $result->local) selected @endif  value="{{$local->id}}">{{$local->name_np}}</option>
+                                @endforeach
+                                @endif
+
                             </select></div>
 
                             <div class="controls col-md-3">
-                            <input   type="number" min="1" max="40"  class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
+                            <input   type="number" min="1" max="40" value="{{$result->ward}}"  class="form-control " placeholder="वार्ड नं" id="ward" name="ward">
 
                                        </div>
 
@@ -205,7 +276,7 @@
                         <label for="email" class="col-md-12">संस्थाको फोन नम्बर:</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control " id="org_phone" name="org_phone">
+                          <input   value="{{$result->org_phone}}" type="text" class="form-control " id="org_phone" name="org_phone">
                         </div>
                       </div>
                      
@@ -215,7 +286,7 @@
                         <label for="email" class="col-md-12">ईमेल:</label>
                         <div class="col-md-12">
                      
-                          <input   type="email" class="form-control " id="email" name="email">
+                          <input value="{{$result->email}}"  type="email" class="form-control " id="email" name="email">
                           <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(सम्पूर्ण विवरणहरु यसै ईमेल मार्फत पठाईनेछ)</span>
 
                           
@@ -228,14 +299,14 @@
                         <label for="email" class="col-md-12">व्यवस्थापकको नाम:</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control " id="managername" name="managername">
+                          <input value="{{$result->managername}}"  type="text" class="form-control " id="managername" name="managername">
                         </div>
                       </div>
                       <div class=" col-md-6">
                         <label for="mobile" class="col-md-12">व्यवस्थापकको मोबाईल नं:</label>
                         <div class="col-md-12">
                      
-                          <input   type="number" class="form-control " id="mobile" name="mobile">
+                          <input value="{{$result->mobile_no}}"   type="number" class="form-control " id="mobile" name="mobile">
                           <span id="ifempty" name="ifempty" style="font-size:12px;font-style: italic;color:red">(यस मोबाईल नम्बरमा कोड पठाइने छ)</span>
                        
                         </div>
@@ -250,7 +321,7 @@
                       <div class="controls col-md-4">
                       <label for="email" class="col-md-12">प्रमाणित गर्ने व्यक्तिको पद:</label>
                       <div class="col-md-12">
-                                                 <select id="verify_post" name="verify_post" class="form-control" required>
+                                                 <select value="{{$result->verify_post}}"  id="verify_post" name="verify_post" class="form-control" required>
                                 <option value="अध्यक्ष" selected> अध्यक्ष</option>
                                 <option value="वरिष्ठ उपाध्यक्ष" > वरिष्ठ उपाध्यक्ष</option>
                                 <option value="उपाध्यक्ष" > उपाध्यक्ष</option>
@@ -266,7 +337,7 @@
                         <label for="email" class="col-md-12">प्रमाणित गर्ने व्यक्तिको नाम:</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" class="form-control " id="chairman_name" name="chairman_name">
+                          <input  value="{{$result->chairman_name}}" type="text" class="form-control " id="chairman_name" name="chairman_name">
                         </div>
                       </div>
 
@@ -274,7 +345,7 @@
                         <label for="email" class="col-md-12"> प्रमाणित गर्ने व्यक्तिको मोबाईल नं:</label>
                         <div class="col-md-12">
                      
-                          <input   type="number" class="form-control " id="chairman_no" name="chairman_no">
+                          <input value="{{$result->chairman_no}}"  type="number" class="form-control " id="chairman_no" name="chairman_no">
                         </div>
                       </div>
                       </div>
@@ -305,7 +376,7 @@
                     
                       <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary align-right">Next</button>
                     </div>
-                    <div class="modal" tabindex="-1" role="dialog" id="modal-box2">
+                    <div class="modal" tabindex="-1" role="dialog" id="modal-box2" data-backdrop="static" data-keyboard="false" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -345,14 +416,14 @@
                       <div class="form-group col-md-6">
                         <label for="repname" class="col-md-12">नाम</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="repname" required  name="repname" >
+                          <input type="text" class="form-control required" value="{{$result->orgRep->rep_name ?? ''}}" id="repname" required  name="repname" >
                         </div>
                       </div>
 
                       <div class="form-group col-md-6">
                         <label for="fullname" class="col-md-12">जन्म मिति :</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="dob" required name="dob">
+                          <input type="text" value="{{$result->orgRep->dob  ?? ''}}"  class="form-control required" id="dob" required name="dob">
                         </div>
                       </div>
 
@@ -365,14 +436,14 @@
                       <div class="form-group col-md-6">
                         <label for="repname" class="col-md-12">पेशा</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" id="occupation" required  name="occupation" >
+                          <input type="text" value="{{$result->orgRep->occupation  ?? ''}}"  class="form-control required" id="occupation" required  name="occupation" >
                         </div>
                       </div>
 
                       <div class="form-group col-md-6">
                         <label for="fullname" class="col-md-12">केन्द्रीय प्रतिनिधिको संस्थामा रहेको सदस्यता नम्बर :</label>
                         <div class="col-md-12">
-                          <input type="text" class="form-control required" required id="memno"  name="memno">
+                          <input type="text"  value="{{$result->orgRep->memno  ?? ''}}" class="form-control required" required id="memno"  name="memno">
                         </div>
                       </div>
 
@@ -389,23 +460,44 @@
                         <div class="controls col-md-3">
                                                  <select name="province_id" class="form-control" required>
                                 <option value="" selected>प्रदेश छान्नुहोस् </option>
+                                @if($result->orgRep){
+                                  @foreach($province as $pro)
+                                <option @if($pro->state_id == $result->orgRep->province) selected @endif value="{{$pro->state_id}}">{{$pro->name_np}}</option>
+                                @endforeach
+                                }
+                                @else
                                 @foreach($province as $pro)
                                 <option value="{{$pro->state_id}}">{{$pro->name_np}}</option>
                                 @endforeach
+                              
+                                @endif
                             </select>
                                   </div>
                                   <div class="controls col-md-3">
                                                   <select name="dist_id" class="form-control" required>
-                                <option value="" selected>जिल्ला  छान्नुहोस् </option>
+                                <option value="" >जिल्ला  छान्नुहोस् </option>
+                                @if($result->orgRep)
+                                                  @foreach($district as $dist)
+                                <option @if($dist->dist_id == $result->orgRep->district) selected @endif  value="{{$dist->dist_id}}">{{$dist->dist_name_np}}</option>
+                                @endforeach
+                                @endif
+
                             </select></div>
 
                             <div class="controls col-md-3">
                                                 <select name="local_id" class="form-control" required>
-                                <option value="" selected> न.पा./गा.पा  छान्नुहोस् </option>
+                                <option value="" > न.पा./गा.पा  छान्नुहोस् </option>
+                                @if($locals ?? '')
+                               
+                                @foreach($locals as $loc)
+                                <option @if($loc->id == $result->orgRep->local) selected @endif  value="{{$loc->id}}" >{{$loc->name_np}}</option>
+                                @endforeach
+                                
+                                @endif
                             </select></div>
 
                             <div class="controls col-md-3">
-                            <input   type="number" class="form-control" required placeholder="वार्ड नं" id="ward" name="ward">
+                            <input value="{{$result->orgRep->ward  ?? ''}}"  type="number" class="form-control" required placeholder="वार्ड नं" id="ward" name="ward">
 
                                        </div>
 
@@ -421,14 +513,14 @@
                         <label for="mobile" class="col-md-12">मोबाईल नं:</label>
                         <div class="col-md-12">
                      
-                          <input   type="number" required class="form-control " id="mobile" name="mobile">
+                          <input  value="{{$result->orgRep->mobile_no ?? ''}}"  type="number" required class="form-control " id="mobile" name="mobile">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="email" class="col-md-12">ईमेल:</label>
                         <div class="col-md-12">
                      
-                          <input   type="email" required class="form-control " id="email" name="email">
+                          <input  value="{{$result->orgRep->email  ?? ''}}"   type="email" required class="form-control " id="email" name="email">
                         </div>
                       </div>
                       </div>
@@ -437,14 +529,14 @@
                         <label for="password" class="col-md-6">माथिल्लो शैक्षिक योग्यता:</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" required class="form-control"  id="qualification" name="qualification">
+                          <input  value="{{$result->orgRep->qualification  ?? ''}}"  type="text" required class="form-control"  id="qualification" name="qualification">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="cnfpassword" class="col-md-12">संघ/संस्थामा कायम रहेको पद :</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" required class="form-control "  id="post" name="post">
+                          <input   value="{{$result->orgRep->post  ?? ''}}" type="text" required class="form-control "  id="post" name="post">
                         </div>
                       </div>
                       </div>
@@ -453,14 +545,14 @@
                         <label for="password" class="col-md-6">सेयर सदस्यता लिएको मिति :</label>
                         <div class="col-md-12">
                      
-                          <input   type="text" required class="form-control"  id="share_reg_dt" name="share_reg_dt">
+                          <input   value="{{$result->orgRep->share_reg_dt  ?? ''}}" type="text" required class="form-control"  id="share_reg_dt" name="share_reg_dt">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="cnfpassword"  class="col-md-12">संचालक समिति को निर्णय मिति  :</label>
                         <div class="col-md-12">
                      
-                          <input required  type="text" class="form-control "  id="decision_dt" name="decision_dt">
+                          <input  value="{{$result->orgRep->decision_dt  ?? ''}}" required  type="text" class="form-control "  id="decision_dt" name="decision_dt">
                         </div>
                       </div>
                       </div>
@@ -480,7 +572,7 @@
                         <div class="col-12">
                         <label   style="color:red">{{$result->message ?? ''}}</label>
 
-                          <form class="application-form" name="uploadform" id="uploadform" method="POST" action="{{ route('frontend.saveUploadDoc') }}" enctype="multipart/form-data">
+                          <form class="application-form" name="uploadform" id="uploadform" method="POST" action="{{ route('frontend.allUpload') }}" enctype="multipart/form-data">
                               @csrf 
                               <input hidden value="{{$result->nefscun_mem_no}}" class="form-control required" id="nefscun_mem_no"  name="nefscun_mem_no" >
                     <input hidden value="{{$result->id}}" class="form-control required" id="register_id"  name="register_id" >
@@ -489,10 +581,10 @@
                       <div class="row col-md-12">
                       <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
-      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('org_stamp').click()">संस्थाको छाप वा लोगो</button>
+      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('org_stamp').click()">संस्थाको छाप वा लोगो *</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="inputFile">File Upload</label>
-        <input type="file" @if(!$result->message) required @endif class="form-control-file text-success font-weight-bold" id="org_stamp" name="org_stamp" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message)  @endif class="form-control-file text-success font-weight-bold" id="org_stamp" name="org_stamp" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
 
       </div>
     </div>
@@ -500,40 +592,40 @@
   
   <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
-      <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('photo').click()">प्रतिनिधिको फोटो</button>
+      <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('photo').click()">प्रतिनिधिको फोटो *</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="photo">File Upload</label>
-        <input type="file" @if(!$result->message) required @endif class="form-control-file text-danger font-weight-bold" id="photo" name="photo" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message)  @endif class="form-control-file text-danger font-weight-bold" id="photo" name="photo" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
 
   <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
-      <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('rep_sign').click()">प्रतिनिधिको दस्तखत</button>
+      <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('rep_sign').click()">प्रतिनिधिको दस्तखत *</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="rep_sign">File Upload</label>
-        <input type="file"  @if(!$result->message) required @endif class="form-control-file text-primary font-weight-bold" id="rep_sign" name="rep_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file"  @if(!$result->message)  @endif class="form-control-file text-primary font-weight-bold" id="rep_sign" name="rep_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
 
   <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
-      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('chairman_sign').click()">अध्यक्षको दस्तखत</button>
+      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('chairman_sign').click()">अध्यक्षको दस्तखत *</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="chairman_sign">File Upload</label>
-        <input type="file" @if(!$result->message) required @endif class="form-control-file text-success font-weight-bold" id="chairman_sign" name="chairman_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message)  @endif class="form-control-file text-success font-weight-bold" id="chairman_sign" name="chairman_sign" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
 
   <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
-      <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('rep_select').click()">प्रतिनिधि छनौट निर्णय</button>
+      <button type="button" class="btn btn-danger btn-block" onclick="document.getElementById('rep_select').click()">प्रतिनिधि छनौट निर्णय *</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="rep_select">File Upload</label>
-        <input type="file" @if(!$result->message) required @endif class="form-control-file text-danger font-weight-bold" id="rep_select" name="rep_select" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message)  @endif class="form-control-file text-danger font-weight-bold" id="rep_select" name="rep_select" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
@@ -541,17 +633,17 @@
    
     <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
-      <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('voucher').click()">नविकरण भौचर अपलोड</button>
+      <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('voucher').click()">नविकरण भौचर अपलोड *</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="voucher">File Upload</label>
-        <input type="file" @if(!$result->message) required @endif class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+        <input type="file" @if(!$result->message)  @endif class="form-control-file text-primary font-weight-bold" id="voucher" name="voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
       </div>
     </div>
   </div>
 
   <div class="row m-b-1">
     <div class="col-sm-6 offset-sm-3">
-      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('save_voucher').click()">नियमित बचतको भौचर अपलोड</button>
+      <button type="button" class="btn btn-success btn-block" onclick="document.getElementById('save_voucher').click()">नियमित बचतको भौचर अपलोड *</button>
       <div class="form-group inputDnD">
         <label class="sr-only" for="save_voucher">File Upload</label>
         <input type="file" multiple class="form-control-file text-success font-weight-bold" id="save_voucher" name="save_voucher" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
@@ -608,7 +700,7 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script type="text/javascript"  src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url('bootstrap/js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
     
     <script type='text/javascript'>
@@ -632,7 +724,7 @@
 function fillData(member_no)
 {
   $("input[name='nefscun_mem_no']").val(member_no);
-  
+    
   $('#modal-box3').modal('hide');
   var _token = $("input[name='_token']").val();
         
@@ -730,6 +822,36 @@ function readUrl(input) {
   
   if (input.files && input.files[0]) {
     let reader = new FileReader();
+    var nefscun_mem_no = $('#nefscun_mem_no').val();
+    var register_id = $('#register_id').val();
+    var image = input.files[0];
+    var name = $(input).attr("name");
+   
+    var _token = "{{ csrf_token() }}";
+   //var  formData= {'nefscun_mem_no':nefscun_mem_no, "_token": _token,'register_id':register_id,name:image};
+  // alert(formData);
+    // nefscun_mem_no:nefscun_mem_no,register_id:register_id,name:name,
+    var formData = new FormData($('#uploadform')[0]);
+   // alert(formData);
+    var url = "{!! route('frontend.saveUploadDoc') !!}";
+    $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN':_token
+  }
+});
+   $.ajax({
+       url: url ,
+       type: 'POST',
+       data:formData,
+       async: false,
+       cache: false,
+       contentType: false,
+       enctype: 'multipart/form-data',
+       processData: false,
+       success: function (response) {
+         //alert(response);
+       }
+   });
     reader.onload = (e) => {
       let imgData = e.target.result;
       let imgName = input.files[0].name;
@@ -758,16 +880,75 @@ function readUrl(input) {
 
       $('#nefscun_mem_no').focusout(function(e){
         var _token = $("input[name='_token']").val();
-        
+
            var memno = $("input[name='nefscun_mem_no']").val();
            var url = "{!! route('frontend.showDetails') !!}";
-        //  alert(url);
+           var token = "";
+           
+        // alert(url);
            $.ajax({
           url:url,
           type: 'POST',
           data: {mem_no:memno, _token: _token},
           success: function(result){
-            
+            if(result.already){
+              if(confirm("Data Found. Do you want to continue with this ? You need to verify Previously Used Number")){
+                $('#modal-box-manager').modal();
+
+                $("#modal-box-manager button[name='validate']").on('click', function(){
+          var phone = $("input[name='phone-manager']").val();
+                  
+          var _token = $("input[name='_token']").val();
+          $.ajax({
+          url: "{!! url('generate_otp_old') !!}",
+          type: 'POST',
+          data: {phone: phone, _token: _token,memno:memno},
+          success: function(result){
+            if(result.status == 1){
+              token = result.token;
+              $('#modal-box-manager').modal('hide');
+              $('#modal-box-manager-otp').modal();
+              $("#modal-box-manager-otp button[name='validate']").on('click', function(){
+          var otp_code = $("input[name='OTP']").val();
+        
+          $.ajax({
+          url: "{!! url('check_otp') !!}",
+          type: 'POST',
+          data: {phone: phone, otp: otp_code, _token: _token},
+          success: function(result){
+            if(result.status == 1){
+              var update_url = "{!! url('update') !!}/"+token;
+              window.location.href = update_url;
+
+           } else
+           {
+                var text = '<p id="msg">Invalid OTP. <br> <strong>Please input the correct OTP sent in your phone.</strong></p>';
+                $('.errormsg').html("");
+
+              $('#modal-box-manager-otp .errormsg').append(text);
+           }
+          }
+        }); 
+         
+        });
+              
+
+           } else
+           {
+                var text = '<p id="msg">    Invalid Phone. <br> <strong>Please check the number and try again.</strong></p>';
+                $('.errormsg').html("");
+
+              $('#modal-box-manager .errormsg').append(text);
+           }
+          }
+        }); 
+         
+        });
+
+    
+              }
+           
+            }
             if(result){
               $("input[name='org_name']").val(result.org_name);
               $("input[name='panno']").val(result.panno);
@@ -858,7 +1039,7 @@ function readUrl(input) {
            var email = $("input[name='email']").val();
           var _token = $("input[name='_token']").val();
            $.ajax({
-          url: "{!! url('generate_otp') !!}",
+         url: "{!! url('generate_otp') !!}",
           type: 'POST',
           data: {phone: contact,email: email, _token: _token},
         });
@@ -909,6 +1090,7 @@ var share_reg_dt = document.getElementById("share_reg_dt");
       share_reg_dt.nepaliDatePicker();
      // dep_date.nepaliDatePicker();
       //renew_dt.nepaliDatePicker();
+     
 
  $("select[name='province_id']").change(function(){
     var province_id = $(this).children("option:selected").val();

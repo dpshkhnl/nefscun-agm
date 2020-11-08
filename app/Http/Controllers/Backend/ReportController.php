@@ -32,7 +32,7 @@ class ReportController extends Controller
         ->join('districts','districts.dist_id','organization_registrations.district')
         ->join('local_bodies','local_bodies.id','organization_registrations.local')
         ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')
-        ->where('status',0)->get();
+        ->where('status',0)->orderBy('organization_registrations.created_at','desc')->get();
         //dd($data);
         return view('backend.reports.registered',compact('data'));
     }
@@ -46,7 +46,8 @@ class ReportController extends Controller
         ->join('provinces','provinces.state_id','organization_registrations.province')
         ->join('districts','districts.dist_id','organization_registrations.district')
         ->join('local_bodies','local_bodies.id','organization_registrations.local')
-        ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')->get();
+        ->join('organization_uploads','organization_uploads.org_reg_id','organization_registrations.id')
+        ->orderBy('organization_registrations.created_at','desc')->get();
         //dd($data);
         return view('backend.reports.comment',compact('data'));
     }
@@ -62,7 +63,14 @@ class ReportController extends Controller
         $register->status = 1;
         $register->updated_by = Auth::user()->name;
         $register->save();
-        Helper::sendEmail($register->email, "Approved", "you are successfully registered. You can now login by clicking on the link below.<br/> http://agm.shutradhar.com.np/login");
+        $text = "Dear".$register->org_name."
+        Your registration for 29th AGM is approved. Please login and proceed.
+        NEFSCUN";
+        
+         Helper::sendSms($register->mobile_no, $text);
+        Helper::sendEmail($register->email, "Approved", "नमस्कार,  
+
+नेफ्स्कूनको २९ औं साधारणसभामा सहभागीताको लागि यहाँले उपलब्ध गराउनुभएको जानकारी र आवश्यक कागजातहरु प्राप्त भएको छ । साधारणसभामा प्रस्तुत हुने वार्षिक प्रतिवेदनहरु पढ्न र सुझावको लागि यस लिंकमा क्लिक गर्नुहोला ।<br/> http://agm.shutradhar.com.np/login");
 
        return "Form Approved Successfully";
     }
@@ -100,9 +108,9 @@ class ReportController extends Controller
             $data->token = $token;
             $data->save();
         } 
-        dd('http://agm.shutradhar.com.np/rc='.$token);
+        //dd('http://agm.shutradhar.com.np/rc='.$token);
         Helper::sendEmail( $data->email, "Rejected", "your Form Has been Rejected due to ".$r->get('rmsg')."Please Update and Submit again 
-        following the on clicking the link below <br/>".'http://agm.shutradhar.com.np/rc='.$token
+        following the on clicking the link below <br/>".'http://agm.shutradhar.com.np/update/'.$token
     );
 
         $regNo =$data->reg_no;
@@ -139,7 +147,8 @@ class ReportController extends Controller
         ->join('provinces','provinces.state_id','organization_registrations.province')
         ->join('districts','districts.dist_id','organization_registrations.district')
         ->join('local_bodies','local_bodies.id','organization_registrations.local')
-        ->where('status',1)->get();
+        ->where('status',1)
+        ->orderBy('organization_registrations.updated_at','desc')->get();
         return view('backend.reports.approved',compact('data'));
     }
 
@@ -150,7 +159,8 @@ class ReportController extends Controller
         ->join('provinces','provinces.state_id','organization_registrations.province')
         ->join('districts','districts.dist_id','organization_registrations.district')
         ->join('local_bodies','local_bodies.id','organization_registrations.local')
-        ->where('status',2)->get();
+        ->where('status',2)
+        ->orderBy('organization_registrations.updated_at','desc')->get();
         return view('backend.reports.rejected',compact('data'));
     }
 }

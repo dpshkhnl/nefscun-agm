@@ -94,13 +94,20 @@ class RegisterController extends Controller
         $signupStep = 0;
         $member = MemberData::where('member_no',$id)->first();
         $result =  new OrganizationRegistration;
+        $orgRegister =  OrganizationRegistration::where('nefscun_mem_no',$request->get('mem_no'))->first();
+      // dd($orgRegister);
+        if($orgRegister){
+            $result->already = true;
+        }else{
+            $result->already = false;
+        }
         if($member){
-            $result->nefscun_mem_no = $member->id;
+            $result->nefscun_mem_no = $member->member_no;
         $result->org_name =$member->name;
         $result->panno = $member->pan_no;
 
         }
-        
+           // dd($result);
         return $result;
         //return view('frontend.auth.register',compact('province','signupStep','result'));
     }
@@ -190,6 +197,31 @@ class RegisterController extends Controller
        
     }
 
+    public function generate_otp_old(Request $r)
+    {
+       // dd($r->get('phone'));
+        $orgRegister =  OrganizationRegistration::where('mobile_no',$r->get('phone'))->where('nefscun_mem_no',$r->get('memno'))->first();
+      // dd($orgRegister);
+        if($orgRegister)
+        {
+            $pass = rand(1000,9999);
+            //$pass = 1234;
+              $otp = new \App\Models\Otp;
+              $otp->phone = $r->phone;
+              $otp->email = $orgRegister->email;
+              $otp->otp_phone = $pass;
+              $otp->otp_email = $pass;
+              $otp->save();
+              Helper::sendSms($r->phone,"Your OTP is ".$otp->otp_phone);
+            //  Helper::sendEmail($r->email, "OTP for Registration", "Your OTP is ".$otp->otp_email);
+            return response(['status' => 1,'token'=>$orgRegister->token]);
+        }else
+        {
+            return response(['status' => 0]);
+        }
+       
+    }
+
     public function check_otp(Request $r)
     {
         $otp = \App\Models\Otp::select('*')->where('phone', $r->phone)->orderBy('id', 'desc')->first();
@@ -254,7 +286,23 @@ class RegisterController extends Controller
         $token= (string)Str::uuid();
         $orgRegister->token = $token;
         $orgRegister->save();
-        return $this->showForm(1,$orgRegister);
+
+        $orgRep =  OrganizationRepresentative::where('nefscun_mem_no',$request->get('nefscun_mem_no'))->first();
+        $result = $orgRegister;
+        $district = null;
+        $locals = null;
+        if($orgRep)
+        {
+            $result->orgRep = $orgRep;
+            $district = District::where('state_id',$result->orgRep->province)->get();
+            $locals = LocalBody::where('dist_id',$result->orgRep->district)->get();
+        }
+        
+      
+        $signupStep = 1;
+        $province = Province::get();
+        return view('frontend.auth.register',compact('province','signupStep','result','district','locals'));
+       
    }
 
    public function saveRepresentative(Request $request)
@@ -286,7 +334,60 @@ class RegisterController extends Controller
         $orgRep->decision_dt = $request->get('decision_dt');
         $orgRep->ip= $request->ip();
         $orgRep->save();
+        $orgRep->id = $request->get('register_id');
         return $this->showForm(2,$orgRep);
+   }
+
+
+   public function allUpload(Request $request)
+   {
+    if($request->get('nefscun_mem_no')){
+        $orgUpload =  OrganizationUpload::where('nefscun_mem_no',$request->get('nefscun_mem_no'))->first();
+        $orgRep =  OrganizationRepresentative::where('nefscun_mem_no',$request->get('nefscun_mem_no'))->first();
+       }
+       $orgRegister =  OrganizationRegistration::find($request->get('register_id'));
+       $msg = "";
+       if($orgUpload){
+           if(empty($orgUpload->rep_select)){
+                $msg.="प्रतिनिधि छनौट निर्णय,";
+           }
+           if(empty($orgUpload->rep_sign)){
+            $msg.="प्रतिनिधिको दस्तखत,";
+           }
+           if(empty($orgUpload->chairman_sign)){
+            $msg.="अध्यक्षको दस्तखत,";
+           }
+           if(empty($orgUpload->voucher)){
+            $msg.="नविकरण भौचर अपलोड,";
+           }
+           if(empty($orgUpload->org_stamp)){
+            $msg.="संस्थाको छाप वा लोगो,";
+           }
+           if(empty($orgUpload->photo)){
+            $msg.="प्रतिनिधिको फोटो";
+           }
+
+           if($msg)
+           {
+            $orgRep->message= "कृपया ".$msg." अपलोड गर्नुहोस ";
+            return $this->showForm(2,$orgRep); 
+           }else
+           {
+            $orgRegister->status = 0;
+            $orgRegister->save();
+            Helper::sendEmail($orgRegister, "२९ औं साधारण सभामा सहभागी हुन आवेदन दर्ता ", "तपाईको आवेदन प्राप्त भएको छ। दर्ता सफल भएपश्चात ईमेल मार्फत जानकारी गराइनेछ। धन्यवाद।
+            नेफ्स्कून
+            ");
+        
+            return $this->showForm(3,$orgUpload); 
+           }
+       }else{
+        $orgRep->message= "कृपया * भएको कागजात  अपलोड गर्नुहोस ";
+        return $this->showForm(2,$orgRep); 
+       }
+
+     
+
    }
 
    public function saveUploadDoc(Request $request){
@@ -299,7 +400,6 @@ class RegisterController extends Controller
        {
         $orgUpload = new OrganizationUpload;
        }
-
     $orgRegister =  OrganizationRegistration::find($request->get('register_id'));
     $orgUpload->nefscun_mem_no = $request->get('nefscun_mem_no');
     $orgUpload->org_reg_id = $request->get('register_id');
@@ -307,7 +407,7 @@ class RegisterController extends Controller
         if ($request->hasFile('rep_select')) {  //check the file present or not
         $images = $request->file('rep_select'); //get the file
         $size = $images->getSize();
-        $names =  'rep_select-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $names =  'rep_select-'.$orgUpload->nefscun_mem_no.'-'.$images->getClientOriginalName();
         $destinationPaths = public_path('/images/rep_select/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->rep_select = $names; //
@@ -315,7 +415,7 @@ class RegisterController extends Controller
     if ($request->hasFile('rep_sign')) {  //check the file present or not
         $images = $request->file('rep_sign'); //get the file
         $size = $images->getSize();
-        $names =  'rep_sign-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $names =  'rep_sign-'.$orgUpload->nefscun_mem_no.'-'.$images->getClientOriginalName();
         $destinationPaths = public_path('/images/rep_sign/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->rep_sign = $names; //
@@ -324,7 +424,7 @@ class RegisterController extends Controller
     if ($request->hasFile('chairman_sign')) {  //check the file present or not
         $images = $request->file('chairman_sign'); //get the file
         $size = $images->getSize();
-        $names =  'chairman_sign-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $names =  'chairman_sign-'.$orgUpload->nefscun_mem_no.'-'.$images->getClientOriginalName();
         $destinationPaths = public_path('/images/chairman_sign/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->chairman_sign = $names; //
@@ -332,7 +432,7 @@ class RegisterController extends Controller
     if ($request->hasFile('audit_report')) {  //check the file present or not
         $images = $request->file('audit_report'); //get the file
         $size = $images->getSize();
-        $names =  'audit_report-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $names =  'audit_report-'.$orgUpload->nefscun_mem_no.'-'.$images->getClientOriginalName();
         $destinationPaths = public_path('/images/audit_report/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->audit_report = $names; //
@@ -340,7 +440,7 @@ class RegisterController extends Controller
     if ($request->hasFile('voucher')) {  //check the file present or not
         $images = $request->file('voucher'); //get the file
         $size = $images->getSize();
-        $names =  'voucher-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $names =  'voucher-'.$orgUpload->nefscun_mem_no.'-'.$images->getClientOriginalName();
         $destinationPaths = public_path('/images/voucher/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->voucher = $names; //
@@ -348,7 +448,7 @@ class RegisterController extends Controller
     if ($request->hasFile('save_voucher')) {  //check the file present or not
         $images = $request->file('save_voucher'); //get the file
         $size = $images->getSize();
-        $names =  'save_voucher-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $names =  'save_voucher-'.$orgUpload->nefscun_mem_no.'-'.$images->getClientOriginalName();
         $destinationPaths = public_path('/images/save_voucher/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->save_voucher = $names; //
@@ -357,7 +457,7 @@ class RegisterController extends Controller
     if ($request->hasFile('org_stamp')) {  //check the file present or not
         $images = $request->file('org_stamp'); //get the file
         $size = $images->getSize();
-        $names =  'org_stamp-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $names =  'org_stamp-'.$orgUpload->nefscun_mem_no.'-'.$images->getClientOriginalName();
         $destinationPaths = public_path('/images/org_stamp/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->org_stamp = $names; //
@@ -365,19 +465,14 @@ class RegisterController extends Controller
     if ($request->hasFile('photo')) {  //check the file present or not
         $images = $request->file('photo'); //get the file
         $size = $images->getSize();
-        $names =  'photo-'.$orgUpload->nefscun_mem_no.'-'.time().".".$images->getClientOriginalName();
+        $names =  'photo-'.$orgUpload->nefscun_mem_no.'-'.$images->getClientOriginalName();
         $destinationPaths = public_path('/images/photo/'); //public path folder dir
         $images->move($destinationPaths,$names);  //mve to destination you mentioned 
         $orgUpload->photo = $names; //
     }
-    $orgRegister->status = 0;
-    $orgRegister->save();
+  
     $orgUpload->save();
-    Helper::sendEmail($orgRegister, "२९ औं साधारण सभामा सहभागी हुन आवेदन दर्ता ", "तपाईको आवेदन प्राप्त भएको छ। दर्ता सफल भएपश्चात ईमेल मार्फत जानकारी गराइनेछ। धन्यवाद।
-    नेफ्स्कून
-    ");
-
-    return $this->showForm(3,$orgUpload);
+    echo "Uploaded";
 }
    
 }

@@ -45,6 +45,7 @@
                             <th> प्रतिनिधि छनौट निर्णय</th>
                            
                             <th> नविकरणको भौचर</th>
+                            <th> नियमित बचतको भौचर</th>
                             <th>Registered Date</th>
                             <th></th>
                             
@@ -63,6 +64,8 @@
                        <td>{{$dt->rep_name}}</td>
                        <td><img src="{{ asset('images/org_stamp/'.$dt->org_stamp) }}"></td>
                        <td><img src="{{ asset('images/rep_select/'.$dt->rep_select) }}"></td>
+                       <td><img src="{{ asset('images/save_voucher/'.$dt->save_voucher) }}"></td>
+
                        <td><img src="{{ asset('images/voucher/'.$dt->voucher) }}"></td>
                       
                     
@@ -118,6 +121,22 @@
 @endsection
 @section('scripts')
 
+
+
+<script>
+    $(document).ready(function() {
+        $('.table').DataTable({
+           dom: 'Blfrtip',
+            "lengthMenu": [[10, 25, 50], [10, 25, 50]],
+            buttons: [
+                {
+                    extend: 'excel',
+                    className: 'btn btn-warning'
+                }
+            ]
+        });
+    });
+</script>
 
 <script>
 function approveform(id){
